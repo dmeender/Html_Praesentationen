@@ -7,37 +7,116 @@
     <link rel="stylesheet" href="../../assets/styles.css">
   </head>
   <body class="deck">
-    <main class="slides" aria-label="Muster-Präsentation">
+    <main class="slides" id="slides" aria-label="Muster-Präsentation">
       <section class="slide title center" id="folie-1">
         <div class="slide-inner">
           <p class="eyebrow">Muster</p>
           <h1>Eine einfache HTML-Präsentation</h1>
-          <p>Bereit für GitHub Pages, QR-Code und Zuschauer auf dem Smartphone.</p>
+          <p class="lead">Bereit für GitHub Pages, QR-Code und Zuschauer auf dem Smartphone.</p>
         </div>
       </section>
 
-      <section class="slide content" id="folie-2">
-        <div class="slide-inner">
-          <p class="eyebrow">Prinzip</p>
-          <h2>Eine Datei pro Präsentation</h2>
-          <ul>
-            <li>Die Präsentation läuft direkt im Browser.</li>
-            <li>Neue Präsentationen entstehen durch Kopieren dieses Ordners.</li>
-            <li>GitHub Pages macht daraus automatisch eine öffentliche Webseite.</li>
-          </ul>
+      <section class="slide agenda" id="folie-2">
+        <div class="slide-inner wide">
+          <p class="eyebrow">Agenda</p>
+          <h2>Worum es heute geht</h2>
+          <ol class="agenda-list">
+            <li>
+              <span>1</span>
+              <div>
+                <strong>Ausgangslage</strong>
+                <small>Ein kurzer Einstieg, damit alle denselben Kontext haben.</small>
+              </div>
+            </li>
+            <li>
+              <span>2</span>
+              <div>
+                <strong>Kernpunkte</strong>
+                <small>Die wichtigsten Aussagen, Beispiele oder Entscheidungen.</small>
+              </div>
+            </li>
+            <li>
+              <span>3</span>
+              <div>
+                <strong>Nächste Schritte</strong>
+                <small>Was nach der Präsentation klar sein oder passieren soll.</small>
+              </div>
+            </li>
+          </ol>
         </div>
       </section>
 
-      <section class="slide split" id="folie-3">
+      <section class="slide content" id="folie-3">
+        <div class="slide-inner wide">
+          <p class="eyebrow">Kennzahlen</p>
+          <h2>Drei starke Punkte</h2>
+          <p class="lead">Diese Folie eignet sich für Zahlen, Vorteile oder eine kurze Zusammenfassung.</p>
+          <div class="stat-grid">
+            <div class="stat">
+              <strong>1</strong>
+              <span>Eine klare Hauptaussage pro Folie.</span>
+            </div>
+            <div class="stat">
+              <strong>3</strong>
+              <span>Maximal wenige Kernaussagen gleichzeitig zeigen.</span>
+            </div>
+            <div class="stat">
+              <strong>+</strong>
+              <span>Neue Präsentationen können einfach ergänzt werden.</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="slide image" id="folie-4">
         <div class="slide-inner">
-          <p class="eyebrow">Teilen</p>
-          <h2>QR-Code für das Publikum</h2>
+          <p class="eyebrow">Bildfolie</p>
+          <h2>Raum für ein starkes Bild</h2>
           <p>
-            Sobald die Präsentation veröffentlicht ist, wird aus der endgültigen URL
-            ein QR-Code erzeugt und hier eingebunden.
+            Hier kann später ein echtes Foto, eine Grafik oder ein Screenshot stehen.
+            Der Text bleibt kurz und erklärt nur die Kernaussage.
           </p>
         </div>
-        <div class="qr-placeholder">QR-Code<br>folgt nach<br>Veröffentlichung</div>
+        <div class="image-panel" aria-label="Platzhalter für Bildmaterial"></div>
+      </section>
+
+      <section class="slide split" id="folie-5">
+        <div class="slide-inner wide">
+          <p class="eyebrow">Vergleich</p>
+          <h2>Zwei Perspektiven</h2>
+          <div class="two-column">
+            <article class="text-panel">
+              <h3>Heute</h3>
+              <p>Was ist der aktuelle Zustand, das Problem oder die Ausgangslage?</p>
+            </article>
+            <article class="text-panel">
+              <h3>Ziel</h3>
+              <p>Was soll sich ändern, besser werden oder nach dem Vortrag klar sein?</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="slide quote" id="folie-6">
+        <div class="slide-inner wide">
+          <div class="quote-mark">"</div>
+          <p class="quote-text">Eine gute Präsentation macht eine Sache klarer als vorher.</p>
+          <p class="quote-source">Platz für Quelle, Person oder Kontext</p>
+        </div>
+      </section>
+
+      <section class="slide qr" id="folie-7">
+        <div class="slide-inner wide qr-content">
+          <div>
+            <p class="eyebrow">Mitnehmen</p>
+            <h2>Präsentation öffnen</h2>
+            <p>
+              Nach der Veröffentlichung wird hier der echte QR-Code eingebunden.
+              Zuschauer können die Präsentation dann direkt auf dem Smartphone öffnen.
+            </p>
+          </div>
+          <div class="qr-placeholder">QR-Code<br>folgt nach<br>Veröffentlichung</div>
+        </div>
       </section>
     </main>
 
@@ -45,6 +124,48 @@
       <a href="#folie-1" aria-label="Folie 1">1</a>
       <a href="#folie-2" aria-label="Folie 2">2</a>
       <a href="#folie-3" aria-label="Folie 3">3</a>
+      <a href="#folie-4" aria-label="Folie 4">4</a>
+      <a href="#folie-5" aria-label="Folie 5">5</a>
+      <a href="#folie-6" aria-label="Folie 6">6</a>
+      <a href="#folie-7" aria-label="Folie 7">7</a>
     </nav>
+    <div class="slide-count" aria-hidden="true">Pfeiltasten nutzbar</div>
+
+    <script>
+      const slides = document.querySelector("#slides");
+      const slideItems = [...document.querySelectorAll(".slide")];
+
+      function currentSlideIndex() {
+        const slideWidth = slides.clientWidth;
+        return Math.round(slides.scrollLeft / slideWidth);
+      }
+
+      function goToSlide(index) {
+        const nextIndex = Math.max(0, Math.min(slideItems.length - 1, index));
+        slideItems[nextIndex].scrollIntoView({ behavior: "smooth", inline: "start" });
+      }
+
+      document.addEventListener("keydown", (event) => {
+        if (event.key === "ArrowRight" || event.key === "PageDown") {
+          event.preventDefault();
+          goToSlide(currentSlideIndex() + 1);
+        }
+
+        if (event.key === "ArrowLeft" || event.key === "PageUp") {
+          event.preventDefault();
+          goToSlide(currentSlideIndex() - 1);
+        }
+
+        if (event.key === "Home") {
+          event.preventDefault();
+          goToSlide(0);
+        }
+
+        if (event.key === "End") {
+          event.preventDefault();
+          goToSlide(slideItems.length - 1);
+        }
+      });
+    </script>
   </body>
 </html>
