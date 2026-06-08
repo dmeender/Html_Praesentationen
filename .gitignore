@@ -1,0 +1,23 @@
+# macOS / Windows metadata
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Editor folders
+.idea/
+.vscode/
+
+# Logs and temporary files
+*.log
+tmp/
+temp/
+
+# Optional local tooling
+node_modules/
+.cache/
+dist/
+build/
+
+# Local environment files
+.env
+.env.*
