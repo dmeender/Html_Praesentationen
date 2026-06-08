@@ -1,0 +1,879 @@
+<!doctype html>
+<html lang="de">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Künstliche Intelligenz in der Schule | Werte und Normen Klasse 10</title>
+    <link rel="stylesheet" href="../../assets/styles.css">
+    <style>
+      :root {
+        --ai-ink: #172033;
+        --ai-teal: #0f766e;
+        --ai-blue: #2563eb;
+        --ai-red: #b42318;
+        --ai-gold: #b45309;
+        --ai-mint: #e8f5f1;
+        --ai-paper: #fbfaf7;
+      }
+
+      .slide {
+        position: relative;
+      }
+
+      .slide.ai-title {
+        overflow: hidden;
+        background:
+          radial-gradient(circle at 78% 24%, rgb(37 99 235 / 16%), transparent 28%),
+          linear-gradient(135deg, rgb(15 118 110 / 15%), transparent 42%),
+          var(--ai-paper);
+      }
+
+      .slide.ai-title::after {
+        content: "KI";
+        position: absolute;
+        right: 7vw;
+        bottom: 3vh;
+        color: rgb(23 32 51 / 5%);
+        font-size: clamp(9rem, 22vw, 22rem);
+        font-weight: 950;
+        line-height: 1;
+        pointer-events: none;
+      }
+
+      .slide.ai-dark {
+        background: var(--ai-ink);
+        color: #ffffff;
+      }
+
+      .slide.ai-dark p,
+      .slide.ai-dark li,
+      .slide.ai-dark small {
+        color: rgb(255 255 255 / 78%);
+      }
+
+      .slide.ai-soft {
+        background: var(--ai-mint);
+      }
+
+      .slide.ai-warm {
+        background: #fff7ed;
+      }
+
+      .slide.ai-blue {
+        background: #eef4ff;
+      }
+
+      .meta-row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin-top: 28px;
+      }
+
+      .pill {
+        display: inline-flex;
+        align-items: center;
+        min-height: 34px;
+        padding: 0 12px;
+        border-radius: 999px;
+        background: rgb(15 118 110 / 11%);
+        color: #134e4a;
+        font-size: 0.95rem;
+        font-weight: 850;
+      }
+
+      .ai-dark .pill {
+        background: rgb(255 255 255 / 12%);
+        color: #ffffff;
+      }
+
+      .big-question {
+        max-width: 1040px;
+        margin-top: 32px;
+        padding: 28px;
+        border-left: 10px solid var(--ai-teal);
+        border-radius: 8px;
+        background: #ffffff;
+        box-shadow: 0 18px 45px rgb(31 41 51 / 10%);
+      }
+
+      .big-question p {
+        margin: 0;
+        color: var(--ai-ink);
+        font-size: clamp(1.45rem, 2.6vw, 3rem);
+        font-weight: 850;
+        line-height: 1.18;
+      }
+
+      .prompt-grid,
+      .group-grid,
+      .rubric-grid,
+      .code-grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 18px;
+        margin-top: 30px;
+      }
+
+      .prompt-card,
+      .group-card,
+      .rubric-card,
+      .code-card {
+        border: 1px solid rgb(31 41 51 / 12%);
+        border-radius: 8px;
+        background: #ffffff;
+        box-shadow: 0 16px 40px rgb(31 41 51 / 8%);
+      }
+
+      .prompt-card,
+      .rubric-card,
+      .code-card {
+        padding: 22px;
+      }
+
+      .prompt-card strong,
+      .rubric-card strong,
+      .code-card strong {
+        display: block;
+        color: var(--ai-ink);
+        font-size: clamp(1.12rem, 1.55vw, 1.38rem);
+        line-height: 1.25;
+      }
+
+      .prompt-card p,
+      .rubric-card p,
+      .code-card p {
+        margin-top: 10px;
+        font-size: clamp(0.98rem, 1.28vw, 1.14rem);
+        line-height: 1.45;
+      }
+
+      .prompt-card:nth-child(1) {
+        border-top: 8px solid var(--ai-teal);
+      }
+
+      .prompt-card:nth-child(2) {
+        border-top: 8px solid var(--ai-red);
+      }
+
+      .prompt-card:nth-child(3) {
+        border-top: 8px solid var(--ai-blue);
+      }
+
+      .prompt-card:nth-child(4) {
+        border-top: 8px solid var(--ai-gold);
+      }
+
+      .timeline {
+        display: grid;
+        gap: 14px;
+        margin-top: 30px;
+      }
+
+      .timeline-item {
+        display: grid;
+        grid-template-columns: 130px minmax(0, 1fr);
+        gap: 22px;
+        align-items: start;
+        padding: 16px 0;
+        border-top: 1px solid var(--line);
+      }
+
+      .timeline-item span {
+        color: var(--ai-teal);
+        font-size: clamp(1.45rem, 2.3vw, 2.35rem);
+        font-weight: 950;
+        line-height: 1;
+      }
+
+      .timeline-item strong {
+        display: block;
+        margin-bottom: 5px;
+        font-size: clamp(1.05rem, 1.5vw, 1.36rem);
+      }
+
+      .timeline-item p {
+        margin: 0;
+        font-size: clamp(0.98rem, 1.28vw, 1.12rem);
+      }
+
+      .group-grid {
+        grid-template-columns: repeat(5, minmax(0, 1fr));
+        gap: 12px;
+      }
+
+      .group-card {
+        min-height: 220px;
+        padding: 18px;
+      }
+
+      .group-card span {
+        display: grid;
+        place-items: center;
+        width: 42px;
+        height: 42px;
+        margin-bottom: 14px;
+        border-radius: 999px;
+        background: #e7f2f0;
+        color: var(--ai-teal);
+        font-weight: 950;
+      }
+
+      .group-card strong {
+        display: block;
+        color: var(--ai-ink);
+        font-size: clamp(1rem, 1.22vw, 1.16rem);
+        line-height: 1.25;
+      }
+
+      .group-card p {
+        margin-top: 10px;
+        font-size: 0.98rem;
+        line-height: 1.36;
+      }
+
+      .task-layout {
+        display: grid;
+        grid-template-columns: minmax(0, 0.82fr) minmax(0, 1.18fr);
+        gap: 34px;
+        align-items: start;
+        margin-top: 28px;
+      }
+
+      .task-focus {
+        padding: 26px;
+        border-radius: 8px;
+        background: #ffffff;
+        box-shadow: 0 18px 45px rgb(31 41 51 / 10%);
+      }
+
+      .task-focus strong {
+        display: block;
+        color: var(--ai-teal);
+        font-size: clamp(1.1rem, 1.7vw, 1.5rem);
+      }
+
+      .task-focus p {
+        margin-top: 12px;
+        color: var(--ai-ink);
+        font-size: clamp(1.2rem, 1.8vw, 1.7rem);
+        font-weight: 800;
+        line-height: 1.25;
+      }
+
+      .task-list {
+        display: grid;
+        gap: 10px;
+        margin: 0;
+        padding-left: 1.1em;
+      }
+
+      .task-list li {
+        font-size: clamp(0.98rem, 1.28vw, 1.15rem);
+        line-height: 1.38;
+      }
+
+      .result-box {
+        margin-top: 22px;
+        padding: 18px 20px;
+        border-left: 8px solid var(--ai-blue);
+        border-radius: 8px;
+        background: rgb(255 255 255 / 82%);
+      }
+
+      .result-box strong {
+        display: block;
+        color: var(--ai-ink);
+        font-size: clamp(1rem, 1.32vw, 1.18rem);
+      }
+
+      .result-box p {
+        margin: 6px 0 0;
+        font-size: clamp(0.98rem, 1.2vw, 1.08rem);
+      }
+
+      .presentation-steps {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 14px;
+        margin-top: 34px;
+      }
+
+      .presentation-step {
+        min-height: 166px;
+        padding: 20px;
+        border-radius: 8px;
+        background: #ffffff;
+        box-shadow: 0 14px 34px rgb(31 41 51 / 8%);
+      }
+
+      .presentation-step span {
+        color: var(--ai-blue);
+        font-size: 2rem;
+        font-weight: 950;
+        line-height: 1;
+      }
+
+      .presentation-step strong {
+        display: block;
+        margin-top: 14px;
+        font-size: clamp(1rem, 1.3vw, 1.18rem);
+      }
+
+      .presentation-step p {
+        margin-top: 8px;
+        font-size: 0.98rem;
+        line-height: 1.35;
+      }
+
+      .code-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+
+      .code-card {
+        min-height: 188px;
+      }
+
+      .code-card:nth-child(1),
+      .code-card:nth-child(4) {
+        border-top: 8px solid var(--ai-teal);
+      }
+
+      .code-card:nth-child(2),
+      .code-card:nth-child(5) {
+        border-top: 8px solid var(--ai-blue);
+      }
+
+      .code-card:nth-child(3) {
+        border-top: 8px solid var(--ai-gold);
+      }
+
+      .reflection {
+        max-width: 980px;
+        margin-top: 34px;
+        padding: 30px;
+        border-radius: 8px;
+        background: #ffffff;
+        box-shadow: 0 18px 45px rgb(31 41 51 / 10%);
+      }
+
+      .reflection p {
+        margin: 0;
+        color: var(--ai-ink);
+        font-size: clamp(1.5rem, 2.7vw, 3.1rem);
+        font-weight: 850;
+        line-height: 1.15;
+      }
+
+      .deck-nav {
+        max-width: min(860px, calc(100vw - 36px));
+        flex-wrap: wrap;
+        justify-content: flex-end;
+      }
+
+      .deck-nav a {
+        width: 32px;
+        height: 32px;
+        font-size: 0.88rem;
+      }
+
+      @media (max-width: 1080px) {
+        .group-grid,
+        .presentation-steps,
+        .code-grid {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+
+        .task-layout {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      @media (max-width: 760px) {
+        .prompt-grid,
+        .group-grid,
+        .rubric-grid,
+        .code-grid,
+        .presentation-steps {
+          grid-template-columns: 1fr;
+        }
+
+        .timeline-item {
+          grid-template-columns: 1fr;
+          gap: 8px;
+        }
+
+        .slide-count {
+          display: none;
+        }
+      }
+    </style>
+  </head>
+  <body class="deck">
+    <main class="slides" id="slides" aria-label="Künstliche Intelligenz in der Schule">
+      <section class="slide ai-title center" id="folie-1">
+        <div class="slide-inner wide">
+          <p class="eyebrow">Werte und Normen | Klasse 10</p>
+          <h1>Künstliche Intelligenz in der Schule</h1>
+          <p class="lead">Chance oder Gefahr? Eine problemorientierte Einheit zur Entwicklung eines gemeinsamen KI-Verhaltenskodexes.</p>
+          <div class="meta-row" aria-label="Unterrichtsrahmen">
+            <span class="pill">2 x 90 Minuten</span>
+            <span class="pill">Gruppenpuzzle</span>
+            <span class="pill">Urteilsbildung</span>
+            <span class="pill">Handlungsprodukt: Kodex</span>
+          </div>
+        </div>
+      </section>
+
+      <section class="slide content" id="folie-2">
+        <div class="slide-inner wide">
+          <p class="eyebrow">Leitfrage</p>
+          <h2>Worum ringen wir?</h2>
+          <div class="big-question">
+            <p>Wie kann KI in der Schule genutzt werden, ohne dass Fairness, Eigenleistung und Verantwortung verloren gehen?</p>
+          </div>
+          <div class="prompt-grid">
+            <article class="prompt-card">
+              <strong>Fairness</strong>
+              <p>Wer hat Zugang zu KI, und wann entsteht ein unfairer Vorteil?</p>
+            </article>
+            <article class="prompt-card">
+              <strong>Eigenleistung</strong>
+              <p>Wo liegt die Grenze zwischen sinnvoller Hilfe und Täuschung?</p>
+            </article>
+            <article class="prompt-card">
+              <strong>Verantwortung</strong>
+              <p>Wer haftet moralisch für Fehler, Verzerrungen oder Falschinformationen?</p>
+            </article>
+            <article class="prompt-card">
+              <strong>Bewertung</strong>
+              <p>Was soll Schule prüfen, wenn KI Texte, Bilder und Präsentationen erstellen kann?</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="slide ai-dark" id="folie-3">
+        <div class="slide-inner wide">
+          <p class="eyebrow">Einstieg</p>
+          <h2>Ein KI-Ergebnis ist noch kein Urteil</h2>
+          <p class="lead">
+            Eine KI kann schnell formulieren, sortieren und Vorschläge machen. Entscheidend bleibt,
+            ob Menschen prüfen, begründen und Verantwortung übernehmen.
+          </p>
+          <div class="prompt-grid">
+            <article class="prompt-card">
+              <strong>Impuls</strong>
+              <p>Zeigt ein KI-Beispiel: gelungene Zusammenfassung, falsche Quelle oder überzeugend klingende Fehlinformation.</p>
+            </article>
+            <article class="prompt-card">
+              <strong>Diskussion</strong>
+              <p>Was wäre daran hilfreich? Was wäre problematisch, wenn es ungeprüft abgegeben wird?</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="slide agenda" id="folie-4">
+        <div class="slide-inner wide">
+          <p class="eyebrow">Ablauf</p>
+          <h2>Vom Problem zum gemeinsamen Kodex</h2>
+          <ol class="agenda-list">
+            <li>
+              <span>1</span>
+              <div>
+                <strong>Gruppenrecherche</strong>
+                <small>Jede Gruppe bearbeitet einen Teilaspekt und entwickelt eine begründete Position.</small>
+              </div>
+            </li>
+            <li>
+              <span>2</span>
+              <div>
+                <strong>Präsentationen</strong>
+                <small>Die Gruppen stellen Erkenntnisse, Bewertung und Empfehlungen in maximal 8 Minuten vor.</small>
+              </div>
+            </li>
+            <li>
+              <span>3</span>
+              <div>
+                <strong>KI-Verhaltenskodex</strong>
+                <small>Die Klasse einigt sich auf 8 bis 10 Regeln für den Einsatz von KI in der Schule.</small>
+              </div>
+            </li>
+          </ol>
+        </div>
+      </section>
+
+      <section class="slide ai-soft" id="folie-5">
+        <div class="slide-inner wide">
+          <p class="eyebrow">Gruppenpuzzle</p>
+          <h2>Fünf Perspektiven auf dieselbe Streitfrage</h2>
+          <div class="group-grid">
+            <article class="group-card">
+              <span>1</span>
+              <strong>Fairness und Leistung</strong>
+              <p>Ist KI bei Hausaufgaben, Referaten oder Facharbeiten fair?</p>
+            </article>
+            <article class="group-card">
+              <span>2</span>
+              <strong>Verantwortung und Wahrheit</strong>
+              <p>Wer trägt Verantwortung für Fehler oder Falschinformationen?</p>
+            </article>
+            <article class="group-card">
+              <span>3</span>
+              <strong>Bewertung von Leistungen</strong>
+              <p>Wie kann Leistung bewertet werden, wenn KI genutzt wird?</p>
+            </article>
+            <article class="group-card">
+              <span>4</span>
+              <strong>Neue Prüfungsformen</strong>
+              <p>Welche Prüfungen passen zu einer Zeit generativer KI?</p>
+            </article>
+            <article class="group-card">
+              <span>5</span>
+              <strong>Gesellschaftliche Folgen</strong>
+              <p>Welche Chancen und Risiken hat KI für Bildung und Gesellschaft?</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="slide content" id="folie-6">
+        <div class="slide-inner wide">
+          <p class="eyebrow">Gruppe 1</p>
+          <h2>Fairness und Leistung</h2>
+          <div class="task-layout">
+            <div class="task-focus">
+              <strong>Fragestellung</strong>
+              <p>Ist es fair, KI bei Hausaufgaben, Referaten oder Facharbeiten zu nutzen?</p>
+              <div class="result-box">
+                <strong>Ergebnis</strong>
+                <p>Entwickelt 3 bis 5 Regeln, die Fairness gewährleisten sollen.</p>
+              </div>
+            </div>
+            <div>
+              <ul class="task-list">
+                <li>Welche Vorteile bietet KI?</li>
+                <li>Welche Nachteile entstehen für die Leistungsbewertung?</li>
+                <li>Ist ein KI-generierter Text eine Eigenleistung?</li>
+                <li>Wo liegen die Grenzen zwischen Hilfe und Täuschung?</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="slide ai-blue" id="folie-7">
+        <div class="slide-inner wide">
+          <p class="eyebrow">Gruppe 2</p>
+          <h2>Verantwortung und Wahrheit</h2>
+          <div class="task-layout">
+            <div class="task-focus">
+              <strong>Fragestellung</strong>
+              <p>Wer trägt Verantwortung für Fehler oder Falschinformationen, die durch KI entstehen?</p>
+              <div class="result-box">
+                <strong>Ergebnis</strong>
+                <p>Erstellt einen Leitfaden für den verantwortungsvollen Umgang mit KI.</p>
+              </div>
+            </div>
+            <div>
+              <ul class="task-list">
+                <li>Warum macht KI Fehler?</li>
+                <li>Können KI-Antworten immer vertraut werden?</li>
+                <li>Wer ist verantwortlich, wenn falsche Informationen abgegeben werden?</li>
+                <li>Welche Pflichten haben Schülerinnen und Schüler?</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="slide content" id="folie-8">
+        <div class="slide-inner wide">
+          <p class="eyebrow">Gruppe 3</p>
+          <h2>Bewertung von Leistungen</h2>
+          <div class="task-layout">
+            <div class="task-focus">
+              <strong>Fragestellung</strong>
+              <p>Wie können schulische Leistungen bewertet werden, wenn KI genutzt wird?</p>
+              <div class="result-box">
+                <strong>Ergebnis</strong>
+                <p>Entwerft ein Bewertungsmodell für KI-unterstützte Arbeiten.</p>
+              </div>
+            </div>
+            <div>
+              <ul class="task-list">
+                <li>Welche Probleme entstehen bei klassischen Hausarbeiten?</li>
+                <li>Welche Leistungen sollten bewertet werden?</li>
+                <li>Sollte die Nutzung von KI offengelegt werden?</li>
+                <li>Welche Bewertungsmodelle wären gerecht?</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="slide ai-warm" id="folie-9">
+        <div class="slide-inner wide">
+          <p class="eyebrow">Gruppe 4</p>
+          <h2>Neue Prüfungsformen</h2>
+          <div class="task-layout">
+            <div class="task-focus">
+              <strong>Fragestellung</strong>
+              <p>Welche Prüfungsformen eignen sich, wenn KI Texte, Bilder und Präsentationen erstellen kann?</p>
+              <div class="result-box">
+                <strong>Ergebnis</strong>
+                <p>Empfehlt mindestens zwei Prüfungsformen für die Zukunft.</p>
+              </div>
+            </div>
+            <div>
+              <ul class="task-list">
+                <li>Mündliche Prüfungen</li>
+                <li>Debatten</li>
+                <li>Portfolios</li>
+                <li>Projektarbeiten</li>
+                <li>Präsentationen mit Fragerunde</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="slide content" id="folie-10">
+        <div class="slide-inner wide">
+          <p class="eyebrow">Gruppe 5</p>
+          <h2>Gesellschaftliche Folgen</h2>
+          <div class="task-layout">
+            <div class="task-focus">
+              <strong>Fragestellung</strong>
+              <p>Welche Chancen und Risiken hat KI für Bildung und Gesellschaft?</p>
+              <div class="result-box">
+                <strong>Ergebnis</strong>
+                <p>Erstellt eine Chancen-Risiken-Übersicht und formuliert eine eigene Bewertung.</p>
+              </div>
+            </div>
+            <div>
+              <ul class="task-list">
+                <li>Bildungsgerechtigkeit</li>
+                <li>Chancengleichheit</li>
+                <li>Abhängigkeit von Technologie</li>
+                <li>Auswirkungen auf Berufe und Lernen</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="slide ai-soft" id="folie-11">
+        <div class="slide-inner wide">
+          <p class="eyebrow">Präsentation</p>
+          <h2>Maximal 8 Minuten pro Gruppe</h2>
+          <p class="lead">Visualisiert eure Ergebnisse auf einer Präsentationsfolie, einem digitalen Whiteboard oder einem Plakat.</p>
+          <div class="presentation-steps">
+            <article class="presentation-step">
+              <span>1</span>
+              <strong>Zentrale Fragestellung</strong>
+              <p>Worum ging es in eurer Gruppe genau?</p>
+            </article>
+            <article class="presentation-step">
+              <span>2</span>
+              <strong>Wichtigste Erkenntnisse</strong>
+              <p>Welche Punkte waren sachlich entscheidend?</p>
+            </article>
+            <article class="presentation-step">
+              <span>3</span>
+              <strong>Eigene Bewertung</strong>
+              <p>Welche Position vertretet ihr und warum?</p>
+            </article>
+            <article class="presentation-step">
+              <span>4</span>
+              <strong>Empfehlungen</strong>
+              <p>Welche konkreten Regeln sollte die Schule übernehmen?</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="slide ai-dark" id="folie-12">
+        <div class="slide-inner wide">
+          <p class="eyebrow">Normative Kernfrage</p>
+          <h2>Aus Medienkunde wird Werte und Normen</h2>
+          <div class="reflection">
+            <p>Welche Regel sollte an unserer Schule gelten und warum ist sie gerecht?</p>
+          </div>
+          <p class="lead">
+            Entscheidend ist nicht nur, was KI technisch kann, sondern welche Nutzung wir aus Gründen der Fairness,
+            Verantwortung und Bildung für vertretbar halten.
+          </p>
+        </div>
+      </section>
+
+      <section class="slide content" id="folie-13">
+        <div class="slide-inner wide">
+          <p class="eyebrow">Abschlussauftrag</p>
+          <h2>KI-Verhaltenskodex für die Schule</h2>
+          <p class="lead">Die Klasse einigt sich auf 8 bis 10 Regeln. Der Kodex soll diese Fragen beantworten:</p>
+          <div class="code-grid">
+            <article class="code-card">
+              <strong>Erlaubte Nutzung</strong>
+              <p>Wofür darf KI im Unterricht und zu Hause genutzt werden?</p>
+            </article>
+            <article class="code-card">
+              <strong>Grenzen</strong>
+              <p>Wofür darf KI nicht genutzt werden?</p>
+            </article>
+            <article class="code-card">
+              <strong>Offenlegung</strong>
+              <p>Was muss angegeben werden, wenn KI geholfen hat?</p>
+            </article>
+            <article class="code-card">
+              <strong>Bewertung</strong>
+              <p>Wie sollen Leistungen bewertet werden?</p>
+            </article>
+            <article class="code-card">
+              <strong>Kompetenzen</strong>
+              <p>Welche Fähigkeiten bleiben unverzichtbar?</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="slide agenda" id="folie-14">
+        <div class="slide-inner wide">
+          <p class="eyebrow">Zeitplanung</p>
+          <h2>1. Doppelstunde</h2>
+          <div class="timeline">
+            <div class="timeline-item">
+              <span>10 Min</span>
+              <div>
+                <strong>Einstieg</strong>
+                <p>KI-Beispiel zeigen und erste Problemfragen sammeln.</p>
+              </div>
+            </div>
+            <div class="timeline-item">
+              <span>10 Min</span>
+              <div>
+                <strong>Gruppenfindung</strong>
+                <p>Themen verteilen, Rollen klären und Arbeitsziel sichern.</p>
+              </div>
+            </div>
+            <div class="timeline-item">
+              <span>45 Min</span>
+              <div>
+                <strong>Recherche</strong>
+                <p>Schwerpunkt untersuchen und eine begründete Position entwickeln.</p>
+              </div>
+            </div>
+            <div class="timeline-item">
+              <span>25 Min</span>
+              <div>
+                <strong>Präsentation vorbereiten</strong>
+                <p>Erkenntnisse verdichten, Empfehlung formulieren, Visualisierung erstellen.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="slide ai-blue" id="folie-15">
+        <div class="slide-inner wide">
+          <p class="eyebrow">Zeitplanung</p>
+          <h2>2. Doppelstunde</h2>
+          <div class="timeline">
+            <div class="timeline-item">
+              <span>40-50 Min</span>
+              <div>
+                <strong>Präsentationen</strong>
+                <p>5 Gruppen präsentieren jeweils maximal 8 Minuten.</p>
+              </div>
+            </div>
+            <div class="timeline-item">
+              <span>20 Min</span>
+              <div>
+                <strong>Diskussion</strong>
+                <p>Empfehlungen vergleichen, Konflikte markieren, Prioritäten setzen.</p>
+              </div>
+            </div>
+            <div class="timeline-item">
+              <span>15 Min</span>
+              <div>
+                <strong>Kodex entwickeln</strong>
+                <p>8 bis 10 gemeinsame Regeln formulieren.</p>
+              </div>
+            </div>
+            <div class="timeline-item">
+              <span>10 Min</span>
+              <div>
+                <strong>Abstimmung</strong>
+                <p>Regeln prüfen, schärfen und beschließen.</p>
+              </div>
+            </div>
+            <div class="timeline-item">
+              <span>5 Min</span>
+              <div>
+                <strong>Reflexion</strong>
+                <p>Was bleibt für den eigenen Umgang mit KI wichtig?</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <nav class="deck-nav" aria-label="Foliennavigation">
+      <a href="#folie-1" aria-label="Folie 1">1</a>
+      <a href="#folie-2" aria-label="Folie 2">2</a>
+      <a href="#folie-3" aria-label="Folie 3">3</a>
+      <a href="#folie-4" aria-label="Folie 4">4</a>
+      <a href="#folie-5" aria-label="Folie 5">5</a>
+      <a href="#folie-6" aria-label="Folie 6">6</a>
+      <a href="#folie-7" aria-label="Folie 7">7</a>
+      <a href="#folie-8" aria-label="Folie 8">8</a>
+      <a href="#folie-9" aria-label="Folie 9">9</a>
+      <a href="#folie-10" aria-label="Folie 10">10</a>
+      <a href="#folie-11" aria-label="Folie 11">11</a>
+      <a href="#folie-12" aria-label="Folie 12">12</a>
+      <a href="#folie-13" aria-label="Folie 13">13</a>
+      <a href="#folie-14" aria-label="Folie 14">14</a>
+      <a href="#folie-15" aria-label="Folie 15">15</a>
+    </nav>
+    <div class="slide-count" aria-hidden="true">Pfeiltasten nutzbar</div>
+
+    <script>
+      const slides = document.querySelector("#slides");
+      const slideItems = [...document.querySelectorAll(".slide")];
+
+      function currentSlideIndex() {
+        const slideWidth = slides.clientWidth;
+        return Math.round(slides.scrollLeft / slideWidth);
+      }
+
+      function goToSlide(index) {
+        const nextIndex = Math.max(0, Math.min(slideItems.length - 1, index));
+        slideItems[nextIndex].scrollIntoView({ behavior: "smooth", inline: "start" });
+      }
+
+      document.addEventListener("keydown", (event) => {
+        if (event.key === "ArrowRight" || event.key === "PageDown") {
+          event.preventDefault();
+          goToSlide(currentSlideIndex() + 1);
+        }
+
+        if (event.key === "ArrowLeft" || event.key === "PageUp") {
+          event.preventDefault();
+          goToSlide(currentSlideIndex() - 1);
+        }
+
+        if (event.key === "Home") {
+          event.preventDefault();
+          goToSlide(0);
+        }
+
+        if (event.key === "End") {
+          event.preventDefault();
+          goToSlide(slideItems.length - 1);
+        }
+      });
+    </script>
+  </body>
+</html>
