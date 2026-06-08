@@ -1,0 +1,855 @@
+<!doctype html>
+<html lang="de">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Simulation Deutscher Ethikrat | Tierversuche</title>
+    <style>
+      :root {
+        color-scheme: light;
+        --bg: #f4f1ec;
+        --paper: #fffdf8;
+        --ink: #1f2933;
+        --muted: #64707d;
+        --line: #d8d2c8;
+        --green: #0f766e;
+        --green-dark: #134e4a;
+        --blue: #2563eb;
+        --red: #b42318;
+        --gold: #b45309;
+        --soft-green: #e8f3f1;
+        --soft-blue: #eef4ff;
+        --soft-red: #fff1ef;
+        --soft-gold: #fff7e8;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html,
+      body {
+        margin: 0;
+        min-height: 100%;
+      }
+
+      body {
+        font-family:
+          Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
+          "Segoe UI", sans-serif;
+        background: var(--bg);
+        color: var(--ink);
+      }
+
+      h1,
+      h2,
+      h3,
+      p {
+        margin-top: 0;
+      }
+
+      .slides {
+        display: flex;
+        width: 100vw;
+        height: 100vh;
+        overflow-x: auto;
+        overflow-y: hidden;
+        scroll-snap-type: x mandatory;
+        scroll-behavior: smooth;
+      }
+
+      .slide {
+        display: grid;
+        flex: 0 0 100vw;
+        min-width: 100vw;
+        height: 100vh;
+        padding: 6vh 7vw;
+        scroll-snap-align: start;
+        background: var(--paper);
+      }
+
+      .slide-inner {
+        align-self: center;
+        width: min(1120px, 100%);
+      }
+
+      .slide.center .slide-inner {
+        justify-self: center;
+        text-align: center;
+      }
+
+      .title-slide {
+        background:
+          linear-gradient(120deg, rgb(15 118 110 / 16%), transparent 38%),
+          linear-gradient(320deg, rgb(37 99 235 / 12%), transparent 42%),
+          var(--paper);
+      }
+
+      .contrast-slide {
+        background: #172033;
+        color: #ffffff;
+      }
+
+      .contrast-slide p,
+      .contrast-slide li,
+      .contrast-slide small {
+        color: rgb(255 255 255 / 76%);
+      }
+
+      .soft-green {
+        background: linear-gradient(90deg, var(--soft-green) 0 38%, var(--paper) 38% 100%);
+      }
+
+      .soft-blue {
+        background: var(--soft-blue);
+      }
+
+      .soft-gold {
+        background: var(--soft-gold);
+      }
+
+      .eyebrow {
+        margin-bottom: 14px;
+        color: var(--green-dark);
+        font-size: clamp(0.78rem, 1vw, 0.95rem);
+        font-weight: 850;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+
+      .contrast-slide .eyebrow {
+        color: #8dd8cf;
+      }
+
+      h1 {
+        max-width: 980px;
+        margin-bottom: 22px;
+        font-size: clamp(3rem, 6vw, 6rem);
+        line-height: 0.96;
+        letter-spacing: 0;
+      }
+
+      h2 {
+        margin-bottom: 24px;
+        font-size: clamp(2rem, 4vw, 4.1rem);
+        line-height: 1;
+        letter-spacing: 0;
+      }
+
+      h3 {
+        margin-bottom: 10px;
+        font-size: clamp(1.12rem, 1.7vw, 1.45rem);
+        line-height: 1.15;
+      }
+
+      p,
+      li {
+        color: var(--muted);
+        font-size: clamp(1.05rem, 1.45vw, 1.35rem);
+        line-height: 1.48;
+      }
+
+      .lead {
+        max-width: 860px;
+        color: var(--muted);
+        font-size: clamp(1.35rem, 2.15vw, 2.1rem);
+        line-height: 1.42;
+      }
+
+      .question {
+        display: inline-block;
+        margin-top: 18px;
+        padding: 18px 22px;
+        border-left: 8px solid var(--green);
+        border-radius: 8px;
+        background: rgb(255 255 255 / 72%);
+        color: var(--ink);
+        font-size: clamp(1.25rem, 2vw, 1.85rem);
+        font-weight: 850;
+        line-height: 1.35;
+        text-align: left;
+      }
+
+      .meta-row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin-top: 30px;
+      }
+
+      .pill {
+        display: inline-flex;
+        align-items: center;
+        min-height: 34px;
+        padding: 0 12px;
+        border-radius: 999px;
+        background: rgb(15 118 110 / 11%);
+        color: var(--green-dark);
+        font-size: 0.95rem;
+        font-weight: 850;
+      }
+
+      .grid {
+        display: grid;
+        gap: 16px;
+      }
+
+      .roles {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 12px;
+      }
+
+      .two {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .three {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+
+      .card {
+        min-height: 0;
+        padding: 20px;
+        border: 1px solid rgb(31 41 51 / 12%);
+        border-radius: 8px;
+        background: rgb(255 255 255 / 88%);
+        box-shadow: 0 16px 38px rgb(31 41 51 / 8%);
+      }
+
+      .card strong {
+        color: var(--ink);
+      }
+
+      .role {
+        min-height: 214px;
+      }
+
+      .role h3 {
+        color: var(--green-dark);
+      }
+
+      .label {
+        display: block;
+        margin: 12px 0 4px;
+        color: var(--green-dark);
+        font-size: 0.78rem;
+        font-weight: 900;
+        letter-spacing: 0.07em;
+        text-transform: uppercase;
+      }
+
+      .card p,
+      .card li {
+        font-size: clamp(0.95rem, 1.22vw, 1.12rem);
+        line-height: 1.42;
+      }
+
+      .card p {
+        margin-bottom: 8px;
+      }
+
+      .card p:last-child,
+      .card ul:last-child {
+        margin-bottom: 0;
+      }
+
+      ul {
+        display: grid;
+        gap: 9px;
+        margin: 0;
+        padding-left: 1.15em;
+      }
+
+      .value-row {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) 80px minmax(0, 1fr);
+        gap: 18px;
+        align-items: center;
+        margin-top: 24px;
+      }
+
+      .value-box {
+        padding: 26px;
+        border-radius: 8px;
+        background: #ffffff;
+        box-shadow: 0 18px 42px rgb(31 41 51 / 9%);
+      }
+
+      .value-box:first-child {
+        border-top: 8px solid var(--blue);
+      }
+
+      .value-box:last-child {
+        border-top: 8px solid var(--red);
+      }
+
+      .versus {
+        display: grid;
+        place-items: center;
+        width: 70px;
+        height: 70px;
+        border-radius: 999px;
+        background: #172033;
+        color: #ffffff;
+        font-weight: 950;
+      }
+
+      .protocol {
+        display: grid;
+        gap: 12px;
+        margin-top: 8px;
+      }
+
+      .turn {
+        display: grid;
+        grid-template-columns: 178px minmax(0, 1fr);
+        gap: 16px;
+        padding: 11px 0;
+        border-top: 1px solid rgb(255 255 255 / 16%);
+      }
+
+      .speaker {
+        color: #ffffff;
+        font-size: clamp(0.95rem, 1.15vw, 1.08rem);
+        font-weight: 900;
+        line-height: 1.25;
+      }
+
+      .turn p {
+        margin: 0;
+        font-size: clamp(0.9rem, 1.08vw, 1.04rem);
+        line-height: 1.34;
+      }
+
+      mark {
+        padding: 0 0.16em;
+        border-radius: 4px;
+        background: rgb(244 197 66 / 42%);
+        color: inherit;
+      }
+
+      #folie-2 h2,
+      #folie-3 h2,
+      #folie-4 h2 {
+        margin-bottom: 18px;
+      }
+
+      #folie-2 .role {
+        min-height: 0;
+        padding: 14px;
+      }
+
+      #folie-2 .role h3 {
+        margin-bottom: 6px;
+        font-size: clamp(0.98rem, 1.35vw, 1.16rem);
+      }
+
+      #folie-2 .label {
+        margin: 7px 0 2px;
+        font-size: 0.68rem;
+      }
+
+      #folie-2 .role p {
+        margin-bottom: 0;
+        font-size: clamp(0.82rem, 1vw, 0.94rem);
+        line-height: 1.25;
+      }
+
+      #folie-3 .lead {
+        font-size: clamp(1.1rem, 1.7vw, 1.45rem);
+      }
+
+      #folie-3 .value-box {
+        padding: 20px;
+      }
+
+      #folie-3 .value-box li,
+      #folie-3 .card p {
+        font-size: clamp(0.9rem, 1.1vw, 1rem);
+        line-height: 1.34;
+      }
+
+      #folie-3 .grid.three {
+        margin-top: 16px;
+      }
+
+      #folie-4 .protocol {
+        gap: 0;
+      }
+
+      .matrix {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+        gap: 18px;
+        align-items: start;
+      }
+
+      .pro {
+        border-top: 8px solid var(--green);
+      }
+
+      .contra {
+        border-top: 8px solid var(--red);
+      }
+
+      .conflicts {
+        grid-column: 1 / -1;
+        border-top: 8px solid var(--gold);
+        background: #ffffff;
+      }
+
+      .statement {
+        display: grid;
+        gap: 18px;
+        margin-top: 10px;
+      }
+
+      .official {
+        padding: 28px;
+        border-left: 8px solid var(--green);
+        border-radius: 8px;
+        background: #ffffff;
+        box-shadow: 0 18px 42px rgb(31 41 51 / 9%);
+      }
+
+      .official p {
+        color: var(--ink);
+        font-size: clamp(1.05rem, 1.45vw, 1.28rem);
+      }
+
+      .conditions {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 14px;
+      }
+
+      .conditions .card {
+        background: rgb(255 255 255 / 72%);
+      }
+
+      .questions {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 16px;
+        margin-top: 24px;
+        padding: 0;
+        list-style: none;
+      }
+
+      .questions li {
+        min-height: 130px;
+        padding: 22px;
+        border-radius: 8px;
+        background: #ffffff;
+        color: var(--ink);
+        box-shadow: 0 16px 38px rgb(31 41 51 / 8%);
+      }
+
+      .questions span {
+        display: block;
+        margin-bottom: 8px;
+        color: var(--green);
+        font-size: 0.86rem;
+        font-weight: 950;
+        letter-spacing: 0.07em;
+        text-transform: uppercase;
+      }
+
+      .deck-nav {
+        position: fixed;
+        right: 18px;
+        bottom: 18px;
+        display: flex;
+        gap: 8px;
+      }
+
+      .deck-nav a {
+        display: grid;
+        place-items: center;
+        width: 42px;
+        height: 42px;
+        border: 1px solid var(--line);
+        border-radius: 999px;
+        background: rgb(255 255 255 / 86%);
+        color: var(--ink);
+        font-size: 1rem;
+        font-weight: 850;
+        text-decoration: none;
+      }
+
+      .slide-count {
+        position: fixed;
+        left: 18px;
+        bottom: 24px;
+        padding: 7px 11px;
+        border-radius: 999px;
+        background: rgb(255 255 255 / 86%);
+        color: var(--muted);
+        font-size: 0.82rem;
+        font-weight: 800;
+      }
+
+      @media (max-width: 900px) {
+        .slide {
+          height: auto;
+          min-height: 100vh;
+          padding: 54px 24px 84px;
+        }
+
+        .slides {
+          overflow-y: auto;
+          align-items: stretch;
+        }
+
+        .roles,
+        .two,
+        .three,
+        .matrix,
+        .conditions,
+        .questions,
+        .value-row {
+          grid-template-columns: 1fr;
+        }
+
+        .versus {
+          justify-self: center;
+          width: 58px;
+          height: 58px;
+        }
+
+        .turn {
+          grid-template-columns: 1fr;
+          gap: 6px;
+        }
+
+        .deck-nav {
+          right: 12px;
+          bottom: 12px;
+        }
+
+        .deck-nav a {
+          width: 36px;
+          height: 36px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main class="slides" id="slides">
+      <section class="slide title-slide center" id="folie-1">
+        <div class="slide-inner">
+          <p class="eyebrow">Werte und Normen · Jahrgang 12</p>
+          <h1>Simulation Deutscher Ethikrat</h1>
+          <p class="lead">
+            Ein Ethikrat entscheidet nicht einfach mit Ja oder Nein. Er macht sichtbar,
+            welche Werte miteinander konkurrieren und welche Empfehlung daraus folgt.
+          </p>
+          <div class="question">
+            Ist es ethisch vertretbar, mit Tieren zu experimentieren, um wissenschaftliche
+            Erkenntnisse zu gewinnen?
+          </div>
+          <div class="meta-row" aria-label="Schwerpunkte">
+            <span class="pill">Perspektivwechsel</span>
+            <span class="pill">ethisches Argumentieren</span>
+            <span class="pill">Abwägung</span>
+            <span class="pill">Konsensfindung</span>
+          </div>
+        </div>
+      </section>
+
+      <section class="slide soft-green" id="folie-2">
+        <div class="slide-inner">
+          <p class="eyebrow">Folie 2</p>
+          <h2>Zusammensetzung des Ethikrats</h2>
+          <div class="grid roles">
+            <article class="card role">
+              <h3>Vorsitz und Moderation</h3>
+              <span class="label">Funktion</span>
+              <p>Strukturiert die Beratung und achtet auf nachvollziehbare Begründungen.</p>
+              <span class="label">Grundposition</span>
+              <p>Ein Konsens ist nur tragfähig, wenn Einwände sichtbar bleiben.</p>
+              <span class="label">Zentraler Wert</span>
+              <p><strong>Urteilsbildung</strong></p>
+            </article>
+            <article class="card role">
+              <h3>Biomedizinische Forschung</h3>
+              <span class="label">Funktion</span>
+              <p>Bewertet Nutzen, Grenzen und Alternativen im Forschungsprozess.</p>
+              <span class="label">Grundposition</span>
+              <p>Tierversuche können bei strenger Prüfung vertretbar sein.</p>
+              <span class="label">Zentraler Wert</span>
+              <p><strong>Heilungschancen</strong></p>
+            </article>
+            <article class="card role">
+              <h3>Tierschutzethik</h3>
+              <span class="label">Funktion</span>
+              <p>Vertritt die moralische Berücksichtigung leidensfähiger Tiere.</p>
+              <span class="label">Grundposition</span>
+              <p>Leid darf nicht bloß als Forschungskosten verbucht werden.</p>
+              <span class="label">Zentraler Wert</span>
+              <p><strong>Leidvermeidung</strong></p>
+            </article>
+            <article class="card role">
+              <h3>Patientenvertretung</h3>
+              <span class="label">Funktion</span>
+              <p>Bringt Perspektiven schwer erkrankter Menschen und Angehöriger ein.</p>
+              <span class="label">Grundposition</span>
+              <p>Forschung ist geboten, wenn realistische Therapien entstehen können.</p>
+              <span class="label">Zentraler Wert</span>
+              <p><strong>Menschenwürde</strong></p>
+            </article>
+            <article class="card role">
+              <h3>Rechtswissenschaft</h3>
+              <span class="label">Funktion</span>
+              <p>Prüft Grundrechte, Schutzpflichten, Verhältnismäßigkeit und Verfahren.</p>
+              <span class="label">Grundposition</span>
+              <p>Erlaubnis nur bei klarer Rechtfertigung und unabhängiger Kontrolle.</p>
+              <span class="label">Zentraler Wert</span>
+              <p><strong>Verantwortung</strong></p>
+            </article>
+            <article class="card role">
+              <h3>Theologische Ethik</h3>
+              <span class="label">Funktion</span>
+              <p>Fragt nach Schöpfungsverantwortung, Mitgeschöpflichkeit und Maßhalten.</p>
+              <span class="label">Grundposition</span>
+              <p>Tiere sind nicht Menschen, aber auch keine bloßen Mittel.</p>
+              <span class="label">Zentraler Wert</span>
+              <p><strong>Achtung vor Leben</strong></p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="slide soft-blue" id="folie-3">
+        <div class="slide-inner">
+          <p class="eyebrow">Folie 3</p>
+          <h2>Ausgangskonflikt</h2>
+          <p class="lead">
+            Die ethische Grundspannung liegt zwischen dem möglichen Nutzen für Menschen
+            und dem tatsächlichen oder wahrscheinlichen Leiden von Tieren.
+          </p>
+          <div class="value-row">
+            <article class="value-box">
+              <h3>Wissenschaftlicher und medizinischer Nutzen</h3>
+              <ul>
+                <li>Entwicklung neuer Therapien und Medikamente</li>
+                <li>Schutz menschlicher Versuchspersonen vor Risiken</li>
+                <li>Erkenntnisse über Krankheiten, Organismen und Wirkmechanismen</li>
+              </ul>
+            </article>
+            <div class="versus" aria-label="gegen">vs.</div>
+            <article class="value-box">
+              <h3>Moralischer Status leidensfähiger Tiere</h3>
+              <ul>
+                <li>Schmerz, Angst, Stress und Einschränkung natürlicher Lebensformen</li>
+                <li>Gefahr, Tiere nur als Mittel zum Zweck zu behandeln</li>
+                <li>Pflicht zu Schutz, Schonung und Alternativen</li>
+              </ul>
+            </article>
+          </div>
+          <div class="grid three" style="margin-top: 22px;">
+            <article class="card">
+              <h3>Konfliktwert 1</h3>
+              <p><strong>Leidvermeidung</strong> gegen Erkenntnisinteresse</p>
+            </article>
+            <article class="card">
+              <h3>Konfliktwert 2</h3>
+              <p><strong>Menschenwohl</strong> gegen Achtung des Tieres</p>
+            </article>
+            <article class="card">
+              <h3>Konfliktwert 3</h3>
+              <p><strong>Forschungsfreiheit</strong> gegen Verantwortung und Kontrolle</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="slide contrast-slide" id="folie-4">
+        <div class="slide-inner">
+          <p class="eyebrow">Folie 4</p>
+          <h2>Diskussionssimulation</h2>
+          <div class="protocol" aria-label="Gesprächsprotokoll">
+            <div class="turn">
+              <div class="speaker">Vorsitz</div>
+              <p>Wir prüfen nicht nur den Nutzen, sondern auch die Frage, ob die Mittel moralisch vertretbar sind. Entscheidend ist eine <mark>begründete Abwägung</mark>.</p>
+            </div>
+            <div class="turn">
+              <div class="speaker">Biomedizinische Forschung</div>
+              <p>Bestimmte Krankheitsprozesse lassen sich noch nicht vollständig ohne lebende Organismen untersuchen. Ein Verbot könnte Therapien verhindern, die Leid bei Menschen mindern.</p>
+            </div>
+            <div class="turn">
+              <div class="speaker">Tierschutzethik</div>
+              <p>Der Nutzen ist relevant, aber er löscht das Tierleid nicht aus. Gerade weil Tiere leidensfähig sind, muss jedes Experiment als moralisch problematisch gelten.</p>
+            </div>
+            <div class="turn">
+              <div class="speaker">Patientenvertretung</div>
+              <p>Ich verstehe den Einwand. Aber auch Patientinnen und Patienten erleben schweres Leid. Wenn ein Versuch realistische Heilungschancen eröffnet, darf diese Perspektive nicht fehlen.</p>
+            </div>
+            <div class="turn">
+              <div class="speaker">Rechtswissenschaft</div>
+              <p>Dann brauchen wir Kriterien: kein bloßes Interesse, sondern hoher Erkenntniswert, keine gleichwertige Alternative, möglichst geringe Belastung und unabhängige Genehmigung.</p>
+            </div>
+            <div class="turn">
+              <div class="speaker">Theologische Ethik</div>
+              <p>Diese Kriterien sind nötig, reichen aber nur, wenn der Grundsatz klar bleibt: Tiere sind Mitgeschöpfe. Die Ausnahme darf nicht zur Routine werden.</p>
+            </div>
+            <div class="turn">
+              <div class="speaker">Vorsitz</div>
+              <p>Ich halte fest: Ein möglicher Konsens liegt nicht im freien Erlauben, sondern in strengen Grenzen, Transparenz und der Pflicht, Alternativen aktiv zu entwickeln.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="slide soft-gold" id="folie-5">
+        <div class="slide-inner">
+          <p class="eyebrow">Folie 5</p>
+          <h2>Ethische Abwägung</h2>
+          <div class="matrix">
+            <article class="card pro">
+              <h3>Pro-Argumente</h3>
+              <ul>
+                <li>Kann schwere Krankheiten besser verstehbar und behandelbar machen.</li>
+                <li>Kann Risiken senken, bevor Verfahren am Menschen getestet werden.</li>
+                <li>Kann ethisch geboten sein, wenn großes menschliches Leid vermeidbar wird.</li>
+                <li>Ist nicht automatisch grenzenlos, sondern an Genehmigung und Kontrolle bindbar.</li>
+              </ul>
+            </article>
+            <article class="card contra">
+              <h3>Contra-Argumente</h3>
+              <ul>
+                <li>Tiere erfahren Schmerzen, Angst, Stress und Verlust von Lebensmöglichkeiten.</li>
+                <li>Der Nutzen ist oft unsicher und nicht jedes Ergebnis auf Menschen übertragbar.</li>
+                <li>Forschung kann Tiere auf ihre Verwertbarkeit reduzieren.</li>
+                <li>Alternativen können zu spät entwickelt werden, wenn Tierversuche bequem verfügbar bleiben.</li>
+              </ul>
+            </article>
+            <article class="card conflicts">
+              <h3>Zentrale Wertekonflikte</h3>
+              <div class="grid three">
+                <p><strong>Nutzen</strong><br>gegen Schaden</p>
+                <p><strong>Forschungsfreiheit</strong><br>gegen Schutzpflicht</p>
+                <p><strong>Menschenwohl</strong><br>gegen Eigenwert des Tieres</p>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="slide soft-green" id="folie-6">
+        <div class="slide-inner">
+          <p class="eyebrow">Folie 6</p>
+          <h2>Gemeinsame Stellungnahme</h2>
+          <div class="statement">
+            <article class="official">
+              <p>
+                Der Ethikrat hält Tierversuche zur Gewinnung wissenschaftlicher Erkenntnisse
+                nicht grundsätzlich für ethisch ausgeschlossen. Er bewertet sie jedoch nur
+                dann als vertretbar, wenn ein erheblicher medizinischer oder wissenschaftlicher
+                Erkenntniswert plausibel begründet ist und keine gleichwertige tierfreie
+                Alternative zur Verfügung steht.
+              </p>
+              <p>
+                Die Empfehlung lautet daher: Tierversuche dürfen nur als streng kontrollierte
+                Ausnahme zugelassen werden. Der Schutz leidensfähiger Tiere, die Entwicklung
+                alternativer Verfahren und eine transparente öffentliche Begründung müssen
+                Vorrang vor bloßer Forschungsroutine haben.
+              </p>
+            </article>
+            <div class="conditions">
+              <article class="card">
+                <h3>Bedingung 1</h3>
+                <p><strong>Ersetzen:</strong> Tierfreie Methoden haben Vorrang, sobald sie vergleichbar geeignet sind.</p>
+              </article>
+              <article class="card">
+                <h3>Bedingung 2</h3>
+                <p><strong>Verringern:</strong> Zahl der Tiere und Belastung müssen so niedrig wie möglich bleiben.</p>
+              </article>
+              <article class="card">
+                <h3>Bedingung 3</h3>
+                <p><strong>Verbessern:</strong> Haltung, Verfahren und Abbruchkriterien müssen Leid konsequent begrenzen.</p>
+              </article>
+            </div>
+            <article class="card">
+              <h3>Minderheitenposition</h3>
+              <p>Ein Teil des Rates lehnt belastende Versuche ab, wenn Tiere schweres Leid erfahren oder der erwartete Nutzen spekulativ bleibt.</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="slide title-slide" id="folie-7">
+        <div class="slide-inner">
+          <p class="eyebrow">Folie 7</p>
+          <h2>Reflexionsfragen für den Kurs</h2>
+          <ul class="questions">
+            <li>
+              <span>Rollenprüfung</span>
+              Welche Rolle war für dich besonders überzeugend, und wodurch?
+            </li>
+            <li>
+              <span>Wertegewichtung</span>
+              Welche Werte wurden in der Stellungnahme höher gewichtet?
+            </li>
+            <li>
+              <span>Konsens</span>
+              War der gefundene Konsens überzeugend oder zu kompromisshaft?
+            </li>
+            <li>
+              <span>Fehlende Perspektive</span>
+              Welche Perspektive hätte der Ethikrat zusätzlich einbeziehen sollen?
+            </li>
+          </ul>
+        </div>
+      </section>
+    </main>
+
+    <nav class="deck-nav" aria-label="Foliennavigation">
+      <a href="#folie-1" aria-label="Folie 1">1</a>
+      <a href="#folie-2" aria-label="Folie 2">2</a>
+      <a href="#folie-3" aria-label="Folie 3">3</a>
+      <a href="#folie-4" aria-label="Folie 4">4</a>
+      <a href="#folie-5" aria-label="Folie 5">5</a>
+      <a href="#folie-6" aria-label="Folie 6">6</a>
+      <a href="#folie-7" aria-label="Folie 7">7</a>
+    </nav>
+    <div class="slide-count" aria-hidden="true">Pfeiltasten nutzbar</div>
+
+    <script>
+      const slides = document.querySelector("#slides");
+      const slideItems = [...document.querySelectorAll(".slide")];
+
+      function currentSlideIndex() {
+        const slideWidth = slides.clientWidth;
+        return Math.round(slides.scrollLeft / slideWidth);
+      }
+
+      function goToSlide(index) {
+        const nextIndex = Math.max(0, Math.min(slideItems.length - 1, index));
+        slideItems[nextIndex].scrollIntoView({ behavior: "smooth", inline: "start" });
+      }
+
+      document.addEventListener("keydown", (event) => {
+        if (event.key === "ArrowRight" || event.key === "PageDown") {
+          event.preventDefault();
+          goToSlide(currentSlideIndex() + 1);
+        }
+
+        if (event.key === "ArrowLeft" || event.key === "PageUp") {
+          event.preventDefault();
+          goToSlide(currentSlideIndex() - 1);
+        }
+
+        if (event.key === "Home") {
+          event.preventDefault();
+          goToSlide(0);
+        }
+
+        if (event.key === "End") {
+          event.preventDefault();
+          goToSlide(slideItems.length - 1);
+        }
+      });
+    </script>
+  </body>
+</html>
