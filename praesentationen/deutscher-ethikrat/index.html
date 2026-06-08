@@ -1,0 +1,1005 @@
+<!doctype html>
+<html lang="de">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Der Deutsche Ethikrat | Werte und Normen Jg. 12</title>
+    <link rel="stylesheet" href="../../assets/styles.css">
+    <style>
+      :root {
+        --ethics-green: #0f766e;
+        --ethics-navy: #172033;
+        --ethics-red: #b42318;
+        --ethics-yellow: #f4c542;
+        --ethics-blue: #1d4ed8;
+        --ethics-lilac: #6d5bd0;
+        --ethics-paper: #fbfaf7;
+      }
+
+      .slide {
+        position: relative;
+      }
+
+      .slide.ethics-title {
+        background:
+          linear-gradient(120deg, rgb(15 118 110 / 16%), transparent 36%),
+          linear-gradient(320deg, rgb(29 78 216 / 12%), transparent 42%),
+          var(--ethics-paper);
+      }
+
+      .slide.ethics-dark {
+        background: var(--ethics-navy);
+        color: #ffffff;
+      }
+
+      .slide.ethics-dark p,
+      .slide.ethics-dark li,
+      .slide.ethics-dark small {
+        color: rgb(255 255 255 / 78%);
+      }
+
+      .slide.ethics-band {
+        background:
+          linear-gradient(90deg, #eef7f5 0 40%, #ffffff 40% 100%);
+      }
+
+      .slide.ethics-warm {
+        background: #fff6e6;
+      }
+
+      .slide.ethics-blue {
+        background: #eef4ff;
+      }
+
+      .lesson-meta {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin-top: 28px;
+      }
+
+      .pill {
+        display: inline-flex;
+        align-items: center;
+        min-height: 34px;
+        padding: 0 12px;
+        border-radius: 999px;
+        background: rgb(15 118 110 / 11%);
+        color: var(--accent-dark);
+        font-size: 0.95rem;
+        font-weight: 850;
+      }
+
+      .ethics-dark .pill {
+        background: rgb(255 255 255 / 12%);
+        color: #ffffff;
+      }
+
+      .question-strip {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 14px;
+        margin-top: 36px;
+      }
+
+      .question-strip article,
+      .compact-card,
+      .source-card,
+      .activity-card {
+        border: 1px solid rgb(31 41 51 / 12%);
+        border-radius: 8px;
+        background: #ffffff;
+        box-shadow: 0 16px 40px rgb(31 41 51 / 8%);
+      }
+
+      .question-strip article {
+        min-height: 172px;
+        padding: 22px;
+      }
+
+      .question-strip strong,
+      .compact-card strong,
+      .activity-card strong {
+        display: block;
+        color: var(--ink);
+        font-size: clamp(1.05rem, 1.5vw, 1.35rem);
+        line-height: 1.25;
+      }
+
+      .question-strip p,
+      .compact-card p,
+      .activity-card p {
+        margin-top: 10px;
+        font-size: clamp(0.98rem, 1.25vw, 1.12rem);
+        line-height: 1.45;
+      }
+
+      .mini-grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 18px;
+        margin-top: 30px;
+      }
+
+      .compact-card {
+        padding: 22px;
+      }
+
+      .icon-badge {
+        display: grid;
+        place-items: center;
+        width: 46px;
+        height: 46px;
+        margin-bottom: 16px;
+        border-radius: 999px;
+        background: #e7f2f0;
+        color: var(--ethics-green);
+        font-size: 1.35rem;
+        font-weight: 950;
+      }
+
+      .ethics-dark .compact-card {
+        border-color: rgb(255 255 255 / 14%);
+        background: rgb(255 255 255 / 8%);
+        box-shadow: none;
+      }
+
+      .ethics-dark .compact-card strong {
+        color: #ffffff;
+      }
+
+      .timeline {
+        display: grid;
+        gap: 16px;
+        margin-top: 32px;
+      }
+
+      .timeline-item {
+        display: grid;
+        grid-template-columns: 88px minmax(0, 1fr);
+        gap: 20px;
+        align-items: start;
+        padding: 18px 0;
+        border-top: 1px solid var(--line);
+      }
+
+      .timeline-item span {
+        color: var(--ethics-green);
+        font-size: clamp(1.6rem, 2.6vw, 2.6rem);
+        font-weight: 950;
+        line-height: 1;
+      }
+
+      .timeline-item strong {
+        display: block;
+        margin-bottom: 6px;
+        font-size: clamp(1.1rem, 1.6vw, 1.45rem);
+      }
+
+      .timeline-item p {
+        margin: 0;
+        font-size: clamp(1rem, 1.35vw, 1.16rem);
+      }
+
+      .role-map {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 12px;
+        margin-top: 32px;
+      }
+
+      .role-map .compact-card {
+        min-height: 190px;
+      }
+
+      .role-map .icon-badge {
+        background: #eff6ff;
+        color: var(--ethics-blue);
+      }
+
+      .comparison {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 18px;
+        margin-top: 30px;
+      }
+
+      .comparison .compact-card:first-child {
+        border-top: 8px solid var(--ethics-green);
+      }
+
+      .comparison .compact-card:last-child {
+        border-top: 8px solid var(--ethics-red);
+      }
+
+      .dense-list {
+        display: grid;
+        gap: 10px;
+        margin-top: 22px;
+        padding-left: 1.1em;
+      }
+
+      .dense-list li {
+        font-size: clamp(0.98rem, 1.35vw, 1.18rem);
+        line-height: 1.42;
+      }
+
+      .process {
+        display: grid;
+        grid-template-columns: repeat(5, minmax(0, 1fr));
+        gap: 10px;
+        margin-top: 34px;
+      }
+
+      .process-step {
+        min-height: 176px;
+        padding: 18px;
+        border-radius: 8px;
+        background: #ffffff;
+        box-shadow: 0 14px 34px rgb(31 41 51 / 8%);
+      }
+
+      .process-step span {
+        display: block;
+        color: var(--ethics-lilac);
+        font-size: 1.8rem;
+        font-weight: 950;
+        line-height: 1;
+      }
+
+      .process-step strong {
+        display: block;
+        margin-top: 14px;
+        font-size: clamp(1rem, 1.25vw, 1.15rem);
+      }
+
+      .process-step p {
+        margin-top: 8px;
+        font-size: 0.98rem;
+        line-height: 1.35;
+      }
+
+      .case-layout {
+        display: grid;
+        grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.05fr);
+        gap: 34px;
+        align-items: start;
+        margin-top: 28px;
+      }
+
+      .scenario {
+        padding: 26px;
+        border-radius: 8px;
+        background: #ffffff;
+        box-shadow: 0 18px 45px rgb(31 41 51 / 10%);
+      }
+
+      .scenario p {
+        font-size: clamp(1.05rem, 1.45vw, 1.25rem);
+      }
+
+      .matrix {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 12px;
+      }
+
+      .matrix .compact-card {
+        min-height: 148px;
+        box-shadow: none;
+      }
+
+      .value-row {
+        display: grid;
+        grid-template-columns: 210px minmax(0, 1fr);
+        gap: 18px;
+        padding: 16px 0;
+        border-top: 1px solid var(--line);
+      }
+
+      .value-row strong {
+        color: var(--ink);
+        font-size: clamp(1.05rem, 1.4vw, 1.22rem);
+      }
+
+      .value-row p {
+        margin: 0;
+        font-size: clamp(1rem, 1.35vw, 1.12rem);
+      }
+
+      .activity-grid {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 18px;
+        margin-top: 30px;
+      }
+
+      .activity-card {
+        min-height: 220px;
+        padding: 22px;
+      }
+
+      .activity-card em {
+        display: inline-block;
+        margin-bottom: 14px;
+        color: var(--ethics-green);
+        font-size: 0.88rem;
+        font-style: normal;
+        font-weight: 900;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+      }
+
+      .source-list {
+        display: grid;
+        gap: 12px;
+        margin-top: 28px;
+      }
+
+      .source-card {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) auto;
+        gap: 18px;
+        align-items: center;
+        padding: 16px 18px;
+        text-decoration: none;
+      }
+
+      .source-card strong,
+      .source-card small {
+        display: block;
+      }
+
+      .source-card small {
+        margin-top: 4px;
+        color: var(--muted);
+        line-height: 1.4;
+      }
+
+      .source-card span:last-child {
+        color: var(--ethics-green);
+        font-size: 1.4rem;
+        font-weight: 950;
+      }
+
+      .teacher-note {
+        margin-top: 24px;
+        padding: 18px 20px;
+        border-left: 8px solid var(--ethics-yellow);
+        border-radius: 8px;
+        background: rgb(255 255 255 / 78%);
+        color: var(--muted);
+        font-size: clamp(1rem, 1.35vw, 1.12rem);
+        line-height: 1.45;
+      }
+
+      .deck-nav {
+        max-width: min(760px, calc(100vw - 36px));
+        flex-wrap: wrap;
+        justify-content: flex-end;
+      }
+
+      .deck-nav a {
+        width: 34px;
+        height: 34px;
+        font-size: 0.95rem;
+      }
+
+      @media (max-width: 980px) {
+        .question-strip,
+        .role-map,
+        .process,
+        .activity-grid {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+
+        .case-layout {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      @media (max-width: 760px) {
+        .question-strip,
+        .mini-grid,
+        .role-map,
+        .comparison,
+        .process,
+        .matrix,
+        .activity-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .slide.ethics-band {
+          background: #ffffff;
+        }
+
+        .timeline-item,
+        .value-row {
+          grid-template-columns: 1fr;
+          gap: 8px;
+        }
+
+        .slide-count {
+          display: none;
+        }
+      }
+    </style>
+  </head>
+  <body class="deck">
+    <main class="slides" id="slides" aria-label="Der Deutsche Ethikrat">
+      <section class="slide ethics-title center" id="folie-1">
+        <div class="slide-inner wide">
+          <p class="eyebrow">Werte und Normen | Jahrgang 12</p>
+          <h1>Der Deutsche Ethikrat</h1>
+          <p class="lead">
+            Wie eine plural besetzte Beratungseinrichtung ethische Konflikte in Medizin,
+            Lebenswissenschaften und Technik für Politik und Öffentlichkeit aufbereitet.
+          </p>
+          <div class="lesson-meta" aria-label="Unterrichtsrahmen">
+            <span class="pill">Gymnasium</span>
+            <span class="pill">Doppelstunde oder Kursblock</span>
+            <span class="pill">Urteilsbildung</span>
+            <span class="pill">Stand: Juni 2026</span>
+          </div>
+        </div>
+      </section>
+
+      <section class="slide agenda" id="folie-2">
+        <div class="slide-inner wide">
+          <p class="eyebrow">Leitfragen</p>
+          <h2>Was soll am Ende klar sein?</h2>
+          <ol class="agenda-list">
+            <li>
+              <span>1</span>
+              <div>
+                <strong>Institution verstehen</strong>
+                <small>Auftrag, Rechtsgrundlage, Unabhängigkeit und Grenzen des Deutschen Ethikrats.</small>
+              </div>
+            </li>
+            <li>
+              <span>2</span>
+              <div>
+                <strong>Pluralität erklären</strong>
+                <small>Warum Naturwissenschaft, Medizin, Recht, Philosophie, Theologie und Sozialwissenschaft zusammenarbeiten.</small>
+              </div>
+            </li>
+            <li>
+              <span>3</span>
+              <div>
+                <strong>Eigene Urteile begründen</strong>
+                <small>Ethische Konflikte strukturiert analysieren, abwägen und argumentativ vertreten.</small>
+              </div>
+            </li>
+          </ol>
+        </div>
+      </section>
+
+      <section class="slide ethics-dark" id="folie-3">
+        <div class="slide-inner wide">
+          <p class="eyebrow">Einstieg</p>
+          <h2>Warum braucht eine Demokratie Ethikberatung?</h2>
+          <p class="lead">
+            Moderne Forschung erzeugt Handlungsmöglichkeiten, bevor die Gesellschaft sich
+            moralisch und rechtlich darauf verständigt hat.
+          </p>
+          <div class="question-strip">
+            <article>
+              <strong>Darf alles gemacht werden, was technisch machbar ist?</strong>
+              <p>Beispiel: Genom-Editierung, Reproduktionsmedizin, KI-Diagnostik.</p>
+            </article>
+            <article>
+              <strong>Wer trägt Verantwortung für Folgen?</strong>
+              <p>Forschende, Ärztinnen, Unternehmen, Politik, Patientinnen, Gesellschaft?</p>
+            </article>
+            <article>
+              <strong>Wie wird aus Streit eine begründete Entscheidung?</strong>
+              <p>Durch transparente Argumente, Abwägung, Minderheitenvoten und öffentliche Debatte.</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="slide content" id="folie-4">
+        <div class="slide-inner wide">
+          <p class="eyebrow">Grunddefinition</p>
+          <h2>Was ist der Deutsche Ethikrat?</h2>
+          <p class="lead">
+            Ein unabhängiger Sachverständigenrat, der ethische Fragen in Forschung,
+            Medizin und Lebenswissenschaften untersucht und Politik sowie Öffentlichkeit berät.
+          </p>
+          <div class="mini-grid">
+            <article class="compact-card">
+              <div class="icon-badge">§</div>
+              <strong>Kein Gericht</strong>
+              <p>Der Rat entscheidet keine Einzelfälle und spricht keine Urteile. Er entwickelt Stellungnahmen, Empfehlungen und Diskussionsangebote.</p>
+            </article>
+            <article class="compact-card">
+              <div class="icon-badge">?</div>
+              <strong>Keine Ersatzpolitik</strong>
+              <p>Er erlässt keine Gesetze. Bundestag und Bundesregierung können seine Argumente nutzen, müssen ihnen aber nicht folgen.</p>
+            </article>
+            <article class="compact-card">
+              <div class="icon-badge">26</div>
+              <strong>Plural besetzt</strong>
+              <p>Bis zu 26 Mitglieder repräsentieren verschiedene Fachrichtungen und ethische Denkweisen.</p>
+            </article>
+            <article class="compact-card">
+              <div class="icon-badge">↔</div>
+              <strong>Brücke</strong>
+              <p>Der Rat übersetzt komplexe Forschungskonflikte in öffentlich nachvollziehbare Argumente.</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="slide ethics-band" id="folie-5">
+        <div class="slide-inner wide">
+          <p class="eyebrow">Rechtsgrundlage</p>
+          <h2>Das Ethikratgesetz als Rahmen</h2>
+          <p class="lead">
+            Seit 2008 arbeitet der Rat auf Grundlage des Ethikratgesetzes. Es legt Auftrag,
+            Stellung, Zusammensetzung, Berufung und Arbeitsweise fest.
+          </p>
+          <div class="timeline">
+            <div class="timeline-item">
+              <span>§ 1</span>
+              <div>
+                <strong>Bildung</strong>
+                <p>Der Deutsche Ethikrat ist als unabhängiger Sachverständigenrat eingerichtet.</p>
+              </div>
+            </div>
+            <div class="timeline-item">
+              <span>§ 2</span>
+              <div>
+                <strong>Aufgaben</strong>
+                <p>Er verfolgt ethische, gesellschaftliche, naturwissenschaftliche, medizinische und rechtliche Fragen samt Folgen für Individuum und Gesellschaft.</p>
+              </div>
+            </div>
+            <div class="timeline-item">
+              <span>§ 3</span>
+              <div>
+                <strong>Unabhängigkeit</strong>
+                <p>Der Rat ist nur an den gesetzlichen Auftrag gebunden; die Mitglieder üben ihr Amt persönlich und unabhängig aus.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="slide content" id="folie-6">
+        <div class="slide-inner wide">
+          <p class="eyebrow">Kernaufgaben</p>
+          <h2>Was macht der Rat konkret?</h2>
+          <div class="role-map">
+            <article class="compact-card">
+              <div class="icon-badge">1</div>
+              <strong>Fragen beobachten</strong>
+              <p>Neue Entwicklungen in Forschung, Medizin, Technik und Gesellschaft identifizieren.</p>
+            </article>
+            <article class="compact-card">
+              <div class="icon-badge">2</div>
+              <strong>Öffentlichkeit informieren</strong>
+              <p>Debatten anregen, Veranstaltungen durchführen, Begriffe und Konfliktlinien klären.</p>
+            </article>
+            <article class="compact-card">
+              <div class="icon-badge">3</div>
+              <strong>Stellungnahmen erarbeiten</strong>
+              <p>Argumente, Daten, Rechtslage, Wertkonflikte und Handlungsmöglichkeiten bündeln.</p>
+            </article>
+            <article class="compact-card">
+              <div class="icon-badge">4</div>
+              <strong>Politik beraten</strong>
+              <p>Empfehlungen für Bundesregierung und Bundestag formulieren, ohne selbst zu entscheiden.</p>
+            </article>
+          </div>
+          <p class="teacher-note">
+            Unterrichtsimpuls: Die Klasse markiert zu jedem Punkt, welche Kompetenz gebraucht wird: Sachwissen,
+            Empathie, rechtliches Denken, Folgenabschätzung oder moralisches Urteilen.
+          </p>
+        </div>
+      </section>
+
+      <section class="slide split" id="folie-7">
+        <div class="slide-inner wide">
+          <p class="eyebrow">Rollenklärung</p>
+          <h2>Ethikrat, Gericht und Parlament unterscheiden</h2>
+          <div class="comparison">
+            <article class="compact-card">
+              <strong>Deutscher Ethikrat</strong>
+              <ul class="dense-list">
+                <li>prüft Wertkonflikte und Folgen.</li>
+                <li>arbeitet beratend und diskursiv.</li>
+                <li>kann Mehrheits- und Minderheitspositionen sichtbar machen.</li>
+                <li>formuliert Empfehlungen, aber keine verbindlichen Normen.</li>
+              </ul>
+            </article>
+            <article class="compact-card">
+              <strong>Gericht oder Parlament</strong>
+              <ul class="dense-list">
+                <li>Gerichte entscheiden konkrete Rechtsstreitigkeiten.</li>
+                <li>Parlamente verabschieden verbindliche Gesetze.</li>
+                <li>Regierungen setzen politische Programme um.</li>
+                <li>Alle können ethische Beratung nutzen, ersetzen sie aber nicht.</li>
+              </ul>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="slide ethics-blue" id="folie-8">
+        <div class="slide-inner wide">
+          <p class="eyebrow">Zusammensetzung</p>
+          <h2>Warum so viele Fachrichtungen?</h2>
+          <p class="lead">
+            Ethische Konflikte sind selten nur medizinisch, nur rechtlich oder nur philosophisch.
+            Der Rat soll deshalb ein plurales Meinungsspektrum abbilden.
+          </p>
+          <div class="stat-grid">
+            <div class="stat">
+              <strong>26</strong>
+              <span>Mitglieder sieht das Ethikratgesetz vor.</span>
+            </div>
+            <div class="stat">
+              <strong>½</strong>
+              <span>Vorschläge kommen je zur Hälfte von Bundestag und Bundesregierung.</span>
+            </div>
+            <div class="stat">
+              <strong>4</strong>
+              <span>Jahre beträgt eine typische Amtszeit; Wiederberufung ist möglich.</span>
+            </div>
+          </div>
+          <div class="mini-grid">
+            <article class="compact-card">
+              <strong>Vertretene Perspektiven</strong>
+              <p>Naturwissenschaft, Medizin, Theologie, Philosophie, Ethik, Recht, Sozialwissenschaft und Ökonomie.</p>
+            </article>
+            <article class="compact-card">
+              <strong>Ausschlussregel</strong>
+              <p>Aktive Mitglieder von Bundestag, Bundesregierung, Landtagen oder Landesregierungen dürfen nicht im Rat sitzen.</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="slide content" id="folie-9">
+        <div class="slide-inner wide">
+          <p class="eyebrow">Berufung</p>
+          <h2>Wie kommt man in den Ethikrat?</h2>
+          <div class="timeline">
+            <div class="timeline-item">
+              <span>01</span>
+              <div>
+                <strong>Expertise und öffentliche Anerkennung</strong>
+                <p>Gesucht werden Personen, die wissenschaftlich oder gesellschaftlich mit ethischen Fragen der Lebenswissenschaften besonders vertraut sind.</p>
+              </div>
+            </div>
+            <div class="timeline-item">
+              <span>02</span>
+              <div>
+                <strong>Vorschlag durch politische Institutionen</strong>
+                <p>Bundestag und Bundesregierung benennen jeweils die Hälfte der Mitglieder. Dadurch bleibt der Rat politisch angebunden, aber nicht weisungsgebunden.</p>
+              </div>
+            </div>
+            <div class="timeline-item">
+              <span>03</span>
+              <div>
+                <strong>Ernennung durch Bundestagspräsidentin oder Bundestagspräsident</strong>
+                <p>Die formale Berufung erfolgt durch die Präsidentin bzw. den Präsidenten des Deutschen Bundestages.</p>
+              </div>
+            </div>
+            <div class="timeline-item">
+              <span>04</span>
+              <div>
+                <strong>Persönliches und unabhängiges Amt</strong>
+                <p>Mitglieder vertreten nicht einfach Partei-, Regierungs- oder Verbandsinteressen, sondern argumentieren eigenständig.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="slide ethics-warm" id="folie-10">
+        <div class="slide-inner wide">
+          <p class="eyebrow">Arbeitsweise</p>
+          <h2>Vom Problem zur Stellungnahme</h2>
+          <div class="process" aria-label="Arbeitsprozess des Ethikrats">
+            <article class="process-step">
+              <span>1</span>
+              <strong>Thema setzen</strong>
+              <p>Der Rat wählt ein Thema selbst oder erhält einen Auftrag von Bundestag oder Bundesregierung.</p>
+            </article>
+            <article class="process-step">
+              <span>2</span>
+              <strong>Wissen sammeln</strong>
+              <p>Studien, Rechtslage, Praxisberichte und Fachanhörungen liefern Sachgrundlagen.</p>
+            </article>
+            <article class="process-step">
+              <span>3</span>
+              <strong>Argumente ordnen</strong>
+              <p>Werte, Normen, Interessen, Risiken und Betroffenenperspektiven werden sichtbar gemacht.</p>
+            </article>
+            <article class="process-step">
+              <span>4</span>
+              <strong>Positionen formulieren</strong>
+              <p>Bei Dissens können getrennte Voten zeigen, wo die ethische Bewertung auseinandergeht.</p>
+            </article>
+            <article class="process-step">
+              <span>5</span>
+              <strong>Empfehlen</strong>
+              <p>Die Stellungnahme gibt Orientierung für Politik, Recht, Fachpraxis und Öffentlichkeit.</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="slide ethics-dark" id="folie-11">
+        <div class="slide-inner wide">
+          <p class="eyebrow">Themenfelder</p>
+          <h2>Typische Konfliktzonen</h2>
+          <p class="lead">
+            Der Ethikrat behandelt vor allem Fragen, in denen Menschenwürde, Freiheit,
+            Gesundheit, Gerechtigkeit, Sicherheit und wissenschaftlicher Fortschritt kollidieren.
+          </p>
+          <div class="mini-grid">
+            <article class="compact-card">
+              <strong>Medizin am Lebensanfang und Lebensende</strong>
+              <p>Pränataldiagnostik, assistierte Reproduktion, Suizidassistenz, Palliativversorgung.</p>
+            </article>
+            <article class="compact-card">
+              <strong>Daten, KI und digitale Medizin</strong>
+              <p>Algorithmen in Diagnostik, Gesundheitsdaten, Datenschutz, Diskriminierungsrisiken.</p>
+            </article>
+            <article class="compact-card">
+              <strong>Gentechnik und Forschung</strong>
+              <p>Genom-Editierung, Embryonenforschung, Tierversuche, Nutzen-Risiko-Abwägung.</p>
+            </article>
+            <article class="compact-card">
+              <strong>Verteilung und Solidarität</strong>
+              <p>Organtransplantation, Pandemiepolitik, Priorisierung knapper Ressourcen.</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="slide ethics-blue" id="folie-12">
+        <div class="slide-inner wide">
+          <p class="eyebrow">Fallarbeit</p>
+          <h2>Beispiel: KI in der medizinischen Diagnostik</h2>
+          <div class="case-layout">
+            <article class="scenario">
+              <strong>Szenario</strong>
+              <p>
+                Eine Klinik möchte eine KI einsetzen, die Hautkrebsrisiken aus Bildern erkennt.
+                Sie ist statistisch sehr stark, macht aber bei bestimmten Hauttypen häufiger Fehler.
+                Patientinnen sollen zustimmen, ohne den Algorithmus im Detail verstehen zu können.
+              </p>
+              <p>
+                Leitfrage: Unter welchen Bedingungen wäre der Einsatz moralisch vertretbar?
+              </p>
+            </article>
+            <div class="matrix">
+              <article class="compact-card">
+                <strong>Autonomie</strong>
+                <p>Wie informiert muss eine Einwilligung sein?</p>
+              </article>
+              <article class="compact-card">
+                <strong>Nichtschaden</strong>
+                <p>Welche Fehlerquote ist akzeptabel?</p>
+              </article>
+              <article class="compact-card">
+                <strong>Gerechtigkeit</strong>
+                <p>Wer wird systematisch schlechter behandelt?</p>
+              </article>
+              <article class="compact-card">
+                <strong>Verantwortung</strong>
+                <p>Wer haftet bei Fehlentscheidung: Arzt, Klinik, Hersteller?</p>
+              </article>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="slide content" id="folie-13">
+        <div class="slide-inner wide">
+          <p class="eyebrow">Urteilsbildung</p>
+          <h2>Ein ethisches Argument prüft mehr als Fakten</h2>
+          <div class="value-row">
+            <strong>Sachanalyse</strong>
+            <p>Was ist technisch, medizinisch und rechtlich der Fall? Welche Unsicherheiten bleiben?</p>
+          </div>
+          <div class="value-row">
+            <strong>Betroffene</strong>
+            <p>Wer gewinnt, wer trägt Risiken, wer wird nicht gehört?</p>
+          </div>
+          <div class="value-row">
+            <strong>Normen und Werte</strong>
+            <p>Welche Prinzipien stehen im Konflikt: Würde, Freiheit, Schutz, Gleichheit, Solidarität?</p>
+          </div>
+          <div class="value-row">
+            <strong>Abwägung</strong>
+            <p>Welche Gründe wiegen stärker, und warum gelten sie nicht nur für den eigenen Standpunkt?</p>
+          </div>
+          <div class="value-row">
+            <strong>Empfehlung</strong>
+            <p>Welche Regel, Grenze oder Bedingung folgt daraus praktisch?</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="slide ethics-warm" id="folie-14">
+        <div class="slide-inner wide">
+          <p class="eyebrow">Unterrichtsmethode</p>
+          <h2>Simulation: Mini-Ethikrat im Kurs</h2>
+          <div class="activity-grid">
+            <article class="activity-card">
+              <em>Phase 1 | 10 Minuten</em>
+              <strong>Rollen bilden</strong>
+              <p>Gruppen übernehmen Perspektiven: Medizin, Philosophie, Recht, Patientenschutz, Technik, Sozialwissenschaft.</p>
+            </article>
+            <article class="activity-card">
+              <em>Phase 2 | 20 Minuten</em>
+              <strong>Argumente vorbereiten</strong>
+              <p>Jede Gruppe formuliert ein Hauptargument, ein Risiko, eine Bedingung und eine Gegenfrage.</p>
+            </article>
+            <article class="activity-card">
+              <em>Phase 3 | 20 Minuten</em>
+              <strong>Empfehlung abstimmen</strong>
+              <p>Der Kurs verabschiedet eine Empfehlung. Minderheiten dürfen ein Sondervotum formulieren.</p>
+            </article>
+          </div>
+          <p class="teacher-note">
+            Bewertbar sind nicht nur Ergebnisse, sondern Begründungsqualität: Sachbezug, Begriffsklarheit,
+            Umgang mit Gegenargumenten und Transparenz der Abwägung.
+          </p>
+        </div>
+      </section>
+
+      <section class="slide split" id="folie-15">
+        <div class="slide-inner wide">
+          <p class="eyebrow">Kritische Reflexion</p>
+          <h2>Was kann Ethikberatung leisten, was nicht?</h2>
+          <div class="comparison">
+            <article class="compact-card">
+              <strong>Stärken</strong>
+              <ul class="dense-list">
+                <li>verlangsamt vorschnelle Ja-Nein-Urteile.</li>
+                <li>macht Wertkonflikte und Betroffenenperspektiven sichtbar.</li>
+                <li>übersetzt Fachwissen in politische Orientierung.</li>
+                <li>zeigt, dass Dissens rational und demokratisch bearbeitet werden kann.</li>
+              </ul>
+            </article>
+            <article class="compact-card">
+              <strong>Grenzen</strong>
+              <ul class="dense-list">
+                <li>hat keine demokratische Gesetzgebungsmacht.</li>
+                <li>kann gesellschaftlichen Streit nicht endgültig auflösen.</li>
+                <li>hängt von Auswahl, Fachperspektiven und öffentlicher Wahrnehmung ab.</li>
+                <li>muss mit Unsicherheit, Zeitdruck und politischen Erwartungen umgehen.</li>
+              </ul>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="slide content" id="folie-16">
+        <div class="slide-inner wide">
+          <p class="eyebrow">Sicherung</p>
+          <h2>Drei Merksätze</h2>
+          <div class="stat-grid">
+            <div class="stat">
+              <strong>1</strong>
+              <span>Der Deutsche Ethikrat berät, entscheidet aber nicht verbindlich.</span>
+            </div>
+            <div class="stat">
+              <strong>2</strong>
+              <span>Seine Stärke liegt in pluraler, interdisziplinärer Abwägung.</span>
+            </div>
+            <div class="stat">
+              <strong>3</strong>
+              <span>Ethik wird politisch relevant, wenn Argumente öffentlich nachvollziehbar werden.</span>
+            </div>
+          </div>
+          <p class="teacher-note">
+            Exit-Ticket: Formuliere eine Frage, bei der du den Ethikrat einschalten würdest,
+            und begründe in zwei Sätzen, welche Werte dort kollidieren.
+          </p>
+        </div>
+      </section>
+
+      <section class="slide qr" id="folie-17">
+        <div class="slide-inner wide">
+          <p class="eyebrow">Quellen und Vertiefung</p>
+          <h2>Material für Unterricht und Recherche</h2>
+          <div class="source-list">
+            <a class="source-card" href="https://www.ethikrat.org/ueber-uns/der-ethikrat/" target="_blank" rel="noreferrer">
+              <span>
+                <strong>Deutscher Ethikrat: Der Ethikrat</strong>
+                <small>Selbstbeschreibung, Aufgaben, Unabhängigkeit und Öffentlichkeit.</small>
+              </span>
+              <span aria-hidden="true">↗</span>
+            </a>
+            <a class="source-card" href="https://www.ethikrat.org/ueber-uns/ethikratgesetz/" target="_blank" rel="noreferrer">
+              <span>
+                <strong>Ethikratgesetz</strong>
+                <small>Rechtsgrundlage zu Auftrag, Stellung, Mitgliedern und Berufung.</small>
+              </span>
+              <span aria-hidden="true">↗</span>
+            </a>
+            <a class="source-card" href="https://www.ethikrat.org/ueber-uns/mitglieder/" target="_blank" rel="noreferrer">
+              <span>
+                <strong>Aktuelle Mitglieder</strong>
+                <small>Zusammensetzung des Rates und Vorsitz.</small>
+              </span>
+              <span aria-hidden="true">↗</span>
+            </a>
+            <a class="source-card" href="https://www.ethikrat.org/presse/mitteilungen/bundestagspraesidentin-beruft-mitglieder-des-deutschen-ethikrates/" target="_blank" rel="noreferrer">
+              <span>
+                <strong>Berufung der Mitglieder 2024</strong>
+                <small>Mitteilung zur Ernennung durch die Bundestagspräsidentin.</small>
+              </span>
+              <span aria-hidden="true">↗</span>
+            </a>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <nav class="deck-nav" aria-label="Foliennavigation">
+      <a href="#folie-1" aria-label="Folie 1">1</a>
+      <a href="#folie-2" aria-label="Folie 2">2</a>
+      <a href="#folie-3" aria-label="Folie 3">3</a>
+      <a href="#folie-4" aria-label="Folie 4">4</a>
+      <a href="#folie-5" aria-label="Folie 5">5</a>
+      <a href="#folie-6" aria-label="Folie 6">6</a>
+      <a href="#folie-7" aria-label="Folie 7">7</a>
+      <a href="#folie-8" aria-label="Folie 8">8</a>
+      <a href="#folie-9" aria-label="Folie 9">9</a>
+      <a href="#folie-10" aria-label="Folie 10">10</a>
+      <a href="#folie-11" aria-label="Folie 11">11</a>
+      <a href="#folie-12" aria-label="Folie 12">12</a>
+      <a href="#folie-13" aria-label="Folie 13">13</a>
+      <a href="#folie-14" aria-label="Folie 14">14</a>
+      <a href="#folie-15" aria-label="Folie 15">15</a>
+      <a href="#folie-16" aria-label="Folie 16">16</a>
+      <a href="#folie-17" aria-label="Folie 17">17</a>
+    </nav>
+    <div class="slide-count" aria-hidden="true">Pfeiltasten nutzbar</div>
+
+    <script>
+      const slides = document.querySelector("#slides");
+      const slideItems = [...document.querySelectorAll(".slide")];
+
+      function currentSlideIndex() {
+        const slideWidth = slides.clientWidth;
+        return Math.round(slides.scrollLeft / slideWidth);
+      }
+
+      function goToSlide(index) {
+        const nextIndex = Math.max(0, Math.min(slideItems.length - 1, index));
+        slideItems[nextIndex].scrollIntoView({ behavior: "smooth", inline: "start" });
+      }
+
+      document.addEventListener("keydown", (event) => {
+        if (event.key === "ArrowRight" || event.key === "PageDown") {
+          event.preventDefault();
+          goToSlide(currentSlideIndex() + 1);
+        }
+
+        if (event.key === "ArrowLeft" || event.key === "PageUp") {
+          event.preventDefault();
+          goToSlide(currentSlideIndex() - 1);
+        }
+
+        if (event.key === "Home") {
+          event.preventDefault();
+          goToSlide(0);
+        }
+
+        if (event.key === "End") {
+          event.preventDefault();
+          goToSlide(slideItems.length - 1);
+        }
+      });
+    </script>
+  </body>
+</html>
