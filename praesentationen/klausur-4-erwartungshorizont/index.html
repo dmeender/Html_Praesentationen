@@ -1,0 +1,699 @@
+<!doctype html>
+<html lang="de">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Nachbesprechung Klassenarbeit Nr. 4</title>
+    <link rel="stylesheet" href="../../assets/styles.css">
+    <style>
+      .slide {
+        overflow-y: auto;
+      }
+
+      .slide-inner {
+        width: 100%;
+        min-width: 0;
+      }
+
+      .slide h1,
+      .slide h2 {
+        overflow-wrap: anywhere;
+      }
+
+      .topic-strip {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
+        margin-top: 30px;
+      }
+
+      .topic-strip span,
+      .tag {
+        display: inline-flex;
+        align-items: center;
+        min-height: 38px;
+        padding: 0 14px;
+        border: 1px solid var(--line);
+        border-radius: 999px;
+        background: #ffffff;
+        color: var(--accent-dark);
+        font-weight: 800;
+      }
+
+      .solution-grid,
+      .criteria-grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 18px;
+        margin-top: 28px;
+      }
+
+      .solution-card,
+      .criteria-card {
+        min-height: 112px;
+        padding: 18px;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: #ffffff;
+        box-shadow: 0 18px 45px rgb(31 41 51 / 8%);
+      }
+
+      .solution-card strong,
+      .criteria-card strong {
+        display: block;
+        margin-bottom: 10px;
+        color: var(--ink);
+        font-size: clamp(1.05rem, 1.5vw, 1.35rem);
+      }
+
+      .solution-card p,
+      .criteria-card p {
+        font-size: clamp(0.98rem, 1.35vw, 1.18rem);
+      }
+
+      .warning-list {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 14px;
+        margin-top: 26px;
+        padding: 0;
+        list-style: none;
+      }
+
+      .warning-list li {
+        padding: 18px 20px;
+        border-left: 7px solid var(--warm);
+        border-radius: 8px;
+        background: #ffffff;
+        box-shadow: 0 14px 36px rgb(31 41 51 / 8%);
+        font-size: clamp(0.98rem, 1.35vw, 1.2rem);
+      }
+
+      .teacher-table {
+        width: 100%;
+        margin-top: 18px;
+        border-collapse: collapse;
+        overflow: hidden;
+        border-radius: 8px;
+        background: #ffffff;
+        box-shadow: 0 12px 32px rgb(31 41 51 / 7%);
+        font-size: clamp(0.82rem, 1vw, 0.98rem);
+      }
+
+      .teacher-table th,
+      .teacher-table td {
+        padding: 10px 12px;
+        border-bottom: 1px solid var(--line);
+        text-align: left;
+        vertical-align: top;
+      }
+
+      .teacher-table th {
+        background: #e7f2f0;
+        color: var(--accent-dark);
+        font-weight: 900;
+      }
+
+      .compact p,
+      .compact li {
+        font-size: clamp(0.95rem, 1.2vw, 1.1rem);
+      }
+
+      .flow {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 14px;
+        margin-top: 28px;
+      }
+
+      .flow div {
+        min-height: 130px;
+        padding: 18px;
+        border-radius: 8px;
+        background: #ffffff;
+        box-shadow: 0 18px 45px rgb(31 41 51 / 8%);
+      }
+
+      .flow strong {
+        display: block;
+        margin-bottom: 10px;
+        color: var(--accent-dark);
+        font-size: clamp(1.5rem, 2.3vw, 2.3rem);
+      }
+
+      .flow span {
+        color: var(--muted);
+        font-size: clamp(0.95rem, 1.2vw, 1.08rem);
+        line-height: 1.4;
+      }
+
+      .slide.practice {
+        background: #f8fafc;
+      }
+
+      .slide.reference {
+        background: #ffffff;
+      }
+
+      .slide.warning {
+        background: #fff8ed;
+      }
+
+      @media (max-width: 760px) {
+        .solution-grid,
+        .criteria-grid,
+        .warning-list,
+        .flow {
+          grid-template-columns: 1fr;
+        }
+
+        .teacher-table {
+          font-size: 0.78rem;
+        }
+
+        .solution-card,
+        .criteria-card,
+        .warning-list li,
+        .flow div {
+          min-height: auto;
+          padding: 16px;
+        }
+      }
+    </style>
+  </head>
+  <body class="deck">
+    <main class="slides" id="slides" data-deck aria-label="Nachbesprechung Klassenarbeit Nr. 4">
+      <section class="slide title center" id="folie-1">
+        <div class="slide-inner">
+          <p class="eyebrow">Mathematik Jahrgang 6</p>
+          <h1>Nachbesprechung Klassenarbeit Nr. 4</h1>
+          <p class="lead">Konstruktionen und Dezimalrechnungen: Lösungen verstehen, typische Fehler erkennen, besser korrigieren.</p>
+          <div class="topic-strip">
+            <span>Dezimalzahlen</span>
+            <span>Mittelsenkrechte</span>
+            <span>Winkelhalbierende</span>
+            <span>Sachaufgaben</span>
+          </div>
+        </div>
+        <aside class="speaker-notes">
+          <strong>Quelle und Einordnung</strong>
+          <p>Erwartungshorizont zur Klassenarbeit Mathematik Jahrgang 6, Nr. 4: Konstruktionen und Dezimalrechnungen.</p>
+          <p>Fachreferenzen laut PDF: Mathematik, Mathematik-Operatoren und Mathematik-Korrekturlogik des lokalen Skills erwartungshorizont-niedersachsen. Die AFB-Zuordnung ist kontextbezogen, weil Operatoren nicht pauschal einem Anforderungsbereich zugeordnet wurden.</p>
+          <p>In der PDF wird vermerkt: Die angeforderte Datei material/klausur.pdf lag nicht vor; analysiert wurde material/Nr4 Konstruktionen und Deziamlrechnungen.pdf. Da keine konkrete Punkteverteilung angegeben ist, nutzt der Erwartungshorizont Ankreuzspalten statt erfundener Punktwerte.</p>
+        </aside>
+      </section>
+
+      <section class="slide agenda" id="folie-2">
+        <div class="slide-inner wide">
+          <p class="eyebrow">Ziel der Stunde</p>
+          <h2>Was wir nach der Arbeit klären</h2>
+          <ol class="agenda-list">
+            <li>
+              <span>1</span>
+              <div>
+                <strong>Richtige Lösungen nachvollziehen</strong>
+                <small>Wir schauen nicht nur auf Ergebnisse, sondern auf sinnvolle Rechen- und Konstruktionswege.</small>
+              </div>
+            </li>
+            <li data-step>
+              <span>2</span>
+              <div>
+                <strong>Fehlerarten erkennen</strong>
+                <small>Kommafehler, Stellenwertfehler, falsche Konstruktionen und falsche Sachmodelle werden getrennt betrachtet.</small>
+              </div>
+            </li>
+            <li data-step>
+              <span>3</span>
+              <div>
+                <strong>Für die nächste Arbeit lernen</strong>
+                <small>Am Ende ist klar, welche Kompetenzen sicherer werden sollen.</small>
+              </div>
+            </li>
+          </ol>
+        </div>
+        <aside class="speaker-notes">
+          <strong>Übergreifende Zielrichtung</strong>
+          <p>Fachliche Zielrichtung laut PDF: Schülerinnen und Schüler sollen Rechenverfahren mit Dezimalzahlen sicher beherrschen und geometrische Ortslinien, insbesondere Mittelsenkrechte und Winkelhalbierende, konstruktiv sowie in einfachen Anwendungssituationen nutzen.</p>
+          <p>Zentrale Kompetenzen: Rechnen mit Dezimalzahlen, sachgerechter Umgang mit Zirkel, Geodreieck und Lineal, Darstellungen verwenden, Modellieren einfacher geometrischer Situationen und verständliches Kommunizieren mathematischer Ergebnisse.</p>
+        </aside>
+      </section>
+
+      <section class="slide content" id="folie-3">
+        <div class="slide-inner wide">
+          <p class="eyebrow">Überblick</p>
+          <h2>Welche Kompetenzen wurden geprüft?</h2>
+          <div class="stat-grid">
+            <div class="stat">
+              <strong>AFB I</strong>
+              <span>Sichere Grundrechenverfahren und Standardkonstruktionen anwenden.</span>
+            </div>
+            <div class="stat" data-step>
+              <strong>AFB II</strong>
+              <span>Rechenwege darstellen, Eigenschaften nutzen und Sachtexte mathematisch modellieren.</span>
+            </div>
+            <div class="stat" data-step>
+              <strong>0</strong>
+              <span>Keine erfundenen Punktwerte: Bewertet wird mit n. erfüllt, tw. erfüllt und voll erfüllt.</span>
+            </div>
+          </div>
+        </div>
+        <aside class="speaker-notes">
+          <strong>Anforderungsbereiche</strong>
+          <p>Schwerpunkt der Arbeit laut PDF: überwiegend AFB I und AFB II. AFB I zeigt sich in sicheren Grundrechenverfahren und Standardkonstruktionen.</p>
+          <p>AFB II zeigt sich in der Übertragung der Mittelsenkrechten auf Sachkontexte, der zeichnerischen Begründung und dem Erstellen eines Terms aus einem Sachtext.</p>
+        </aside>
+      </section>
+
+      <section class="slide practice" id="folie-4">
+        <div class="slide-inner wide">
+          <p class="eyebrow">Aufgabe 1</p>
+          <h2>Kopfrechnen mit Dezimalzahlen und Brüchen</h2>
+          <p class="lead">Wichtig war: einfache Dezimalzahlen sicher rechnen und den Bruch <strong>1/2</strong> als <strong>0,5</strong> nutzen.</p>
+          <div class="solution-grid">
+            <article class="solution-card">
+              <strong>1a</strong>
+              <p>0,75 + 1/2 = 0,75 + 0,5 = <strong>1,25</strong></p>
+            </article>
+            <article class="solution-card" data-step>
+              <strong>1b</strong>
+              <p>2,3 + 7,2 = <strong>9,5</strong></p>
+            </article>
+            <article class="solution-card" data-step>
+              <strong>1c</strong>
+              <p>0,5 - 0,1 + 0,5 = <strong>0,9</strong></p>
+            </article>
+            <article class="solution-card" data-step>
+              <strong>1d</strong>
+              <p>1,2 : 4 = <strong>0,3</strong></p>
+            </article>
+          </div>
+        </div>
+        <aside class="speaker-notes">
+          <strong>Erwartungshorizont Aufgabe 1</strong>
+          <p>Operator: lösen/berechnen. Schwerpunkt: AFB I, da bekannte Grundrechenverfahren ohne mehrstufige Modellierung angewendet werden.</p>
+          <p>Kompetenzorientiert: Dezimal- und Bruchzahlaufgaben berechnen, Grundrechenarten im Kopf sachgerecht anwenden, einfache Dezimalzahlen und den Bruch 1/2 sicher in Beziehung setzen, mathematische Schreibweise verwenden und Ergebnisse eindeutig in Bruch- oder Dezimalschreibweise notieren.</p>
+          <p>Musterlösung: Ansatz: 1/2 als 0,5 deuten; Dezimalzahlen stellenwertgerecht addieren, subtrahieren oder dividieren. Kein schriftlicher Rechenweg erforderlich, da Kopfrechnen verlangt ist. Ergebnisse: a) 1,25; b) 9,5; c) 0,9; d) 0,3.</p>
+          <p>Typische Fehler: Stellenwertfehler, fehlerhafte Umwandlung von 1/2 in 0,5 und Rechenfehler bei 1,2 : 4. Folgefehler sind kaum relevant, weil die Teilaufgaben unabhängig sind.</p>
+        </aside>
+      </section>
+
+      <section class="slide practice" id="folie-5">
+        <div class="slide-inner wide">
+          <p class="eyebrow">Aufgabe 2</p>
+          <h2>Schriftliche Dezimalrechnungen</h2>
+          <p class="lead">Hier zählte nicht nur das Ergebnis. Der schriftliche Ansatz musste prüfbar und stellenwertgerecht sein.</p>
+          <div class="solution-grid">
+            <article class="solution-card">
+              <strong>2a Addition</strong>
+              <p>75,782 + 11,362 + 0,502 = <strong>87,646</strong></p>
+            </article>
+            <article class="solution-card" data-step>
+              <strong>2b Multiplikation</strong>
+              <p>2,34 · 7,3 = <strong>17,082</strong></p>
+            </article>
+            <article class="solution-card" data-step>
+              <strong>2c Subtraktion</strong>
+              <p>7,3 - 0,905 = 7,300 - 0,905 = <strong>6,395</strong></p>
+            </article>
+            <article class="solution-card" data-step>
+              <strong>2d Subtraktion</strong>
+              <p>106,32 - 23,43 = <strong>82,89</strong></p>
+            </article>
+          </div>
+        </div>
+        <aside class="speaker-notes">
+          <strong>Erwartungshorizont Aufgabe 2</strong>
+          <p>Operator: bearbeiten/berechnen. Schwerpunkt: AFB I bis II, da schriftliche Verfahren korrekt angesetzt, ausgeführt und darstellbar gemacht werden müssen.</p>
+          <p>Kompetenzorientiert: geeigneten schriftlichen Rechenansatz wählen und nachvollziehbar ausführen; Stellenwertverständnis nutzen; Kommas bei Addition, Subtraktion und Multiplikation korrekt berücksichtigen; Zwischenschritte so notieren, dass der Lösungsweg prüfbar bleibt.</p>
+          <p>Musterlösung: 2a: 75,782 + 11,362 + 0,502 = 87,646. 2b: 234 · 73 = 17082, danach drei Dezimalstellen setzen. 2c: 7,300 - 0,905 = 6,395. 2d: 106,32 - 23,43 = 82,89.</p>
+          <p>Bewertungshinweise: Ansatzfehler, besonders falsche Kommasetzung, schwerer gewichten. Folgefehler beachten, wenn ein falscher Zwischenschritt konsequent weitergeführt wird. Typische Fehler: Kommas nicht untereinander, fehlende Nullen beim Subtrahieren, falsche Dezimalstellen nach der Multiplikation und Übertragsfehler.</p>
+        </aside>
+      </section>
+
+      <section class="slide warning" id="folie-6">
+        <div class="slide-inner wide">
+          <p class="eyebrow">Merksatz Dezimalzahlen</p>
+          <h2>Die häufigsten Rechenfallen</h2>
+          <ul class="warning-list">
+            <li><strong>Kommas untereinander:</strong> Bei Addition und Subtraktion stehen gleiche Stellenwerte untereinander.</li>
+            <li data-step><strong>Nullen ergänzen:</strong> 7,3 wird bei 7,3 - 0,905 zu 7,300.</li>
+            <li data-step><strong>Multiplikation:</strong> Erst ohne Komma rechnen, dann Dezimalstellen zählen.</li>
+            <li data-step><strong>Geld:</strong> Eurobeträge brauchen im Ergebnis passende Nachkommastellen und Einheit.</li>
+          </ul>
+        </div>
+        <aside class="speaker-notes">
+          <strong>Unterrichtsimpuls</strong>
+          <p>Diese Folie eignet sich für eine kurze Fehlerdiagnose: Beispiele aus Schülerlösungen anonymisiert vergleichen lassen. Wichtig: Unterschied zwischen Rechenfehler, Stellenwertfehler und Ansatzfehler sichtbar machen.</p>
+          <p>Aus der PDF: Rechenfehler bei richtigem Verfahren eher gering bis mittel; falscher Ansatz oder systematischer Stellenwertfehler mittel bis schwer.</p>
+        </aside>
+      </section>
+
+      <section class="slide practice" id="folie-7">
+        <div class="slide-inner wide">
+          <p class="eyebrow">Aufgabe 3</p>
+          <h2>Konstruktionen: sauber, genau, begründet</h2>
+          <div class="flow">
+            <div>
+              <strong>3a</strong>
+              <span>Strecke AB = 9 cm zeichnen, Mittelsenkrechte mit gleichen Kreisbögen konstruieren.</span>
+            </div>
+            <div data-step>
+              <strong>3b</strong>
+              <span>Winkel α = 40° zeichnen und Winkelhalbierende bei 20° zu jedem Schenkel konstruieren.</span>
+            </div>
+            <div data-step>
+              <strong>3c</strong>
+              <span>Zeichnerisch zeigen: Punkte auf der Mittelsenkrechten sind gleich weit von A und B entfernt.</span>
+            </div>
+            <div data-step>
+              <strong>3d</strong>
+              <span>Eine Gerade k so finden, dass g den Winkel zwischen h und k halbiert.</span>
+            </div>
+          </div>
+        </div>
+        <aside class="speaker-notes">
+          <strong>Erwartungshorizont Aufgabe 3</strong>
+          <p>Operatoren: konstruieren/zeichnen/zeigen. Schwerpunkt: AFB I bis II; Teilaufgabe c und d verlangen zusätzlich eine begründende bzw. strukturierende Darstellung.</p>
+          <p>Kompetenzorientiert: Zirkel, Geodreieck und Lineal sachgerecht einsetzen; Konstruktionslinien sauber, genau und mit Bleistift ausführen; die Lage gleich weit entfernter Punkte zur Mittelsenkrechten zeichnerisch nachvollziehbar machen; Beziehungen untersuchen bzw. finden.</p>
+          <p>3a: Strecke AB mit Länge 9 cm korrekt zeichnen; Kreisbögen um A und B mit gleichem Radius größer als 4,5 cm zeichnen; Schnittpunkte verbinden; Gerade steht senkrecht auf AB; Mittelpunkt liegt bei 4,5 cm und auf der Mittelsenkrechten.</p>
+          <p>3b: Winkel α = 40° korrekt zeichnen; gleich große Kreisbögen/Schnittpunkte zur Konstruktion der Winkelhalbierenden verwenden; Winkelhalbierende liegt bei 20° zu jedem Schenkel.</p>
+          <p>3c: A, B und AB erkennbar; Mittelsenkrechte korrekt; mehrere Punkte auf der Mittelsenkrechten als gleich weit von A und B entfernt erkennbar, zum Beispiel durch gleiche Strecken oder Kreise; Zeichnung stützt die Aussage.</p>
+          <p>3d: Gerade g und schneidende Gerade h mit eindeutigem Schnittpunkt; Gerade k als Spiegelgerade zu h an g bzw. mit gleichem Winkel auf der anderen Seite von g; g halbiert den Winkel zwischen h und k.</p>
+        </aside>
+      </section>
+
+      <section class="slide split" id="folie-8">
+        <div class="slide-inner wide">
+          <p class="eyebrow">Konstruktionsqualität</p>
+          <h2>Woran erkennt man eine volle Lösung?</h2>
+          <div class="two-column">
+            <article class="text-panel">
+              <h3>Voll überzeugend</h3>
+              <p>Konstruktionslinien sind sichtbar, Werkzeuge wurden korrekt genutzt, Beschriftungen sind eindeutig und die geometrische Eigenschaft wird erkennbar.</p>
+            </article>
+            <article class="text-panel" data-step>
+              <h3>Noch nicht sicher</h3>
+              <p>Nur geschätzt, ungenau gezeichnet, falscher Radius, fehlende Schnittpunkte oder keine erkennbare Begründung durch die Zeichnung.</p>
+            </article>
+          </div>
+        </div>
+        <aside class="speaker-notes">
+          <strong>Bewertung Aufgabe 3</strong>
+          <p>Ansatz laut PDF: Eigenschaften von Mittelsenkrechter und Winkelhalbierender erkennen und als Konstruktion umsetzen. Fehlender geometrischer Zusammenhang ist ein Ansatz- oder Verfahrensproblem.</p>
+          <p>Wichtig in der Nachbesprechung: Schülerinnen und Schüler sollen unterscheiden, ob sie die Idee verstanden, aber unsauber ausgeführt haben, oder ob die falsche geometrische Eigenschaft verwendet wurde.</p>
+        </aside>
+      </section>
+
+      <section class="slide practice" id="folie-9">
+        <div class="slide-inner wide">
+          <p class="eyebrow">Aufgabe 4</p>
+          <h2>Mittelsenkrechte im Sachkontext</h2>
+          <p class="lead">Der Satz „gleich weit entfernt von Ahausen und Neustadt“ ist der Schlüssel.</p>
+          <div class="criteria-grid">
+            <article class="criteria-card">
+              <strong>Sachmodell</strong>
+              <p>Ahausen und Neustadt als Punkte A und N eintragen und die Strecke AN zeichnen.</p>
+            </article>
+            <article class="criteria-card" data-step>
+              <strong>Konstruktion</strong>
+              <p>Die Mittelsenkrechte von AN konstruieren und die Autobahn als Linie darauf einzeichnen.</p>
+            </article>
+            <article class="criteria-card" data-step>
+              <strong>Bedeutung</strong>
+              <p>Jeder Punkt auf dieser Linie ist gleich weit von beiden Orten entfernt.</p>
+            </article>
+            <article class="criteria-card" data-step>
+              <strong>Darstellung</strong>
+              <p>Orte und Autobahn beschriften; 2,5 km sinnvoll berücksichtigen, wenn maßstäblich gezeichnet wird.</p>
+            </article>
+          </div>
+        </div>
+        <aside class="speaker-notes">
+          <strong>Erwartungshorizont Aufgabe 4</strong>
+          <p>Operator: erstellen/zeichnen. Schwerpunkt: AFB II, da die Eigenschaft der Mittelsenkrechten auf einen Sachzusammenhang übertragen wird.</p>
+          <p>Kompetenzorientiert: mathematisch modellieren; Ahausen und Neustadt als zwei Punkte einer Strecke modellieren; aussagekräftige Zeichnung mit Beschriftung, Strecke und gesuchter Autobahnlinie erstellen; gleichen Abstand zu beiden Orten als Mittelsenkrechte der Verbindungsstrecke deuten; den Verlauf der Autobahn eindeutig kennzeichnen und auf den Sachkontext beziehen.</p>
+          <p>Musterlösung: „gleich weit entfernt von beiden Orten“ als geometrischen Ort der Mittelsenkrechten der Strecke zwischen den Orten deuten; Orte verbinden; Mittelsenkrechte konstruieren; Autobahn als gerade Linie auf der Mittelsenkrechten einzeichnen. Ergebnis: Die Autobahnlinie ist gerade, beschriftet und hält zu beiden Orten denselben Abstand.</p>
+          <p>Typische Fehler: Autobahn parallel oder durch einen Ort gezeichnet, Mittelsenkrechte der falschen Strecke konstruiert oder fehlender Bezug zum Sachkontext. Modellierungsfehler schwer gewichten, wenn statt Mittelsenkrechter eine beliebige Gerade verwendet wird.</p>
+        </aside>
+      </section>
+
+      <section class="slide practice" id="folie-10">
+        <div class="slide-inner wide">
+          <p class="eyebrow">Aufgabe 5</p>
+          <h2>Geldbeträge und Rechenterm</h2>
+          <p class="lead">Erst Sachtext verstehen, dann Teilpreise berechnen, danach Summe und Wechselgeld.</p>
+          <div class="solution-grid">
+            <article class="solution-card">
+              <strong>Chips</strong>
+              <p>2 · 0,98 € = <strong>1,96 €</strong></p>
+            </article>
+            <article class="solution-card" data-step>
+              <strong>Butter</strong>
+              <p>3 · 1,99 € = <strong>5,97 €</strong></p>
+            </article>
+            <article class="solution-card" data-step>
+              <strong>Brot und Summe</strong>
+              <p>2,89 €; Gesamtpreis = <strong>10,82 €</strong></p>
+            </article>
+            <article class="solution-card" data-step>
+              <strong>Wechselgeld und Term</strong>
+              <p>20,00 € - 10,82 € = <strong>9,18 €</strong><br>2 · 0,98 + 3 · 1,99 + 2,89</p>
+            </article>
+          </div>
+        </div>
+        <aside class="speaker-notes">
+          <strong>Erwartungshorizont Aufgabe 5</strong>
+          <p>Operatoren: berechnen/erstellen. Schwerpunkt: AFB I bis II, da ein Sachtext in Rechnungen und einen Term übersetzt wird.</p>
+          <p>Kompetenzorientiert: Mengen, Einzelpreise und Gesamtpreise korrekt zuordnen; Geldbeträge mit zwei Nachkommastellen korrekt addieren und subtrahieren; Rechnung aus Teil a als passenden Term formulieren; Gesamtpreis und Wechselgeld mit Euro-Einheit angeben.</p>
+          <p>Inhaltlich: Chips: 2 · 0,98 € = 1,96 €. Butter: 3 · 1,99 € = 5,97 €. Brot: 1 · 2,89 € = 2,89 €. Gesamtpreis: 10,82 €. Wechselgeld: 20,00 € - 10,82 € = 9,18 €. Passender Term: 2 · 0,98 + 3 · 1,99 + 2,89. Äquivalente Terme mit Klammern oder Euro-Einheiten sind korrekt, wenn sie denselben Einkauf modellieren.</p>
+          <p>Typische Fehler: Einzelpreise nur addiert statt multipliziert, Brot vergessen, Kommafehler bei Geldbeträgen, Wechselgeld vom falschen Betrag subtrahiert, Term passt nicht zu den Rechnungen. Einheitenfehler gering bis mittel; falsches Sachmodell mittel bis schwer.</p>
+        </aside>
+      </section>
+
+      <section class="slide warning" id="folie-11">
+        <div class="slide-inner wide">
+          <p class="eyebrow">Fehlerdiagnose</p>
+          <h2>Vier Fehlerarten unterscheiden</h2>
+          <ul class="warning-list">
+            <li><strong>Rechenfehler:</strong> Idee stimmt, aber beim Ausrechnen passiert ein Fehler.</li>
+            <li data-step><strong>Stellenwertfehler:</strong> Kommas, Nullen oder Dezimalstellen werden systematisch falsch behandelt.</li>
+            <li data-step><strong>Konstruktionsfehler:</strong> Die gesuchte geometrische Linie wird ungenau oder falsch konstruiert.</li>
+            <li data-step><strong>Modellierungsfehler:</strong> Der Sachtext wird in eine falsche Rechnung oder Zeichnung übersetzt.</li>
+          </ul>
+        </div>
+        <aside class="speaker-notes">
+          <strong>Korrekturlogik</strong>
+          <p>Die PDF unterscheidet mehrfach lokale Rechenfehler, Ansatz-/Modellierungsfehler und systematische Stellenwertfehler. Diese Unterscheidung ist für die Nachbesprechung zentral, weil sie zeigt, woran gezielt geübt werden muss.</p>
+          <p>Folgefehler sollen nicht doppelt bestraft werden, wenn ein erkennbar falscher Zwischenschritt anschließend mathematisch konsequent weitergeführt wird.</p>
+        </aside>
+      </section>
+
+      <section class="slide content" id="folie-12">
+        <div class="slide-inner wide">
+          <p class="eyebrow">Korrekturprinzipien</p>
+          <h2>Was bei der Bewertung wichtig ist</h2>
+          <div class="criteria-grid">
+            <article class="criteria-card">
+              <strong>Folgefehler</strong>
+              <p>Ein Fehler wird nicht mehrfach bestraft, wenn danach konsequent weitergerechnet oder weiterkonstruiert wird.</p>
+            </article>
+            <article class="criteria-card" data-step>
+              <strong>Alternative Wege</strong>
+              <p>Andere richtige Lösungswege, äquivalente Terme und gleichwertige Konstruktionen sind zulässig.</p>
+            </article>
+            <article class="criteria-card" data-step>
+              <strong>Darstellung</strong>
+              <p>Ein Rechen- oder Konstruktionsweg muss so erkennbar sein, dass er geprüft werden kann.</p>
+            </article>
+            <article class="criteria-card" data-step>
+              <strong>Sachbezug</strong>
+              <p>Bei Textaufgaben zählt, ob die Rechnung oder Zeichnung wirklich zur Situation passt.</p>
+            </article>
+          </div>
+        </div>
+        <aside class="speaker-notes">
+          <strong>Übergreifende Korrekturhinweise</strong>
+          <p>Wortlautnah aus der PDF: Folgefehler sollen nicht doppelt bestraft werden, wenn ein erkennbar falscher Zwischenschritt anschließend mathematisch konsequent weitergeführt wird.</p>
+          <p>Korrekte alternative Lösungswege, äquivalente Terme und geometrisch gleichwertige Konstruktionen sind zuzulassen, sofern sie zur Aufgabenstellung passen.</p>
+        </aside>
+      </section>
+
+      <section class="slide quote" id="folie-13">
+        <div class="slide-inner wide">
+          <div class="quote-mark">"</div>
+          <p class="quote-text">Nicht jeder Fehler bedeutet dasselbe.</p>
+          <p class="quote-source" data-step>Wer die Fehlerart erkennt, kann gezielter üben.</p>
+        </div>
+        <aside class="speaker-notes">
+          <strong>Abschlussimpuls</strong>
+          <p>Die Klasse kann zum Abschluss die eigene Arbeit markieren: ein Zeichen für Rechenfehler, eines für Stellenwertfehler, eines für Konstruktion, eines für Sachmodell. Daraus entsteht ein persönlicher Übungsschwerpunkt.</p>
+        </aside>
+      </section>
+
+      <section class="slide content" id="folie-14">
+        <div class="slide-inner wide">
+          <p class="eyebrow">Übungsplan</p>
+          <h2>Was vor der nächsten Arbeit sitzen sollte</h2>
+          <div class="criteria-grid">
+            <article class="criteria-card">
+              <strong>Dezimalzahlen</strong>
+              <p>Addieren, subtrahieren, dividieren und multiplizieren mit korrekter Kommasetzung.</p>
+            </article>
+            <article class="criteria-card" data-step>
+              <strong>Konstruktionen</strong>
+              <p>Mittelsenkrechte und Winkelhalbierende mit Zirkel, Lineal und Geodreieck sauber ausführen.</p>
+            </article>
+            <article class="criteria-card" data-step>
+              <strong>Sachaufgaben</strong>
+              <p>Textinformationen in eine Rechnung, einen Term oder eine geometrische Zeichnung übersetzen.</p>
+            </article>
+            <article class="criteria-card" data-step>
+              <strong>Darstellung</strong>
+              <p>Ergebnisse eindeutig mit Einheit, Beschriftung und nachvollziehbarem Weg notieren.</p>
+            </article>
+          </div>
+        </div>
+        <aside class="speaker-notes">
+          <strong>Fachliche Zielrichtung</strong>
+          <p>Diese Folie verdichtet die zentrale Kompetenzformulierung aus der PDF für Schülerinnen und Schüler. Sie kann als Grundlage für Hausaufgaben, Berichtigung oder Förderaufgaben genutzt werden.</p>
+        </aside>
+      </section>
+
+      <section class="slide reference compact" id="folie-15">
+        <div class="slide-inner wide">
+          <p class="eyebrow">Anhang</p>
+          <h2>Aufgaben 1 und 2: vollständige Kriterien</h2>
+          <table class="teacher-table">
+            <thead>
+              <tr>
+                <th>Aufgabe</th>
+                <th>Kompetenzen und Kriterien</th>
+                <th>Lösungen</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>1</td>
+                <td>Dezimal- und Bruchzahlaufgaben berechnen; Grundrechenarten im Kopf anwenden; 1/2 als 0,5 deuten; eindeutige mathematische Schreibweise verwenden.</td>
+                <td>1a 1,25; 1b 9,5; 1c 0,9; 1d 0,3.</td>
+              </tr>
+              <tr>
+                <td>2</td>
+                <td>Schriftlich berechnen; Stellenwertverständnis nutzen; Kommas korrekt berücksichtigen; Zwischenschritte prüfbar notieren.</td>
+                <td>2a 87,646; 2b 17,082; 2c 6,395; 2d 82,89.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <aside class="speaker-notes">
+          <strong>Ankreuzlogik</strong>
+          <p>Die PDF verwendet zu allen Kriterien die Spalten n. erfüllt, tw. erfüllt und voll erfüllt. Diese Präsentation zeigt die Kriterien gesammelt, ohne Punktwerte zu erfinden.</p>
+        </aside>
+      </section>
+
+      <section class="slide reference compact" id="folie-16">
+        <div class="slide-inner wide">
+          <p class="eyebrow">Anhang</p>
+          <h2>Aufgabe 3: vollständige Konstruktionskriterien</h2>
+          <table class="teacher-table">
+            <thead>
+              <tr>
+                <th>Teil</th>
+                <th>Erwartung</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>3a</td>
+                <td>AB = 9 cm; Kreisbögen um A und B mit gleichem Radius größer als 4,5 cm; Schnittpunkte verbinden; Mittelsenkrechte senkrecht zu AB; Mittelpunkt bei 4,5 cm.</td>
+              </tr>
+              <tr>
+                <td>3b</td>
+                <td>Winkel α = 40°; Konstruktion mit gleich großen Kreisbögen/Schnittpunkten; Winkelhalbierende bei 20° zu jedem Schenkel.</td>
+              </tr>
+              <tr>
+                <td>3c</td>
+                <td>A, B und AB erkennbar; Mittelsenkrechte korrekt; mehrere Punkte auf der Mittelsenkrechten als gleich weit von A und B entfernt erkennbar; Zeichnung stützt die Aussage.</td>
+              </tr>
+              <tr>
+                <td>3d</td>
+                <td>Gerade g und schneidende Gerade h; eindeutiger Schnittpunkt; k als Spiegelgerade zu h an g oder mit gleichem Winkel auf der anderen Seite; g halbiert den Winkel.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <aside class="speaker-notes">
+          <strong>Kompetenz Aufgabe 3</strong>
+          <p>Kompetenzorientierte Kriterien: Konstruieren und zeichnen, sachgerechter Werkzeugeinsatz, saubere Konstruktionslinien, Eigenschaft zeigen und Beziehungen untersuchen/finden.</p>
+        </aside>
+      </section>
+
+      <section class="slide reference compact" id="folie-17">
+        <div class="slide-inner wide">
+          <p class="eyebrow">Anhang</p>
+          <h2>Aufgaben 4 und 5: vollständige Kriterien</h2>
+          <table class="teacher-table">
+            <thead>
+              <tr>
+                <th>Aufgabe</th>
+                <th>Kernkriterien</th>
+                <th>Ergebnis</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>4</td>
+                <td>Ahausen und Neustadt als Punkte; Strecke AN; Mittelsenkrechte korrekt; Autobahn als gerade Linie auf der Mittelsenkrechten; Beschriftungen; 2,5 km bei maßstäblicher Zeichnung sinnvoll berücksichtigt.</td>
+                <td>Die Autobahnlinie ist gerade, beschriftet und gleich weit von beiden Orten entfernt.</td>
+              </tr>
+              <tr>
+                <td>5</td>
+                <td>Mengen und Einzelpreise zuordnen; Geldbeträge addieren und subtrahieren; Rechnung als Term formulieren; Ergebnisse mit Euro-Einheit angeben.</td>
+                <td>Gesamtpreis 10,82 €; Wechselgeld 9,18 €; Term z. B. 2 · 0,98 + 3 · 1,99 + 2,89.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <aside class="speaker-notes">
+          <strong>Bewertung Aufgaben 4 und 5</strong>
+          <p>Aufgabe 4: Modellierungsfehler schwer gewichten, wenn statt Mittelsenkrechter eine beliebige Gerade verwendet wird. Folgefehler beachten, wenn eine falsch gezeichnete Verbindungsstrecke konsequent weiterverwendet wird.</p>
+          <p>Aufgabe 5: Falsche Zuordnung von Menge und Preis ist ein Ansatz-/Modellierungsfehler. Folgefehler aus Teil a bei Teil b nicht doppelt bestrafen, wenn die Subtraktion konsequent richtig ist.</p>
+        </aside>
+      </section>
+    </main>
+
+    <div class="deck-nav-shell">
+      <button
+        class="deck-nav-toggle"
+        type="button"
+        aria-label="Foliennavigation ein- oder ausklappen"
+        aria-expanded="false"
+        aria-controls="deck-nav"
+        data-nav-toggle
+      >
+        ...
+      </button>
+      <nav class="deck-nav" id="deck-nav" aria-label="Foliennavigation">
+        <a href="#folie-1" aria-label="Folie 1">1</a>
+        <a href="#folie-2" aria-label="Folie 2">2</a>
+        <a href="#folie-3" aria-label="Folie 3">3</a>
+        <a href="#folie-4" aria-label="Folie 4">4</a>
+        <a href="#folie-5" aria-label="Folie 5">5</a>
+        <a href="#folie-6" aria-label="Folie 6">6</a>
+        <a href="#folie-7" aria-label="Folie 7">7</a>
+        <a href="#folie-8" aria-label="Folie 8">8</a>
+        <a href="#folie-9" aria-label="Folie 9">9</a>
+        <a href="#folie-10" aria-label="Folie 10">10</a>
+        <a href="#folie-11" aria-label="Folie 11">11</a>
+        <a href="#folie-12" aria-label="Folie 12">12</a>
+        <a href="#folie-13" aria-label="Folie 13">13</a>
+        <a href="#folie-14" aria-label="Folie 14">14</a>
+        <a href="#folie-15" aria-label="Folie 15">15</a>
+        <a href="#folie-16" aria-label="Folie 16">16</a>
+        <a href="#folie-17" aria-label="Folie 17">17</a>
+      </nav>
+    </div>
+    <div class="slide-count" data-deck-status aria-hidden="true">1/17</div>
+    <script src="../../assets/deck.js"></script>
+  </body>
+</html>
