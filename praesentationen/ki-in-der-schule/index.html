@@ -78,6 +78,98 @@
         background: #eef4ff;
       }
 
+      .slide.ai-brainstorm {
+        background:
+          linear-gradient(90deg, #ffffff 0 58%, #e8f5f1 58% 100%);
+      }
+
+      .brainstorm-layout {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) minmax(260px, 360px);
+        gap: 44px;
+        align-items: center;
+        margin-top: 28px;
+      }
+
+      .traffic-light {
+        display: grid;
+        gap: 12px;
+        margin-top: 28px;
+      }
+
+      .traffic-item {
+        display: grid;
+        grid-template-columns: 42px minmax(0, 1fr);
+        gap: 14px;
+        align-items: start;
+        padding: 14px 0;
+        border-top: 1px solid var(--line);
+      }
+
+      .traffic-dot {
+        display: grid;
+        place-items: center;
+        width: 36px;
+        height: 36px;
+        border-radius: 999px;
+        color: #ffffff;
+        font-weight: 950;
+      }
+
+      .traffic-dot.green {
+        background: #15803d;
+      }
+
+      .traffic-dot.yellow {
+        background: #b45309;
+      }
+
+      .traffic-dot.red {
+        background: #b42318;
+      }
+
+      .traffic-item strong {
+        display: block;
+        color: var(--ai-ink);
+        font-size: clamp(1.05rem, 1.45vw, 1.28rem);
+      }
+
+      .traffic-item p {
+        margin: 4px 0 0;
+        font-size: clamp(0.98rem, 1.2vw, 1.08rem);
+      }
+
+      .qr-card {
+        display: grid;
+        justify-items: center;
+        gap: 18px;
+        padding: 28px;
+        border: 1px solid rgb(31 41 51 / 12%);
+        border-radius: 8px;
+        background: #ffffff;
+        box-shadow: 0 18px 45px rgb(31 41 51 / 10%);
+      }
+
+      .qr-card img {
+        width: min(300px, 100%);
+        height: auto;
+        image-rendering: crisp-edges;
+      }
+
+      .qr-card strong {
+        display: block;
+        color: var(--ai-ink);
+        font-size: clamp(1.1rem, 1.55vw, 1.36rem);
+        text-align: center;
+      }
+
+      .qr-card p {
+        margin: 0;
+        font-size: clamp(0.95rem, 1.1vw, 1.05rem);
+        line-height: 1.4;
+        text-align: center;
+      }
+
       .meta-row {
         display: flex;
         flex-wrap: wrap;
@@ -404,7 +496,8 @@
 
         .group-grid,
         .presentation-steps,
-        .code-grid {
+        .code-grid,
+        .brainstorm-layout {
           grid-template-columns: repeat(2, minmax(0, 1fr));
         }
 
@@ -429,8 +522,13 @@
         .group-grid,
         .rubric-grid,
         .code-grid,
-        .presentation-steps {
+        .presentation-steps,
+        .brainstorm-layout {
           grid-template-columns: 1fr;
+        }
+
+        .slide.ai-brainstorm {
+          background: #ffffff;
         }
 
         .timeline-item {
@@ -460,7 +558,48 @@
         </div>
       </section>
 
-      <section class="slide content" id="folie-2">
+      <section class="slide ai-brainstorm" id="folie-2">
+        <div class="slide-inner wide">
+          <p class="eyebrow">Einstieg</p>
+          <h2>Verhaltensampel: Wann ist KI-Nutzung vertretbar?</h2>
+          <p class="lead">
+            Scannt den QR-Code und ordnet erste Beispiele spontan ein. Die Ampel zeigt,
+            welche Nutzung ihr begründen könnt und wo ihr Grenzen seht.
+          </p>
+          <div class="brainstorm-layout">
+            <div class="traffic-light" aria-label="Verhaltensampel">
+              <div class="traffic-item">
+                <span class="traffic-dot green" aria-hidden="true">G</span>
+                <div>
+                  <strong>Grün: vertretbar</strong>
+                  <p>KI hilft beim Lernen, ohne die eigene Leistung zu ersetzen.</p>
+                </div>
+              </div>
+              <div class="traffic-item">
+                <span class="traffic-dot yellow" aria-hidden="true">!</span>
+                <div>
+                  <strong>Gelb: nur mit Bedingungen</strong>
+                  <p>KI darf unterstützen, muss aber offengelegt, geprüft oder begrenzt werden.</p>
+                </div>
+              </div>
+              <div class="traffic-item">
+                <span class="traffic-dot red" aria-hidden="true">R</span>
+                <div>
+                  <strong>Rot: nicht vertretbar</strong>
+                  <p>KI verschleiert Eigenleistung, erzeugt Täuschung oder gibt ungeprüfte Inhalte ab.</p>
+                </div>
+              </div>
+            </div>
+            <div class="qr-card">
+              <img src="qrcode.png" alt="QR-Code zum Brainstorming der Verhaltensampel">
+              <strong>Brainstorming öffnen</strong>
+              <p>Erste Einschätzung: Was ist gerecht, was braucht Regeln, was geht zu weit?</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="slide content" id="folie-3">
         <div class="slide-inner wide">
           <p class="eyebrow">Leitfrage</p>
           <h2>Worum ringen wir?</h2>
@@ -488,7 +627,7 @@
         </div>
       </section>
 
-      <section class="slide ai-dark" id="folie-3">
+      <section class="slide ai-dark" id="folie-4">
         <div class="slide-inner wide">
           <p class="eyebrow">Einstieg</p>
           <h2>Ein KI-Ergebnis ist noch kein Urteil</h2>
@@ -509,7 +648,7 @@
         </div>
       </section>
 
-      <section class="slide agenda" id="folie-4">
+      <section class="slide agenda" id="folie-5">
         <div class="slide-inner wide">
           <p class="eyebrow">Ablauf</p>
           <h2>Vom Problem zum gemeinsamen Kodex</h2>
@@ -539,167 +678,166 @@
         </div>
       </section>
 
-      <section class="slide ai-soft" id="folie-5">
+      <section class="slide ai-soft" id="folie-6">
         <div class="slide-inner wide">
           <p class="eyebrow">Gruppenpuzzle</p>
           <h2>Fünf Perspektiven auf dieselbe Streitfrage</h2>
           <div class="group-grid">
             <article class="group-card">
               <span>1</span>
-              <strong>Fairness und Leistung</strong>
-              <p>Ist KI bei Hausaufgaben, Referaten oder Facharbeiten fair?</p>
+              <strong>Fairness und Eigenleistung</strong>
+              <p>Welche KI-Nutzung würdet ihr selbst grün, gelb oder rot markieren?</p>
             </article>
             <article class="group-card">
               <span>2</span>
               <strong>Verantwortung und Wahrheit</strong>
-              <p>Wer trägt Verantwortung für Fehler oder Falschinformationen?</p>
+              <p>Wann würdet ihr einer KI-Antwort vertrauen und wann nicht?</p>
             </article>
             <article class="group-card">
               <span>3</span>
               <strong>Bewertung von Leistungen</strong>
-              <p>Wie kann Leistung bewertet werden, wenn KI genutzt wird?</p>
+              <p>Wann wäre eine Note trotz KI-Nutzung aus eurer Sicht gerecht?</p>
             </article>
             <article class="group-card">
               <span>4</span>
               <strong>Neue Prüfungsformen</strong>
-              <p>Welche Prüfungen passen zu einer Zeit generativer KI?</p>
+              <p>Welche Aufgaben zeigen, was ihr wirklich selbst könnt?</p>
             </article>
             <article class="group-card">
               <span>5</span>
               <strong>Gesellschaftliche Folgen</strong>
-              <p>Welche Chancen und Risiken hat KI für Bildung und Gesellschaft?</p>
+              <p>Wann hilft KI euch beim Lernen, wann macht sie abhängig?</p>
             </article>
           </div>
         </div>
       </section>
 
-      <section class="slide content" id="folie-6">
+      <section class="slide content" id="folie-7">
         <div class="slide-inner wide">
           <p class="eyebrow">Gruppe 1</p>
-          <h2>Fairness und Leistung</h2>
+          <h2>Fairness und Eigenleistung</h2>
           <div class="task-layout">
             <div class="task-focus">
               <strong>Fragestellung</strong>
-              <p>Ist es fair, KI bei Hausaufgaben, Referaten oder Facharbeiten zu nutzen?</p>
+              <p>Welche KI-Nutzung würdet ihr im Schulalltag als fair, fragwürdig oder unfair einordnen?</p>
               <div class="result-box">
                 <strong>Ergebnis</strong>
-                <p>Entwickelt 3 bis 5 Regeln, die Fairness gewährleisten sollen.</p>
+                <p>Erstellt eine Schüler-Ampel zur Fairness mit eigenen Beispielen und 2 bis 3 Empfehlungen.</p>
               </div>
             </div>
             <div>
               <ul class="task-list">
-                <li>Welche Vorteile bietet KI?</li>
-                <li>Welche Nachteile entstehen für die Leistungsbewertung?</li>
-                <li>Ist ein KI-generierter Text eine Eigenleistung?</li>
-                <li>Wo liegen die Grenzen zwischen Hilfe und Täuschung?</li>
+                <li>Geht von euren eigenen Erfahrungen mit Hausaufgaben, Referaten, Facharbeiten oder Lernaufgaben aus.</li>
+                <li>Wählt Situationen aus, bei denen ihr in der Ampel unsicher wart oder verschiedener Meinung seid.</li>
+                <li>Ordnet sie neu ein: Was ist für euch grün, gelb oder rot?</li>
+                <li>Begründet, woran man echte Eigenleistung noch erkennt.</li>
               </ul>
             </div>
           </div>
         </div>
       </section>
 
-      <section class="slide ai-blue" id="folie-7">
+      <section class="slide ai-blue" id="folie-8">
         <div class="slide-inner wide">
           <p class="eyebrow">Gruppe 2</p>
           <h2>Verantwortung und Wahrheit</h2>
           <div class="task-layout">
             <div class="task-focus">
               <strong>Fragestellung</strong>
-              <p>Wer trägt Verantwortung für Fehler oder Falschinformationen, die durch KI entstehen?</p>
+              <p>Wann könnt ihr KI-Antworten verantwortbar nutzen und wann müsst ihr misstrauisch werden?</p>
               <div class="result-box">
                 <strong>Ergebnis</strong>
-                <p>Erstellt einen Leitfaden für den verantwortungsvollen Umgang mit KI.</p>
+                <p>Erstellt eine Schüler-Ampel zum Prüfen von KI-Antworten mit 2 bis 3 Empfehlungen.</p>
               </div>
             </div>
             <div>
               <ul class="task-list">
-                <li>Warum macht KI Fehler?</li>
-                <li>Können KI-Antworten immer vertraut werden?</li>
-                <li>Wer ist verantwortlich, wenn falsche Informationen abgegeben werden?</li>
-                <li>Welche Pflichten haben Schülerinnen und Schüler?</li>
+                <li>Sammelt Situationen, in denen ihr KI nach Erklärungen, Fakten, Quellen oder Formulierungen fragen würdet.</li>
+                <li>Prüft, wann ihr das Ergebnis übernehmen, überprüfen oder verwerfen müsstet.</li>
+                <li>Ordnet eure Situationen in grün, gelb oder rot ein.</li>
+                <li>Begründet, welche Verantwortung bei euch bleibt.</li>
               </ul>
             </div>
           </div>
         </div>
       </section>
 
-      <section class="slide content" id="folie-8">
+      <section class="slide content" id="folie-9">
         <div class="slide-inner wide">
           <p class="eyebrow">Gruppe 3</p>
           <h2>Bewertung von Leistungen</h2>
           <div class="task-layout">
             <div class="task-focus">
               <strong>Fragestellung</strong>
-              <p>Wie können schulische Leistungen bewertet werden, wenn KI genutzt wird?</p>
+              <p>Wann wäre eine bewertete Arbeit trotz KI-Nutzung aus eurer Sicht noch gerecht bewertet?</p>
               <div class="result-box">
                 <strong>Ergebnis</strong>
-                <p>Entwerft ein Bewertungsmodell für KI-unterstützte Arbeiten.</p>
+                <p>Erstellt eine Schüler-Ampel für bewertete Aufgaben mit 2 bis 3 Empfehlungen.</p>
               </div>
             </div>
             <div>
               <ul class="task-list">
-                <li>Welche Probleme entstehen bei klassischen Hausarbeiten?</li>
-                <li>Welche Leistungen sollten bewertet werden?</li>
-                <li>Sollte die Nutzung von KI offengelegt werden?</li>
-                <li>Welche Bewertungsmodelle wären gerecht?</li>
+                <li>Sammelt Situationen, in denen KI bei benoteten Aufgaben helfen könnte.</li>
+                <li>Diskutiert: Wäre es für euch fair, wenn andere KI so nutzen?</li>
+                <li>Ordnet ein, welche Nutzung grün, gelb oder rot ist.</li>
+                <li>Entscheidet, was Schülerinnen und Schüler offenlegen müssten.</li>
               </ul>
             </div>
           </div>
         </div>
       </section>
 
-      <section class="slide ai-warm" id="folie-9">
+      <section class="slide ai-warm" id="folie-10">
         <div class="slide-inner wide">
           <p class="eyebrow">Gruppe 4</p>
           <h2>Neue Prüfungsformen</h2>
           <div class="task-layout">
             <div class="task-focus">
               <strong>Fragestellung</strong>
-              <p>Welche Prüfungsformen eignen sich, wenn KI Texte, Bilder und Präsentationen erstellen kann?</p>
+              <p>Bei welchen Aufgaben könnt ihr zeigen, was ihr wirklich verstanden habt?</p>
               <div class="result-box">
                 <strong>Ergebnis</strong>
-                <p>Empfehlt mindestens zwei Prüfungsformen für die Zukunft.</p>
+                <p>Erstellt eine Schüler-Ampel für Aufgaben und Prüfungen mit 2 bis 3 Empfehlungen.</p>
               </div>
             </div>
             <div>
               <ul class="task-list">
-                <li>Mündliche Prüfungen</li>
-                <li>Debatten</li>
-                <li>Portfolios</li>
-                <li>Projektarbeiten</li>
-                <li>Präsentationen mit Fragerunde</li>
+                <li>Sammelt Aufgabenformate, die ihr aus dem Unterricht kennt oder euch wünschen würdet.</li>
+                <li>Überlegt, bei welchen Aufgaben KI kaum hilft, sinnvoll hilft oder zu viel übernimmt.</li>
+                <li>Ordnet die Aufgabenformen in grün, gelb oder rot ein.</li>
+                <li>Begründet, wodurch eure eigene Leistung sichtbar wird.</li>
               </ul>
             </div>
           </div>
         </div>
       </section>
 
-      <section class="slide content" id="folie-10">
+      <section class="slide content" id="folie-11">
         <div class="slide-inner wide">
           <p class="eyebrow">Gruppe 5</p>
           <h2>Gesellschaftliche Folgen</h2>
           <div class="task-layout">
             <div class="task-focus">
               <strong>Fragestellung</strong>
-              <p>Welche Chancen und Risiken hat KI für Bildung und Gesellschaft?</p>
+              <p>Wann hilft KI euch wirklich beim Lernen und wann nimmt sie euch Lernen ab?</p>
               <div class="result-box">
                 <strong>Ergebnis</strong>
-                <p>Erstellt eine Chancen-Risiken-Übersicht und formuliert eine eigene Bewertung.</p>
+                <p>Erstellt eine Schüler-Ampel zu Chancen und Risiken mit 2 bis 3 Empfehlungen.</p>
               </div>
             </div>
             <div>
               <ul class="task-list">
-                <li>Bildungsgerechtigkeit</li>
-                <li>Chancengleichheit</li>
-                <li>Abhängigkeit von Technologie</li>
-                <li>Auswirkungen auf Berufe und Lernen</li>
+                <li>Sammelt Erfahrungen aus Schule, Alltag, Social Media, Hobbys oder Berufsvorstellungen.</li>
+                <li>Unterscheidet: Wann macht KI euch selbstständiger, wann eher abhängiger?</li>
+                <li>Ordnet eure Beispiele in grün, gelb oder rot ein.</li>
+                <li>Begründet, was für euch gerechter und verantwortlicher Umgang wäre.</li>
               </ul>
             </div>
           </div>
         </div>
       </section>
 
-      <section class="slide ai-soft" id="folie-11">
+      <section class="slide ai-soft" id="folie-12">
         <div class="slide-inner wide">
           <p class="eyebrow">Präsentation</p>
           <h2>Maximal 8 Minuten pro Gruppe</h2>
@@ -712,24 +850,24 @@
             </article>
             <article class="presentation-step">
               <span>2</span>
-              <strong>Wichtigste Erkenntnisse</strong>
-              <p>Welche Punkte waren sachlich entscheidend?</p>
+              <strong>Eigene Beispiele</strong>
+              <p>Welche Situationen aus Schule oder Alltag habt ihr gesammelt?</p>
             </article>
             <article class="presentation-step">
               <span>3</span>
-              <strong>Eigene Bewertung</strong>
-              <p>Welche Position vertretet ihr und warum?</p>
+              <strong>Ampel-Einordnung</strong>
+              <p>Was ist grün, gelb oder rot und wie begründet ihr das?</p>
             </article>
             <article class="presentation-step">
               <span>4</span>
               <strong>Empfehlungen</strong>
-              <p>Welche konkreten Regeln sollte die Schule übernehmen?</p>
+              <p>Welche Regeln sollte die Schule daraus ableiten?</p>
             </article>
           </div>
         </div>
       </section>
 
-      <section class="slide ai-dark" id="folie-12">
+      <section class="slide ai-dark" id="folie-13">
         <div class="slide-inner wide">
           <p class="eyebrow">Normative Kernfrage</p>
           <h2>Aus Medienkunde wird Werte und Normen</h2>
@@ -743,37 +881,37 @@
         </div>
       </section>
 
-      <section class="slide content" id="folie-13">
+      <section class="slide content" id="folie-14">
         <div class="slide-inner wide">
           <p class="eyebrow">Abschlussauftrag</p>
           <h2>KI-Verhaltenskodex für die Schule</h2>
-          <p class="lead">Die Klasse einigt sich auf 8 bis 10 Regeln. Der Kodex soll diese Fragen beantworten:</p>
+          <p class="lead">Die Klasse einigt sich auf 8 bis 10 Regeln. Nutzt eure Ampel-Ergebnisse als Grundlage.</p>
           <div class="code-grid">
             <article class="code-card">
-              <strong>Erlaubte Nutzung</strong>
-              <p>Wofür darf KI im Unterricht und zu Hause genutzt werden?</p>
+              <strong>Grün</strong>
+              <p>Welche KI-Nutzung ist aus eurer Sicht vertretbar und sinnvoll?</p>
             </article>
             <article class="code-card">
-              <strong>Grenzen</strong>
-              <p>Wofür darf KI nicht genutzt werden?</p>
+              <strong>Gelb</strong>
+              <p>Welche KI-Nutzung ist nur unter bestimmten Bedingungen vertretbar?</p>
+            </article>
+            <article class="code-card">
+              <strong>Rot</strong>
+              <p>Welche KI-Nutzung ist nicht vertretbar?</p>
+            </article>
+            <article class="code-card">
+              <strong>Begründung</strong>
+              <p>Welche Werte begründen eure Regeln?</p>
             </article>
             <article class="code-card">
               <strong>Offenlegung</strong>
-              <p>Was muss angegeben werden, wenn KI geholfen hat?</p>
-            </article>
-            <article class="code-card">
-              <strong>Bewertung</strong>
-              <p>Wie sollen Leistungen bewertet werden?</p>
-            </article>
-            <article class="code-card">
-              <strong>Kompetenzen</strong>
-              <p>Welche Fähigkeiten bleiben unverzichtbar?</p>
+              <p>Was muss gesagt oder dokumentiert werden?</p>
             </article>
           </div>
         </div>
       </section>
 
-      <section class="slide agenda" id="folie-14">
+      <section class="slide agenda" id="folie-15">
         <div class="slide-inner wide">
           <p class="eyebrow">Zeitplanung</p>
           <h2>1. Doppelstunde</h2>
@@ -810,7 +948,7 @@
         </div>
       </section>
 
-      <section class="slide ai-blue" id="folie-15">
+      <section class="slide ai-blue" id="folie-16">
         <div class="slide-inner wide">
           <p class="eyebrow">Zeitplanung</p>
           <h2>2. Doppelstunde</h2>
@@ -871,6 +1009,7 @@
       <a href="#folie-13" aria-label="Folie 13">13</a>
       <a href="#folie-14" aria-label="Folie 14">14</a>
       <a href="#folie-15" aria-label="Folie 15">15</a>
+      <a href="#folie-16" aria-label="Folie 16">16</a>
     </nav>
     <div class="slide-count" aria-hidden="true">Pfeiltasten nutzbar</div>
 
