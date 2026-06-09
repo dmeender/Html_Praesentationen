@@ -170,6 +170,46 @@
         text-align: center;
       }
 
+      .source-grid {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 14px;
+        margin-top: 28px;
+      }
+
+      .source-card {
+        display: grid;
+        min-height: 178px;
+        padding: 18px;
+        border: 1px solid rgb(31 41 51 / 12%);
+        border-radius: 8px;
+        background: #ffffff;
+        color: inherit;
+        text-decoration: none;
+        box-shadow: 0 14px 34px rgb(31 41 51 / 8%);
+      }
+
+      .source-card strong {
+        display: block;
+        color: var(--ai-ink);
+        font-size: clamp(1rem, 1.25vw, 1.15rem);
+        line-height: 1.25;
+      }
+
+      .source-card p {
+        margin: 8px 0 0;
+        font-size: clamp(0.92rem, 1.08vw, 1rem);
+        line-height: 1.35;
+      }
+
+      .source-card span {
+        align-self: end;
+        margin-top: 14px;
+        color: var(--ai-teal);
+        font-size: 0.86rem;
+        font-weight: 850;
+      }
+
       .meta-row {
         display: flex;
         flex-wrap: wrap;
@@ -497,7 +537,8 @@
         .group-grid,
         .presentation-steps,
         .code-grid,
-        .brainstorm-layout {
+        .brainstorm-layout,
+        .source-grid {
           grid-template-columns: repeat(2, minmax(0, 1fr));
         }
 
@@ -523,7 +564,8 @@
         .rubric-grid,
         .code-grid,
         .presentation-steps,
-        .brainstorm-layout {
+        .brainstorm-layout,
+        .source-grid {
           grid-template-columns: 1fr;
         }
 
@@ -714,6 +756,49 @@
 
       <section class="slide content" id="folie-7">
         <div class="slide-inner wide">
+          <p class="eyebrow">Recherche</p>
+          <h2>Mögliche Quellen für eure Ampel</h2>
+          <p class="lead">
+            Nutzt passende Quellen, um eure Ampel-Einordnung zu prüfen: Was ist erlaubt,
+            was ist fair, was muss offengelegt werden?
+          </p>
+          <div class="source-grid">
+            <a class="source-card" href="https://bildungsportal-niedersachsen.de/schulorganisation/datenschutz-an-schulen/datenschutz-im-schulalltag/textgenerierende-ki-systeme">
+              <strong>Bildungsportal Niedersachsen</strong>
+              <p>Textgenerierende KI-Systeme im schulischen Kontext.</p>
+              <span>Landesbezug und Schule</span>
+            </a>
+            <a class="source-card" href="https://www.lfd.niedersachsen.de/dsk-ki">
+              <strong>Datenschutz Niedersachsen</strong>
+              <p>Orientierungshilfen zu KI, Verantwortung und Datenschutz.</p>
+              <span>Daten und Risiken</span>
+            </a>
+            <a class="source-card" href="https://www.mk.niedersachsen.de/startseite/aktuelles/presseinformationenniedersachsen-bringt-ki-in-den-unterricht-schul-chatbot-startet-landesweit-248679.html">
+              <strong>Niedersachsen: KI im Unterricht</strong>
+              <p>Informationen zum Schul-Chatbot AIS.chat und KI als Unterrichtsthema.</p>
+              <span>Regeln und Praxis</span>
+            </a>
+            <a class="source-card" href="https://www.schulministerium.nrw/textgenerierende-ki">
+              <strong>NRW: Textgenerierende KI</strong>
+              <p>Chancen, Risiken und transparente Nutzung im Vergleich.</p>
+              <span>Transparenz</span>
+            </a>
+            <a class="source-card" href="https://digitale-schule.hessen.de/unterricht-und-paedagogik/handreichung-kuenstliche-intelligenz-ki-in-schule-und-unterricht">
+              <strong>Hessen: KI in Schule und Unterricht</strong>
+              <p>Handreichung mit Praxisbezug, Ethik und Datenschutz.</p>
+              <span>Beispiele und Orientierung</span>
+            </a>
+            <a class="source-card" href="https://www.ndr.de/nachrichten/niedersachsen/hannover_weser-leinegebiet/ki-betrug-an-schulen-wenn-lehrkraefte-zu-ermittlern-werden,kuenstlicheintelligenz-116.html">
+              <strong>NDR: KI-Betrug an Schulen</strong>
+              <p>Anlasstext zu Fairness, Täuschung und Kontrolle.</p>
+              <span>Diskussionsanlass</span>
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <section class="slide content" id="folie-8">
+        <div class="slide-inner wide">
           <p class="eyebrow">Gruppe 1</p>
           <h2>Fairness und Eigenleistung</h2>
           <div class="task-layout">
@@ -737,7 +822,7 @@
         </div>
       </section>
 
-      <section class="slide ai-blue" id="folie-8">
+      <section class="slide ai-blue" id="folie-9">
         <div class="slide-inner wide">
           <p class="eyebrow">Gruppe 2</p>
           <h2>Verantwortung und Wahrheit</h2>
@@ -762,7 +847,7 @@
         </div>
       </section>
 
-      <section class="slide content" id="folie-9">
+      <section class="slide content" id="folie-10">
         <div class="slide-inner wide">
           <p class="eyebrow">Gruppe 3</p>
           <h2>Bewertung von Leistungen</h2>
@@ -787,7 +872,7 @@
         </div>
       </section>
 
-      <section class="slide ai-warm" id="folie-10">
+      <section class="slide ai-warm" id="folie-11">
         <div class="slide-inner wide">
           <p class="eyebrow">Gruppe 4</p>
           <h2>Neue Prüfungsformen</h2>
@@ -812,7 +897,7 @@
         </div>
       </section>
 
-      <section class="slide content" id="folie-11">
+      <section class="slide content" id="folie-12">
         <div class="slide-inner wide">
           <p class="eyebrow">Gruppe 5</p>
           <h2>Gesellschaftliche Folgen</h2>
@@ -837,7 +922,7 @@
         </div>
       </section>
 
-      <section class="slide ai-soft" id="folie-12">
+      <section class="slide ai-soft" id="folie-13">
         <div class="slide-inner wide">
           <p class="eyebrow">Präsentation</p>
           <h2>Maximal 8 Minuten pro Gruppe</h2>
@@ -867,7 +952,7 @@
         </div>
       </section>
 
-      <section class="slide ai-dark" id="folie-13">
+      <section class="slide ai-dark" id="folie-14">
         <div class="slide-inner wide">
           <p class="eyebrow">Normative Kernfrage</p>
           <h2>Aus Medienkunde wird Werte und Normen</h2>
@@ -881,7 +966,7 @@
         </div>
       </section>
 
-      <section class="slide content" id="folie-14">
+      <section class="slide content" id="folie-15">
         <div class="slide-inner wide">
           <p class="eyebrow">Abschlussauftrag</p>
           <h2>KI-Verhaltenskodex für die Schule</h2>
@@ -911,7 +996,7 @@
         </div>
       </section>
 
-      <section class="slide agenda" id="folie-15">
+      <section class="slide agenda" id="folie-16">
         <div class="slide-inner wide">
           <p class="eyebrow">Zeitplanung</p>
           <h2>1. Doppelstunde</h2>
@@ -948,7 +1033,7 @@
         </div>
       </section>
 
-      <section class="slide ai-blue" id="folie-16">
+      <section class="slide ai-blue" id="folie-17">
         <div class="slide-inner wide">
           <p class="eyebrow">Zeitplanung</p>
           <h2>2. Doppelstunde</h2>
@@ -1010,6 +1095,7 @@
       <a href="#folie-14" aria-label="Folie 14">14</a>
       <a href="#folie-15" aria-label="Folie 15">15</a>
       <a href="#folie-16" aria-label="Folie 16">16</a>
+      <a href="#folie-17" aria-label="Folie 17">17</a>
     </nav>
     <div class="slide-count" aria-hidden="true">Pfeiltasten nutzbar</div>
 
