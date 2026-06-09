@@ -7,13 +7,18 @@
     <link rel="stylesheet" href="../../assets/styles.css">
   </head>
   <body class="deck">
-    <main class="slides" id="slides" aria-label="Muster-Präsentation">
+    <main class="slides" id="slides" data-deck aria-label="Muster-Präsentation">
       <section class="slide title center" id="folie-1">
         <div class="slide-inner">
           <p class="eyebrow">Muster</p>
           <h1>Eine einfache HTML-Präsentation</h1>
           <p class="lead">Bereit für GitHub Pages, QR-Code und Zuschauer auf dem Smartphone.</p>
         </div>
+        <aside class="speaker-notes">
+          <strong>Moderationsnotiz</strong>
+          <p>Kurz einordnen: Diese Vorlage ist der Startpunkt für neue Präsentationen.</p>
+          <p>Die Bedienung funktioniert mit Leertaste, Pfeiltasten und Shift + N für Notizen.</p>
+        </aside>
       </section>
 
       <section class="slide agenda" id="folie-2">
@@ -28,14 +33,14 @@
                 <small>Ein kurzer Einstieg, damit alle denselben Kontext haben.</small>
               </div>
             </li>
-            <li>
+            <li data-step>
               <span>2</span>
               <div>
                 <strong>Kernpunkte</strong>
                 <small>Die wichtigsten Aussagen, Beispiele oder Entscheidungen.</small>
               </div>
             </li>
-            <li>
+            <li data-step>
               <span>3</span>
               <div>
                 <strong>Nächste Schritte</strong>
@@ -44,6 +49,10 @@
             </li>
           </ol>
         </div>
+        <aside class="speaker-notes">
+          <strong>Moderationsnotiz</strong>
+          <p>Nur die Punkte 2 und 3 erscheinen nacheinander. Punkt 1 bleibt sichtbar, damit die Folie nicht leer startet.</p>
+        </aside>
       </section>
 
       <section class="slide content" id="folie-3">
@@ -56,16 +65,20 @@
               <strong>1</strong>
               <span>Eine klare Hauptaussage pro Folie.</span>
             </div>
-            <div class="stat">
+            <div class="stat" data-step>
               <strong>3</strong>
               <span>Maximal wenige Kernaussagen gleichzeitig zeigen.</span>
             </div>
-            <div class="stat">
+            <div class="stat" data-step>
               <strong>+</strong>
               <span>Neue Präsentationen können einfach ergänzt werden.</span>
             </div>
           </div>
         </div>
+        <aside class="speaker-notes">
+          <strong>Moderationsnotiz</strong>
+          <p>Einblendungen nur für die zweite und dritte Kennzahl verwenden. Mehr als drei Schritte pro Folie vermeiden.</p>
+        </aside>
       </section>
 
       <section class="slide image" id="folie-4">
@@ -78,6 +91,10 @@
           </p>
         </div>
         <div class="image-panel" aria-label="Platzhalter für Bildmaterial"></div>
+        <aside class="speaker-notes">
+          <strong>Moderationsnotiz</strong>
+          <p>Bildfolien meist ohne Einblendung nutzen. Das Publikum soll zuerst das Bild erfassen können.</p>
+        </aside>
       </section>
 
       <section class="slide split" id="folie-5">
@@ -89,20 +106,28 @@
               <h3>Heute</h3>
               <p>Was ist der aktuelle Zustand, das Problem oder die Ausgangslage?</p>
             </article>
-            <article class="text-panel">
+            <article class="text-panel" data-step>
               <h3>Ziel</h3>
               <p>Was soll sich ändern, besser werden oder nach dem Vortrag klar sein?</p>
             </article>
           </div>
         </div>
+        <aside class="speaker-notes">
+          <strong>Moderationsnotiz</strong>
+          <p>Erst den heutigen Zustand erklären, dann per Leertaste das Ziel dazunehmen.</p>
+        </aside>
       </section>
 
       <section class="slide quote" id="folie-6">
         <div class="slide-inner wide">
           <div class="quote-mark">"</div>
           <p class="quote-text">Eine gute Präsentation macht eine Sache klarer als vorher.</p>
-          <p class="quote-source">Platz für Quelle, Person oder Kontext</p>
+          <p class="quote-source" data-step>Platz für Quelle, Person oder Kontext</p>
         </div>
+        <aside class="speaker-notes">
+          <strong>Moderationsnotiz</strong>
+          <p>Bei Zitaten kann die Quelle nach dem Vorlesen eingeblendet werden.</p>
+        </aside>
       </section>
 
       <section class="slide qr" id="folie-7">
@@ -117,6 +142,10 @@
           </div>
           <div class="qr-placeholder">QR-Code<br>folgt nach<br>Veröffentlichung</div>
         </div>
+        <aside class="speaker-notes">
+          <strong>Moderationsnotiz</strong>
+          <p>Erst nach der Entscheidung zur Veröffentlichung den echten QR-Code einsetzen.</p>
+        </aside>
       </section>
     </main>
 
@@ -129,43 +158,7 @@
       <a href="#folie-6" aria-label="Folie 6">6</a>
       <a href="#folie-7" aria-label="Folie 7">7</a>
     </nav>
-    <div class="slide-count" aria-hidden="true">Pfeiltasten nutzbar</div>
-
-    <script>
-      const slides = document.querySelector("#slides");
-      const slideItems = [...document.querySelectorAll(".slide")];
-
-      function currentSlideIndex() {
-        const slideWidth = slides.clientWidth;
-        return Math.round(slides.scrollLeft / slideWidth);
-      }
-
-      function goToSlide(index) {
-        const nextIndex = Math.max(0, Math.min(slideItems.length - 1, index));
-        slideItems[nextIndex].scrollIntoView({ behavior: "smooth", inline: "start" });
-      }
-
-      document.addEventListener("keydown", (event) => {
-        if (event.key === "ArrowRight" || event.key === "PageDown") {
-          event.preventDefault();
-          goToSlide(currentSlideIndex() + 1);
-        }
-
-        if (event.key === "ArrowLeft" || event.key === "PageUp") {
-          event.preventDefault();
-          goToSlide(currentSlideIndex() - 1);
-        }
-
-        if (event.key === "Home") {
-          event.preventDefault();
-          goToSlide(0);
-        }
-
-        if (event.key === "End") {
-          event.preventDefault();
-          goToSlide(slideItems.length - 1);
-        }
-      });
-    </script>
+    <div class="slide-count" data-deck-status aria-hidden="true">1/7</div>
+    <script src="../../assets/deck.js"></script>
   </body>
 </html>
