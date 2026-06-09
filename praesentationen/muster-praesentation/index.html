@@ -149,15 +149,27 @@
       </section>
     </main>
 
-    <nav class="deck-nav" aria-label="Foliennavigation">
-      <a href="#folie-1" aria-label="Folie 1">1</a>
-      <a href="#folie-2" aria-label="Folie 2">2</a>
-      <a href="#folie-3" aria-label="Folie 3">3</a>
-      <a href="#folie-4" aria-label="Folie 4">4</a>
-      <a href="#folie-5" aria-label="Folie 5">5</a>
-      <a href="#folie-6" aria-label="Folie 6">6</a>
-      <a href="#folie-7" aria-label="Folie 7">7</a>
-    </nav>
+    <div class="deck-nav-shell">
+      <button
+        class="deck-nav-toggle"
+        type="button"
+        aria-label="Foliennavigation ein- oder ausklappen"
+        aria-expanded="false"
+        aria-controls="deck-nav"
+        data-nav-toggle
+      >
+        ...
+      </button>
+      <nav class="deck-nav" id="deck-nav" aria-label="Foliennavigation">
+        <a href="#folie-1" aria-label="Folie 1">1</a>
+        <a href="#folie-2" aria-label="Folie 2">2</a>
+        <a href="#folie-3" aria-label="Folie 3">3</a>
+        <a href="#folie-4" aria-label="Folie 4">4</a>
+        <a href="#folie-5" aria-label="Folie 5">5</a>
+        <a href="#folie-6" aria-label="Folie 6">6</a>
+        <a href="#folie-7" aria-label="Folie 7">7</a>
+      </nav>
+    </div>
     <div class="slide-count" data-deck-status aria-hidden="true">1/7</div>
     <script src="../../assets/deck.js"></script>
   </body>

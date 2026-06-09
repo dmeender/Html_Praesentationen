@@ -22,6 +22,7 @@ Präsentationen können die gemeinsame Steuerung aus `assets/deck.js` nutzen:
 - `Home`: erste Folie
 - `Ende`: letzte Folie
 - `Shift + N`: Moderationsnotizen ein- oder ausblenden
+- `Shift + F`: Foliennummern ein- oder ausklappen
 
 Eine Präsentation bindet die Steuerung so ein:
 
@@ -38,6 +39,13 @@ Eine Präsentation bindet die Steuerung so ein:
     </aside>
   </section>
 </main>
+
+<div class="deck-nav-shell">
+  <button class="deck-nav-toggle" type="button" data-nav-toggle>...</button>
+  <nav class="deck-nav" aria-label="Foliennavigation">
+    <a href="#folie-1">1</a>
+  </nav>
+</div>
 
 <script src="../../assets/deck.js"></script>
 ```

@@ -407,14 +407,28 @@ h1 {
   align-items: center;
 }
 
-.deck-nav {
+.deck-nav-shell {
   position: fixed;
   right: 18px;
   bottom: 18px;
+  z-index: 16;
   display: flex;
+  align-items: center;
   gap: 8px;
 }
 
+.deck-nav {
+  display: flex;
+  gap: 8px;
+  max-width: min(70vw, 520px);
+  overflow: hidden;
+  transition:
+    max-width 180ms ease,
+    opacity 180ms ease,
+    transform 180ms ease;
+}
+
+.deck-nav-toggle,
 .deck-nav a {
   display: grid;
   place-items: center;
@@ -426,6 +440,18 @@ h1 {
   color: var(--ink);
   font-size: 1.2rem;
   text-decoration: none;
+}
+
+.deck-nav-toggle {
+  cursor: pointer;
+  font-weight: 900;
+}
+
+.nav-collapsed .deck-nav {
+  max-width: 0;
+  opacity: 0;
+  pointer-events: none;
+  transform: translateX(8px);
 }
 
 .deck-nav a.is-active {
@@ -510,11 +536,17 @@ h1 {
     min-height: 280px;
   }
 
-  .deck-nav {
+  .deck-nav-shell {
     right: 12px;
     bottom: 12px;
   }
 
+  .deck-nav {
+    max-width: min(76vw, 360px);
+    overflow-x: auto;
+  }
+
+  .deck-nav-toggle,
   .deck-nav a {
     width: 36px;
     height: 36px;

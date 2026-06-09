@@ -8,12 +8,51 @@
   const slideItems = Array.from(slides.querySelectorAll(".slide"));
   const stepState = new Map(slideItems.map((slide) => [slide, 0]));
   const status = document.querySelector("[data-deck-status]");
+  const nav = document.querySelector(".deck-nav");
+
+  function ensureNavigationToggle() {
+    if (!nav) {
+      return null;
+    }
+
+    let shell = nav.closest(".deck-nav-shell");
+
+    if (!shell) {
+      shell = document.createElement("div");
+      shell.className = "deck-nav-shell";
+      nav.before(shell);
+      shell.append(nav);
+    }
+
+    let toggle = shell.querySelector("[data-nav-toggle]");
+
+    if (!toggle) {
+      toggle = document.createElement("button");
+      toggle.className = "deck-nav-toggle";
+      toggle.type = "button";
+      toggle.textContent = "...";
+      toggle.setAttribute("aria-label", "Foliennavigation ein- oder ausklappen");
+      toggle.setAttribute("aria-expanded", "false");
+      toggle.setAttribute("data-nav-toggle", "");
+      shell.prepend(toggle);
+    }
+
+    if (!nav.id) {
+      nav.id = "deck-nav";
+    }
+
+    toggle.setAttribute("aria-controls", nav.id);
+    return toggle;
+  }
+
+  const navToggle = ensureNavigationToggle();
   const navLinks = Array.from(document.querySelectorAll(".deck-nav a"));
 
   document.body.classList.add("deck-ready");
+  document.body.classList.add("nav-collapsed");
 
   function isEditableTarget(target) {
-    return target.closest("input, textarea, select, button, [contenteditable='true']");
+    return target.closest("input, textarea, select, [contenteditable='true']");
   }
 
   function currentSlideIndex() {
@@ -101,6 +140,18 @@
     document.body.classList.toggle("notes-visible");
   }
 
+  function setNavigationCollapsed(collapsed) {
+    document.body.classList.toggle("nav-collapsed", collapsed);
+
+    if (navToggle) {
+      navToggle.setAttribute("aria-expanded", collapsed ? "false" : "true");
+    }
+  }
+
+  function toggleNavigation() {
+    setNavigationCollapsed(!document.body.classList.contains("nav-collapsed"));
+  }
+
   document.addEventListener("keydown", (event) => {
     if (isEditableTarget(event.target)) {
       return;
@@ -109,6 +160,12 @@
     if (event.shiftKey && event.key.toLowerCase() === "n") {
       event.preventDefault();
       toggleNotes();
+      return;
+    }
+
+    if (event.shiftKey && event.key.toLowerCase() === "f") {
+      event.preventDefault();
+      toggleNavigation();
       return;
     }
 
@@ -140,8 +197,13 @@
     link.addEventListener("click", (event) => {
       event.preventDefault();
       goToSlide(index);
+      setNavigationCollapsed(true);
     });
   });
+
+  if (navToggle) {
+    navToggle.addEventListener("click", toggleNavigation);
+  }
 
   let scrollFrame = null;
   slides.addEventListener("scroll", () => {
