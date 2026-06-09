@@ -585,7 +585,7 @@
     </style>
   </head>
   <body class="deck">
-    <main class="slides" id="slides" aria-label="Künstliche Intelligenz in der Schule">
+    <main class="slides" id="slides" data-deck aria-label="Künstliche Intelligenz in der Schule">
       <section class="slide ai-title center" id="folie-1">
         <div class="slide-inner wide">
           <p class="eyebrow">Werte und Normen | Klasse 10</p>
@@ -598,6 +598,11 @@
             <span class="pill">Handlungsprodukt: Kodex</span>
           </div>
         </div>
+        <aside class="speaker-notes">
+          <strong>Moderationsnotiz</strong>
+          <p>Kurzer Rahmen: Es geht nicht um Technikbegeisterung oder Verbote, sondern um begruendete Regeln aus Schuelersicht.</p>
+          <p>Hinweis: Leertaste und Pfeiltasten steuern Folien und Einblendungen, Shift + N zeigt Notizen.</p>
+        </aside>
       </section>
 
       <section class="slide ai-brainstorm" id="folie-2">
@@ -639,6 +644,10 @@
             </div>
           </div>
         </div>
+        <aside class="speaker-notes">
+          <strong>Moderationsnotiz</strong>
+          <p>Die Ampel zuerst ohne lange Erklaerung nutzen lassen. Die spontanen Einschaetzungen sind Ausgangsmaterial fuer die Gruppenarbeit.</p>
+        </aside>
       </section>
 
       <section class="slide content" id="folie-3">
@@ -653,20 +662,24 @@
               <strong>Fairness</strong>
               <p>Wer hat Zugang zu KI, und wann entsteht ein unfairer Vorteil?</p>
             </article>
-            <article class="prompt-card">
+            <article class="prompt-card" data-step>
               <strong>Eigenleistung</strong>
               <p>Wo liegt die Grenze zwischen sinnvoller Hilfe und Täuschung?</p>
             </article>
-            <article class="prompt-card">
+            <article class="prompt-card" data-step>
               <strong>Verantwortung</strong>
               <p>Wer haftet moralisch für Fehler, Verzerrungen oder Falschinformationen?</p>
             </article>
-            <article class="prompt-card">
+            <article class="prompt-card" data-step>
               <strong>Bewertung</strong>
               <p>Was soll Schule prüfen, wenn KI Texte, Bilder und Präsentationen erstellen kann?</p>
             </article>
           </div>
         </div>
+        <aside class="speaker-notes">
+          <strong>Moderationsnotiz</strong>
+          <p>Fairness ist sichtbar, die weiteren Werte koennen nacheinander dazukommen. Danach zur Leitfrage zurueckfuehren.</p>
+        </aside>
       </section>
 
       <section class="slide ai-dark" id="folie-4">
@@ -682,7 +695,7 @@
               <strong>Impuls</strong>
               <p>Zeigt ein KI-Beispiel: gelungene Zusammenfassung, falsche Quelle oder überzeugend klingende Fehlinformation.</p>
             </article>
-            <article class="prompt-card">
+            <article class="prompt-card" data-step>
               <strong>Diskussion</strong>
               <p>Was wäre daran hilfreich? Was wäre problematisch, wenn es ungeprüft abgegeben wird?</p>
             </article>
@@ -702,14 +715,14 @@
                 <small>Jede Gruppe bearbeitet einen Teilaspekt und entwickelt eine begründete Position.</small>
               </div>
             </li>
-            <li>
+            <li data-step>
               <span>2</span>
               <div>
                 <strong>Präsentationen</strong>
                 <small>Die Gruppen stellen Erkenntnisse, Bewertung und Empfehlungen in maximal 8 Minuten vor.</small>
               </div>
             </li>
-            <li>
+            <li data-step>
               <span>3</span>
               <div>
                 <strong>KI-Verhaltenskodex</strong>
@@ -718,6 +731,10 @@
             </li>
           </ol>
         </div>
+        <aside class="speaker-notes">
+          <strong>Moderationsnotiz</strong>
+          <p>Der Ablauf wird schrittweise gezeigt. Betonen: Die Recherche prueft und schaerft die erste Ampel, sie ersetzt sie nicht.</p>
+        </aside>
       </section>
 
       <section class="slide ai-soft" id="folie-6">
@@ -933,17 +950,17 @@
               <strong>Zentrale Fragestellung</strong>
               <p>Worum ging es in eurer Gruppe genau?</p>
             </article>
-            <article class="presentation-step">
+            <article class="presentation-step" data-step>
               <span>2</span>
               <strong>Eigene Beispiele</strong>
               <p>Welche Situationen aus Schule oder Alltag habt ihr gesammelt?</p>
             </article>
-            <article class="presentation-step">
+            <article class="presentation-step" data-step>
               <span>3</span>
               <strong>Ampel-Einordnung</strong>
               <p>Was ist grün, gelb oder rot und wie begründet ihr das?</p>
             </article>
-            <article class="presentation-step">
+            <article class="presentation-step" data-step>
               <span>4</span>
               <strong>Empfehlungen</strong>
               <p>Welche Regeln sollte die Schule daraus ableiten?</p>
@@ -1008,21 +1025,21 @@
                 <p>KI-Beispiel zeigen und erste Problemfragen sammeln.</p>
               </div>
             </div>
-            <div class="timeline-item">
+            <div class="timeline-item" data-step>
               <span>10 Min</span>
               <div>
                 <strong>Gruppenfindung</strong>
                 <p>Themen verteilen, Rollen klären und Arbeitsziel sichern.</p>
               </div>
             </div>
-            <div class="timeline-item">
+            <div class="timeline-item" data-step>
               <span>45 Min</span>
               <div>
                 <strong>Recherche</strong>
                 <p>Schwerpunkt untersuchen und eine begründete Position entwickeln.</p>
               </div>
             </div>
-            <div class="timeline-item">
+            <div class="timeline-item" data-step>
               <span>25 Min</span>
               <div>
                 <strong>Präsentation vorbereiten</strong>
@@ -1078,62 +1095,38 @@
       </section>
     </main>
 
-    <nav class="deck-nav" aria-label="Foliennavigation">
-      <a href="#folie-1" aria-label="Folie 1">1</a>
-      <a href="#folie-2" aria-label="Folie 2">2</a>
-      <a href="#folie-3" aria-label="Folie 3">3</a>
-      <a href="#folie-4" aria-label="Folie 4">4</a>
-      <a href="#folie-5" aria-label="Folie 5">5</a>
-      <a href="#folie-6" aria-label="Folie 6">6</a>
-      <a href="#folie-7" aria-label="Folie 7">7</a>
-      <a href="#folie-8" aria-label="Folie 8">8</a>
-      <a href="#folie-9" aria-label="Folie 9">9</a>
-      <a href="#folie-10" aria-label="Folie 10">10</a>
-      <a href="#folie-11" aria-label="Folie 11">11</a>
-      <a href="#folie-12" aria-label="Folie 12">12</a>
-      <a href="#folie-13" aria-label="Folie 13">13</a>
-      <a href="#folie-14" aria-label="Folie 14">14</a>
-      <a href="#folie-15" aria-label="Folie 15">15</a>
-      <a href="#folie-16" aria-label="Folie 16">16</a>
-      <a href="#folie-17" aria-label="Folie 17">17</a>
-    </nav>
-    <div class="slide-count" aria-hidden="true">Pfeiltasten nutzbar</div>
-
-    <script>
-      const slides = document.querySelector("#slides");
-      const slideItems = [...document.querySelectorAll(".slide")];
-
-      function currentSlideIndex() {
-        const slideWidth = slides.clientWidth;
-        return Math.round(slides.scrollLeft / slideWidth);
-      }
-
-      function goToSlide(index) {
-        const nextIndex = Math.max(0, Math.min(slideItems.length - 1, index));
-        slideItems[nextIndex].scrollIntoView({ behavior: "smooth", inline: "start" });
-      }
-
-      document.addEventListener("keydown", (event) => {
-        if (event.key === "ArrowRight" || event.key === "PageDown") {
-          event.preventDefault();
-          goToSlide(currentSlideIndex() + 1);
-        }
-
-        if (event.key === "ArrowLeft" || event.key === "PageUp") {
-          event.preventDefault();
-          goToSlide(currentSlideIndex() - 1);
-        }
-
-        if (event.key === "Home") {
-          event.preventDefault();
-          goToSlide(0);
-        }
-
-        if (event.key === "End") {
-          event.preventDefault();
-          goToSlide(slideItems.length - 1);
-        }
-      });
-    </script>
+    <div class="deck-nav-shell">
+      <button
+        class="deck-nav-toggle"
+        type="button"
+        aria-label="Foliennavigation ein- oder ausklappen"
+        aria-expanded="false"
+        aria-controls="deck-nav"
+        data-nav-toggle
+      >
+        ...
+      </button>
+      <nav class="deck-nav" id="deck-nav" aria-label="Foliennavigation">
+        <a href="#folie-1" aria-label="Folie 1">1</a>
+        <a href="#folie-2" aria-label="Folie 2">2</a>
+        <a href="#folie-3" aria-label="Folie 3">3</a>
+        <a href="#folie-4" aria-label="Folie 4">4</a>
+        <a href="#folie-5" aria-label="Folie 5">5</a>
+        <a href="#folie-6" aria-label="Folie 6">6</a>
+        <a href="#folie-7" aria-label="Folie 7">7</a>
+        <a href="#folie-8" aria-label="Folie 8">8</a>
+        <a href="#folie-9" aria-label="Folie 9">9</a>
+        <a href="#folie-10" aria-label="Folie 10">10</a>
+        <a href="#folie-11" aria-label="Folie 11">11</a>
+        <a href="#folie-12" aria-label="Folie 12">12</a>
+        <a href="#folie-13" aria-label="Folie 13">13</a>
+        <a href="#folie-14" aria-label="Folie 14">14</a>
+        <a href="#folie-15" aria-label="Folie 15">15</a>
+        <a href="#folie-16" aria-label="Folie 16">16</a>
+        <a href="#folie-17" aria-label="Folie 17">17</a>
+      </nav>
+    </div>
+    <div class="slide-count" data-deck-status aria-hidden="true">1/17</div>
+    <script src="../../assets/deck.js"></script>
   </body>
 </html>
