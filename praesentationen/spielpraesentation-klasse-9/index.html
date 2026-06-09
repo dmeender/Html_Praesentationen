@@ -1,0 +1,949 @@
+<!doctype html>
+<html lang="de">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Spielpräsentationen vorbereiten | Informatik Klasse 9</title>
+    <link rel="stylesheet" href="../../assets/styles.css">
+    <style>
+      :root {
+        --game-ink: #18212f;
+        --game-teal: #0f766e;
+        --game-green: #15803d;
+        --game-blue: #2563eb;
+        --game-orange: #c2410c;
+        --game-yellow: #facc15;
+        --game-soft: #edf7f4;
+        --game-paper: #fffdf8;
+      }
+
+      .slide {
+        position: relative;
+      }
+
+      .slide-inner.wide {
+        width: min(1180px, 100%);
+      }
+
+      .slide.game-title {
+        overflow: hidden;
+        background:
+          linear-gradient(135deg, rgb(15 118 110 / 14%), transparent 44%),
+          var(--game-paper);
+      }
+
+      .slide.game-title::after {
+        content: "{ }";
+        position: absolute;
+        right: 7vw;
+        bottom: 3vh;
+        color: rgb(24 33 47 / 6%);
+        font-size: clamp(8rem, 18vw, 20rem);
+        font-weight: 950;
+        letter-spacing: 0;
+        line-height: 1;
+        pointer-events: none;
+      }
+
+      .slide.game-soft {
+        background: var(--game-soft);
+      }
+
+      .slide.game-blue {
+        background: #eef4ff;
+      }
+
+      .slide.game-warm {
+        background: #fff7ed;
+      }
+
+      .slide.game-dark {
+        background: var(--game-ink);
+        color: #ffffff;
+      }
+
+      .slide.game-dark p,
+      .slide.game-dark li,
+      .slide.game-dark small {
+        color: rgb(255 255 255 / 78%);
+      }
+
+      .meta-row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin-top: 28px;
+      }
+
+      .pill {
+        display: inline-flex;
+        align-items: center;
+        min-height: 38px;
+        padding: 0 14px;
+        border: 1px solid rgb(24 33 47 / 14%);
+        border-radius: 999px;
+        background: #ffffff;
+        color: var(--game-ink);
+        font-size: clamp(0.92rem, 1.15vw, 1.05rem);
+        font-weight: 850;
+      }
+
+      .workshop-grid {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 16px;
+        margin-top: 32px;
+      }
+
+      .workshop-card,
+      .prompt-card,
+      .rubric-card {
+        padding: 22px;
+        border: 1px solid rgb(24 33 47 / 12%);
+        border-radius: 8px;
+        background: #ffffff;
+        box-shadow: 0 18px 45px rgb(31 41 51 / 8%);
+      }
+
+      .workshop-card strong,
+      .prompt-card strong,
+      .rubric-card strong {
+        display: block;
+        color: var(--game-ink);
+        font-size: clamp(1.08rem, 1.45vw, 1.28rem);
+        line-height: 1.25;
+      }
+
+      .workshop-card p,
+      .prompt-card p,
+      .rubric-card p {
+        margin: 10px 0 0;
+        font-size: clamp(0.98rem, 1.2vw, 1.08rem);
+        line-height: 1.38;
+      }
+
+      .number-badge {
+        display: grid;
+        place-items: center;
+        width: 48px;
+        height: 48px;
+        margin-bottom: 16px;
+        border-radius: 999px;
+        background: #e7f2f0;
+        color: var(--game-teal);
+        font-size: 1.25rem;
+        font-weight: 950;
+      }
+
+      .compact-agenda .agenda-list {
+        gap: 8px;
+      }
+
+      .compact-agenda .agenda-list li {
+        padding: 12px 0;
+      }
+
+      .compact-agenda .agenda-list span {
+        width: 42px;
+        height: 42px;
+      }
+
+      .task-strip {
+        display: grid;
+        gap: 12px;
+        margin-top: 30px;
+      }
+
+      .task-item {
+        display: grid;
+        grid-template-columns: 42px minmax(0, 1fr);
+        gap: 14px;
+        align-items: start;
+        padding: 15px 0;
+        border-top: 1px solid var(--line);
+      }
+
+      .task-icon {
+        display: grid;
+        place-items: center;
+        width: 36px;
+        height: 36px;
+        border-radius: 999px;
+        background: var(--game-teal);
+        color: #ffffff;
+        font-weight: 950;
+      }
+
+      .task-item strong {
+        display: block;
+        color: var(--game-ink);
+        font-size: clamp(1.05rem, 1.45vw, 1.28rem);
+      }
+
+      .task-item p {
+        margin: 4px 0 0;
+        font-size: clamp(0.98rem, 1.2vw, 1.08rem);
+      }
+
+      .sentence-grid {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 14px;
+        margin-top: 34px;
+      }
+
+      .sentence-card {
+        min-height: 168px;
+        padding: 24px;
+        border-radius: 8px;
+        background: #ffffff;
+        box-shadow: 0 18px 45px rgb(31 41 51 / 9%);
+      }
+
+      .sentence-card span {
+        display: block;
+        color: var(--game-teal);
+        font-size: clamp(0.86rem, 1vw, 0.95rem);
+        font-weight: 900;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+      }
+
+      .sentence-card p {
+        margin-top: 16px;
+        color: var(--game-ink);
+        font-size: clamp(1.2rem, 1.8vw, 1.55rem);
+        font-weight: 850;
+        line-height: 1.25;
+      }
+
+      .flow-list {
+        display: grid;
+        gap: 12px;
+        margin: 32px 0 0;
+        padding: 0;
+        list-style: none;
+      }
+
+      .flow-list li {
+        display: grid;
+        grid-template-columns: 120px minmax(0, 1fr);
+        gap: 18px;
+        align-items: center;
+        padding: 16px 0;
+        border-top: 1px solid var(--line);
+      }
+
+      .flow-list span {
+        display: inline-flex;
+        justify-content: center;
+        padding: 8px 12px;
+        border-radius: 999px;
+        background: #e7f2f0;
+        color: var(--game-teal);
+        font-size: clamp(0.9rem, 1vw, 1rem);
+        font-weight: 900;
+      }
+
+      .flow-list strong {
+        color: var(--game-ink);
+      }
+
+      .code-moment {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) minmax(280px, 0.78fr);
+        gap: 34px;
+        align-items: start;
+        margin-top: 30px;
+      }
+
+      .code-list {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin-top: 18px;
+      }
+
+      .code-chip {
+        padding: 9px 12px;
+        border-radius: 999px;
+        background: #ffffff;
+        color: var(--game-ink);
+        font-size: clamp(0.92rem, 1.08vw, 1rem);
+        font-weight: 850;
+        box-shadow: 0 10px 24px rgb(31 41 51 / 7%);
+      }
+
+      .time-box {
+        display: grid;
+        grid-template-columns: 160px minmax(0, 1fr);
+        gap: 28px;
+        align-items: center;
+        margin-top: 34px;
+        padding: 28px;
+        border-radius: 8px;
+        background: #ffffff;
+        box-shadow: 0 18px 45px rgb(31 41 51 / 9%);
+      }
+
+      .time-box strong {
+        display: block;
+        color: var(--game-orange);
+        font-size: clamp(3rem, 6vw, 6rem);
+        line-height: 1;
+      }
+
+      .feedback-grid {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 18px;
+        margin-top: 34px;
+      }
+
+      .feedback-card {
+        min-height: 190px;
+        padding: 24px;
+        border-radius: 8px;
+        background: #ffffff;
+        box-shadow: 0 18px 45px rgb(31 41 51 / 9%);
+      }
+
+      .feedback-card strong {
+        display: block;
+        color: var(--game-ink);
+        font-size: clamp(1.28rem, 1.9vw, 1.8rem);
+      }
+
+      .feedback-card p {
+        margin-top: 12px;
+        font-size: clamp(1rem, 1.3vw, 1.16rem);
+      }
+
+      .rubric-table {
+        width: 100%;
+        margin-top: 26px;
+        border-collapse: collapse;
+        table-layout: fixed;
+        border-radius: 8px;
+        overflow: hidden;
+        background: #ffffff;
+        box-shadow: 0 18px 45px rgb(31 41 51 / 9%);
+      }
+
+      .rubric-table th,
+      .rubric-table td {
+        padding: 15px 16px;
+        border: 1px solid rgb(24 33 47 / 12%);
+        color: var(--game-ink);
+        font-size: clamp(0.85rem, 1.02vw, 0.96rem);
+        line-height: 1.32;
+        text-align: left;
+        vertical-align: top;
+      }
+
+      .rubric-table th {
+        background: #e7f2f0;
+        color: var(--game-teal);
+        font-weight: 950;
+      }
+
+      .rubric-table td:first-child {
+        width: 18%;
+        font-weight: 900;
+      }
+
+      .check-grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 14px;
+        margin-top: 32px;
+      }
+
+      .check-item {
+        display: grid;
+        grid-template-columns: 34px minmax(0, 1fr);
+        gap: 12px;
+        align-items: start;
+        padding: 16px;
+        border-radius: 8px;
+        background: #ffffff;
+        box-shadow: 0 14px 34px rgb(31 41 51 / 8%);
+      }
+
+      .check-item span {
+        display: grid;
+        place-items: center;
+        width: 28px;
+        height: 28px;
+        border-radius: 999px;
+        background: var(--game-green);
+        color: #ffffff;
+        font-weight: 950;
+      }
+
+      .check-item p {
+        margin: 0;
+        color: var(--game-ink);
+        font-size: clamp(1rem, 1.25vw, 1.12rem);
+        font-weight: 780;
+      }
+
+      @media (max-width: 860px) {
+        .slide {
+          padding: 34px 18px 54px;
+        }
+
+        .slide h2 {
+          margin-bottom: 14px;
+          font-size: clamp(1.55rem, 8vw, 2.2rem);
+        }
+
+        .slide p,
+        .slide li {
+          font-size: 1rem;
+          line-height: 1.35;
+        }
+
+        .lead {
+          font-size: 1.08rem;
+        }
+
+        .workshop-grid,
+        .sentence-grid,
+        .feedback-grid,
+        .check-grid {
+          grid-template-columns: 1fr;
+          gap: 10px;
+          margin-top: 18px;
+        }
+
+        .code-moment,
+        .time-box {
+          grid-template-columns: 1fr;
+          gap: 14px;
+        }
+
+        .flow-list li {
+          grid-template-columns: 1fr;
+          gap: 8px;
+          padding: 10px 0;
+        }
+
+        .workshop-card,
+        .prompt-card,
+        .rubric-card,
+        .sentence-card,
+        .feedback-card {
+          min-height: 0;
+          padding: 14px;
+        }
+
+        .workshop-card p,
+        .prompt-card p,
+        .rubric-card p,
+        .feedback-card p {
+          margin-top: 6px;
+          font-size: 0.92rem;
+        }
+
+        .number-badge {
+          width: 34px;
+          height: 34px;
+          margin-bottom: 8px;
+          font-size: 1rem;
+        }
+
+        .task-strip,
+        .flow-list {
+          gap: 6px;
+          margin-top: 18px;
+        }
+
+        .task-item {
+          grid-template-columns: 34px minmax(0, 1fr);
+          gap: 10px;
+          padding: 10px 0;
+        }
+
+        .task-icon {
+          width: 30px;
+          height: 30px;
+        }
+
+        .sentence-card p {
+          margin-top: 8px;
+          font-size: 1.05rem;
+        }
+
+        .code-list {
+          gap: 6px;
+        }
+
+        .code-chip {
+          padding: 7px 9px;
+          font-size: 0.86rem;
+        }
+
+        .time-box {
+          margin-top: 18px;
+          padding: 16px;
+        }
+
+        .time-box strong {
+          font-size: 3.2rem;
+        }
+
+        .feedback-card strong {
+          font-size: 1.2rem;
+        }
+
+        .check-item {
+          padding: 12px;
+        }
+
+        .compact-agenda .agenda-list {
+          margin-top: 18px;
+        }
+
+        .compact-agenda .agenda-list li {
+          grid-template-columns: 42px minmax(0, 1fr);
+          gap: 10px;
+          padding: 8px 0;
+        }
+
+        .compact-agenda .agenda-list span {
+          width: 34px;
+          height: 34px;
+        }
+
+        .compact-agenda .agenda-list strong {
+          font-size: 1rem;
+        }
+
+        .compact-agenda .agenda-list small {
+          font-size: 0.84rem;
+        }
+
+        .rubric-table {
+          display: table;
+          margin-top: 16px;
+          table-layout: fixed;
+          border-radius: 8px;
+          background: #ffffff;
+          box-shadow: 0 12px 28px rgb(31 41 51 / 8%);
+        }
+
+        .rubric-table th,
+        .rubric-table td {
+          padding: 7px 6px;
+          font-size: 0.62rem;
+          line-height: 1.18;
+        }
+
+        .rubric-table td:first-child {
+          width: 17%;
+        }
+      }
+    </style>
+  </head>
+  <body class="deck">
+    <main class="slides" id="slides" data-deck aria-label="Spielpräsentationen vorbereiten">
+      <section class="slide title center game-title" id="folie-1">
+        <div class="slide-inner">
+          <p class="eyebrow">Informatik Klasse 9</p>
+          <h1>Game Release: Bühne frei!</h1>
+          <p class="lead">Workshop für euren Release-Pitch in Scratch oder MakeCode.</p>
+          <div class="meta-row" aria-label="Schwerpunkte">
+            <span class="pill">Präsentation absprechen</span>
+            <span class="pill">Demo planen</span>
+            <span class="pill">Kriterien kennen</span>
+          </div>
+        </div>
+        <aside class="speaker-notes">
+          <strong>Moderationsnotiz</strong>
+          <p>Einordnen: Die Spiele sind weitgehend fertig. Heute geht es darum, die Präsentationen gut vorzubereiten.</p>
+        </aside>
+      </section>
+
+      <section class="slide agenda game-soft compact-agenda" id="folie-2">
+        <div class="slide-inner wide">
+          <p class="eyebrow">Workshop-Ablauf</p>
+          <h2>Fünf Bausteine für eure Vorbereitung</h2>
+          <ol class="agenda-list">
+            <li>
+              <span>1</span>
+              <div>
+                <strong>Spielidee klären</strong>
+                <small>Was ist euer Spiel und warum ist es interessant?</small>
+              </div>
+            </li>
+            <li data-step>
+              <span>2</span>
+              <div>
+                <strong>Demo planen</strong>
+                <small>Welche Szene zeigt eure wichtigsten Funktionen?</small>
+              </div>
+            </li>
+            <li data-step>
+              <span>3</span>
+              <div>
+                <strong>Technik erklären</strong>
+                <small>Welcher Code-Moment zeigt eure Programmierleistung?</small>
+              </div>
+            </li>
+            <li data-step>
+              <span>4</span>
+              <div>
+                <strong>Optional: kurz finalisieren</strong>
+                <small>Maximal fünf Minuten für kleine Korrekturen, keine neuen Großbaustellen.</small>
+              </div>
+            </li>
+            <li data-step>
+              <span>5</span>
+              <div>
+                <strong>Reflexion und Kriterien prüfen</strong>
+                <small>Was habt ihr gelernt und worauf achtet die Klasse beim Feedback?</small>
+              </div>
+            </li>
+          </ol>
+        </div>
+        <aside class="speaker-notes">
+          <strong>Moderationsnotiz</strong>
+          <p>Baustein 4 als optionalen Puffer markieren. Falls eine Gruppe fertig ist, nutzt sie die Zeit weiter für Präsentationsabsprachen.</p>
+        </aside>
+      </section>
+
+      <section class="slide content" id="folie-3">
+        <div class="slide-inner wide">
+          <p class="eyebrow">Baustein 1</p>
+          <h2>Spielidee verständlich erklären</h2>
+          <p class="lead">Die Klasse soll nach kurzer Zeit wissen, worum es in eurem Spiel geht.</p>
+          <div class="task-strip">
+            <div class="task-item">
+              <span class="task-icon">?</span>
+              <div>
+                <strong>Was ist das Ziel des Spiels?</strong>
+                <p>Zum Beispiel Punkte sammeln, Gegner vermeiden, ein Level schaffen oder ein Rätsel lösen.</p>
+              </div>
+            </div>
+            <div class="task-item" data-step>
+              <span class="task-icon">→</span>
+              <div>
+                <strong>Wie spielt man es?</strong>
+                <p>Erklärt Steuerung, Regeln und wann man gewinnt oder verliert.</p>
+              </div>
+            </div>
+            <div class="task-item" data-step>
+              <span class="task-icon">!</span>
+              <div>
+                <strong>Was macht euer Spiel besonders?</strong>
+                <p>Nennt ein Element, auf das ihr bewusst stolz seid.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <aside class="speaker-notes">
+          <strong>Moderationsnotiz</strong>
+          <p>Auf Verständlichkeit achten: Die Zuhörer kennen das Spiel noch nicht. Fachbegriffe nur verwenden, wenn sie erklärt werden.</p>
+        </aside>
+      </section>
+
+      <section class="slide game-blue" id="folie-4">
+        <div class="slide-inner wide">
+          <p class="eyebrow">Mini-Auftrag</p>
+          <h2>Pitch in drei Sätzen</h2>
+          <p class="lead">Diese Satzanfänge können euch helfen, euren Einstieg klar und kurz zu formulieren.</p>
+          <div class="sentence-grid">
+            <article class="sentence-card">
+              <span>Satz 1</span>
+              <p>Unser Spiel heißt ...</p>
+            </article>
+            <article class="sentence-card" data-step>
+              <span>Satz 2</span>
+              <p>Man muss ...</p>
+            </article>
+            <article class="sentence-card" data-step>
+              <span>Satz 3</span>
+              <p>Besonders an unserem Spiel ist ...</p>
+            </article>
+          </div>
+        </div>
+        <aside class="speaker-notes">
+          <strong>Moderationsnotiz</strong>
+          <p>Arbeitszeit kurz halten. Ziel ist ein sprechbarer Einstieg, kein langer Werbetext.</p>
+        </aside>
+      </section>
+
+      <section class="slide content" id="folie-5">
+        <div class="slide-inner wide">
+          <p class="eyebrow">Baustein 2</p>
+          <h2>Demo planen: zeigen statt nur spielen</h2>
+          <p class="lead">Eine gute Demo ist vorbereitet und macht eine Funktion klarer.</p>
+          <ol class="flow-list">
+            <li>
+              <span>Start</span>
+              <strong>Wie beginnt das Spiel?</strong>
+            </li>
+            <li data-step>
+              <span>Steuerung</span>
+              <strong>Welche Tasten, Klicks oder Bewegungen braucht man?</strong>
+            </li>
+            <li data-step>
+              <span>Szene</span>
+              <strong>Welche Spielsituation zeigt eure Idee besonders gut?</strong>
+            </li>
+            <li data-step>
+              <span>Feature</span>
+              <strong>Welches Detail wollt ihr unbedingt zeigen?</strong>
+            </li>
+          </ol>
+        </div>
+        <aside class="speaker-notes">
+          <strong>Moderationsnotiz</strong>
+          <p>Die Demo sollte nicht ausarten. Eine typische Spielsituation reicht, wenn sie gut erklärt wird.</p>
+        </aside>
+      </section>
+
+      <section class="slide game-warm" id="folie-6">
+        <div class="slide-inner wide">
+          <p class="eyebrow">Mini-Auftrag</p>
+          <h2>Euer Demo-Fahrplan</h2>
+          <div class="workshop-grid">
+            <article class="prompt-card">
+              <strong>Wer startet?</strong>
+              <p>Eine Person öffnet das Spiel und bringt es in die richtige Ausgangssituation.</p>
+            </article>
+            <article class="prompt-card" data-step>
+              <strong>Wer erklärt?</strong>
+              <p>Eine Person erklärt Ziel, Steuerung oder eine wichtige Funktion während der Demo.</p>
+            </article>
+            <article class="prompt-card" data-step>
+              <strong>Was darf nicht fehlen?</strong>
+              <p>Legt eine Szene fest, die ihr sicher zeigen könnt.</p>
+            </article>
+          </div>
+        </div>
+        <aside class="speaker-notes">
+          <strong>Moderationsnotiz</strong>
+          <p>Gruppen sollten hier konkret Namen und Reihenfolge festlegen. Falls möglich: einmal kurz durchsprechen lassen.</p>
+        </aside>
+      </section>
+
+      <section class="slide game-soft" id="folie-7">
+        <div class="slide-inner wide">
+          <p class="eyebrow">Baustein 3</p>
+          <h2>Technik verständlich machen</h2>
+          <p class="lead">Wählt eine technische Stelle, die zeigt, wie euer Spiel funktioniert.</p>
+          <div class="code-moment">
+            <article class="prompt-card">
+              <strong>Ein guter Code-Moment ist ...</strong>
+              <p>konkret, sichtbar im Spiel und so erklärt, dass andere ihn nachvollziehen können.</p>
+              <div class="code-list" aria-label="Mögliche technische Aspekte">
+                <span class="code-chip">Ereignis</span>
+                <span class="code-chip">Schleife</span>
+                <span class="code-chip">Bedingung</span>
+                <span class="code-chip">Variable</span>
+                <span class="code-chip">Punkte</span>
+                <span class="code-chip">Timer</span>
+                <span class="code-chip">Level</span>
+                <span class="code-chip">Kollision</span>
+              </div>
+            </article>
+            <article class="prompt-card" data-step>
+              <strong>Erklärt nicht alles.</strong>
+              <p>Eine gut ausgewählte Stelle ist besser als ein schneller Rundgang durch den ganzen Code.</p>
+            </article>
+          </div>
+        </div>
+        <aside class="speaker-notes">
+          <strong>Moderationsnotiz</strong>
+          <p>Die Gruppen sollen sich auf eine Stelle konzentrieren. Bei Scratch oder MakeCode kann diese Stelle kurz geöffnet oder beschrieben werden.</p>
+        </aside>
+      </section>
+
+      <section class="slide game-blue" id="folie-8">
+        <div class="slide-inner wide">
+          <p class="eyebrow">Mini-Auftrag</p>
+          <h2>Unser wichtigster Code-Moment</h2>
+          <div class="sentence-grid">
+            <article class="sentence-card">
+              <span>Auswahl</span>
+              <p>Diesen Teil erklären wir, weil ...</p>
+            </article>
+            <article class="sentence-card" data-step>
+              <span>Wirkung</span>
+              <p>Ohne diesen Code würde ... nicht funktionieren.</p>
+            </article>
+            <article class="sentence-card" data-step>
+              <span>Verbindung</span>
+              <p>Im Spiel sieht man das daran, dass ...</p>
+            </article>
+          </div>
+        </div>
+        <aside class="speaker-notes">
+          <strong>Moderationsnotiz</strong>
+          <p>Wenn Gruppen Schwierigkeiten haben: Sie können auch eine Schwierigkeit erklären, die sie gelöst haben.</p>
+        </aside>
+      </section>
+
+      <section class="slide game-warm" id="folie-9">
+        <div class="slide-inner wide">
+          <p class="eyebrow">Baustein 4 - optional</p>
+          <h2>Maximal fünf Minuten finalisieren</h2>
+          <p class="lead">Nur kleine Dinge, die eure Präsentation absichern. Keine neuen großen Funktionen.</p>
+          <div class="time-box">
+            <strong>5</strong>
+            <div>
+              <p>Erlaubt sind: Spielstart testen, Anleitung verbessern, Namen ergänzen, offensichtlichen Fehler korrigieren.</p>
+              <p data-step>Nicht sinnvoll sind: neues Level bauen, neue Spiellogik beginnen oder das Projekt grundsätzlich umbauen.</p>
+            </div>
+          </div>
+        </div>
+        <aside class="speaker-notes">
+          <strong>Moderationsnotiz</strong>
+          <p>Diese Folie nur nutzen, wenn Gruppen wirklich noch Kleinigkeiten sichern müssen. Sonst direkt zur Reflexion weitergehen.</p>
+        </aside>
+      </section>
+
+      <section class="slide game-soft" id="folie-10">
+        <div class="slide-inner wide">
+          <p class="eyebrow">Feedback</p>
+          <h2>So geben wir Rückmeldung</h2>
+          <p class="lead">Feedback soll konkret, fair und hilfreich sein.</p>
+          <div class="feedback-grid">
+            <article class="feedback-card">
+              <strong>Stärke</strong>
+              <p>Gut gelungen ist ...</p>
+            </article>
+            <article class="feedback-card" data-step>
+              <strong>Frage</strong>
+              <p>Ich frage mich ...</p>
+            </article>
+            <article class="feedback-card" data-step>
+              <strong>Tipp</strong>
+              <p>Mein Tipp wäre ...</p>
+            </article>
+          </div>
+        </div>
+        <aside class="speaker-notes">
+          <strong>Moderationsnotiz</strong>
+          <p>Feedback vor den Präsentationen einmal modellieren. Nicht: "War gut", sondern konkret an Inhalt, Demo oder Technik anknüpfen.</p>
+        </aside>
+      </section>
+
+      <section class="slide content" id="folie-11">
+        <div class="slide-inner wide">
+          <p class="eyebrow">Orientierungskriterien</p>
+          <h2>Worauf achten wir?</h2>
+          <div class="workshop-grid">
+            <article class="rubric-card">
+              <strong>Spielidee</strong>
+              <p>Ziel, Regeln, Spielspaß und Besonderheit werden klar.</p>
+            </article>
+            <article class="rubric-card" data-step>
+              <strong>Technik</strong>
+              <p>Eine wichtige Umsetzung wird nachvollziehbar erklärt.</p>
+            </article>
+            <article class="rubric-card" data-step>
+              <strong>Demo</strong>
+              <p>Das Spiel wird gezielt und vorbereitet gezeigt.</p>
+            </article>
+            <article class="rubric-card" data-step>
+              <strong>Teamarbeit</strong>
+              <p>Aufgaben, Absprachen und Zusammenarbeit werden sichtbar.</p>
+            </article>
+            <article class="rubric-card" data-step>
+              <strong>Reflexion</strong>
+              <p>Lernprozess, Schwierigkeiten und Verbesserungen werden benannt.</p>
+            </article>
+            <article class="rubric-card" data-step>
+              <strong>Auftreten</strong>
+              <p>Die Gruppe spricht verständlich, geordnet und im Zeitrahmen.</p>
+            </article>
+          </div>
+        </div>
+        <aside class="speaker-notes">
+          <strong>Moderationsnotiz</strong>
+          <p>Das sind Orientierungskriterien, kein Punkteschema. Sie helfen den Gruppen beim Vorbereiten und der Klasse beim Feedback.</p>
+        </aside>
+      </section>
+
+      <section class="slide game-blue" id="folie-12">
+        <div class="slide-inner wide">
+          <p class="eyebrow">Bewertungsraster ohne Punkte</p>
+          <h2>Orientierung für Präsentation und Feedback</h2>
+          <table class="rubric-table">
+            <thead>
+              <tr>
+                <th>Bereich</th>
+                <th>Stark gelungen</th>
+                <th>Solide gelungen</th>
+                <th>Noch ausbaufähig</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Spielidee</td>
+                <td data-label="Stark gelungen">Ziel, Regeln und Besonderheit sind klar und überzeugend.</td>
+                <td data-label="Solide gelungen">Die Spielidee ist grundsätzlich verständlich.</td>
+                <td data-label="Noch ausbaufähig">Teile der Idee oder Regeln bleiben unklar.</td>
+              </tr>
+              <tr>
+                <td>Technik</td>
+                <td data-label="Stark gelungen">Ein wichtiger Code-Moment wird konkret und nachvollziehbar erklärt.</td>
+                <td data-label="Solide gelungen">Einige technische Aspekte werden passend genannt.</td>
+                <td data-label="Noch ausbaufähig">Die technische Umsetzung wird kaum erklärt.</td>
+              </tr>
+              <tr>
+                <td>Demo</td>
+                <td data-label="Stark gelungen">Die Demo ist vorbereitet und zeigt zentrale Funktionen gezielt.</td>
+                <td data-label="Solide gelungen">Die Demo funktioniert und zeigt das Spiel grundsätzlich.</td>
+                <td data-label="Noch ausbaufähig">Die Demo wirkt ungeplant oder zeigt zu wenig vom Spiel.</td>
+              </tr>
+              <tr>
+                <td>Reflexion</td>
+                <td data-label="Stark gelungen">Zusammenarbeit, Schwierigkeiten und Lernfortschritte werden ehrlich reflektiert.</td>
+                <td data-label="Solide gelungen">Einzelne Reflexionspunkte werden genannt.</td>
+                <td data-label="Noch ausbaufähig">Die Reflexion bleibt sehr allgemein.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <aside class="speaker-notes">
+          <strong>Moderationsnotiz</strong>
+          <p>Falls die Tabelle zu klein wirkt, im Unterricht kurz stehen lassen oder über die Foliennavigation gezielt wieder aufrufen.</p>
+        </aside>
+      </section>
+
+    </main>
+
+    <div class="deck-nav-shell">
+      <button
+        class="deck-nav-toggle"
+        type="button"
+        aria-label="Foliennavigation ein- oder ausklappen"
+        aria-expanded="false"
+        aria-controls="deck-nav"
+        data-nav-toggle
+      >
+        ...
+      </button>
+      <nav class="deck-nav" id="deck-nav" aria-label="Foliennavigation">
+        <a href="#folie-1" aria-label="Folie 1">1</a>
+        <a href="#folie-2" aria-label="Folie 2">2</a>
+        <a href="#folie-3" aria-label="Folie 3">3</a>
+        <a href="#folie-4" aria-label="Folie 4">4</a>
+        <a href="#folie-5" aria-label="Folie 5">5</a>
+        <a href="#folie-6" aria-label="Folie 6">6</a>
+        <a href="#folie-7" aria-label="Folie 7">7</a>
+        <a href="#folie-8" aria-label="Folie 8">8</a>
+        <a href="#folie-9" aria-label="Folie 9">9</a>
+        <a href="#folie-10" aria-label="Folie 10">10</a>
+        <a href="#folie-11" aria-label="Folie 11">11</a>
+        <a href="#folie-12" aria-label="Folie 12">12</a>
+      </nav>
+    </div>
+    <div class="slide-count" data-deck-status aria-hidden="true">1/12</div>
+    <script src="../../assets/deck.js"></script>
+  </body>
+</html>
