@@ -16,6 +16,8 @@ assert.match(deck, /GeoGebra Classic 6/);
 assert.match(deck, /aria-label="GeoGebra im Alltag: Dynamische Konstruktionen in Klasse 6"/);
 assert.match(deck, /data-deck/);
 assert.match(deck, /deck\.js/);
+assert.match(deck, /\.steps li\s*\{[\s\S]*display: block;/);
+assert.match(deck, /\.steps li strong\s*\{[\s\S]*display: inline;/);
 
 const requiredTerms = [
   "Zieh-Test",
@@ -29,6 +31,10 @@ const requiredTerms = [
   "Karussell",
   "Windrad",
   "Geschenkpapier",
+  "Mittelsenkrechte",
+  "Winkelhalbierende",
+  "Pausenhof",
+  "Kuchenstück",
   "Bewegen-Werkzeug",
   "GeoGebra-Datei",
   "Alltagssituation"
@@ -42,10 +48,10 @@ const dynamicPrompts = (deck.match(/Ziehe/g) || []).length;
 assert.ok(dynamicPrompts >= 8, `Expected at least 8 dynamic drag prompts, found ${dynamicPrompts}`);
 
 const taskCount = (deck.match(/Konstruktionsauftrag/g) || []).length;
-assert.ok(taskCount >= 8, `Expected at least 8 construction tasks, found ${taskCount}`);
+assert.ok(taskCount >= 10, `Expected at least 10 construction tasks, found ${taskCount}`);
 
 const slideCount = (deck.match(/<section class="slide/g) || []).length;
-assert.ok(slideCount >= 15, `Expected at least 15 slides, found ${slideCount}`);
+assert.ok(slideCount >= 18, `Expected at least 18 slides, found ${slideCount}`);
 
 const navCount = (deck.match(/href="#folie-/g) || []).length;
 assert.equal(navCount, slideCount, "Navigation should contain one link per slide");

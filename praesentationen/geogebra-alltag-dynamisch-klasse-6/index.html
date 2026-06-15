@@ -149,19 +149,23 @@
 
       .steps li {
         counter-increment: task;
-        display: grid;
-        grid-template-columns: 42px minmax(0, 1fr);
-        gap: 14px;
-        align-items: start;
+        position: relative;
+        display: block;
+        min-height: 64px;
         padding: 14px;
+        padding-left: 68px;
         border: 1px solid var(--line);
         border-radius: 8px;
         background: #ffffff;
         font-size: clamp(0.95rem, 1.25vw, 1.08rem);
+        line-height: 1.38;
       }
 
       .steps li::before {
         content: counter(task);
+        position: absolute;
+        left: 16px;
+        top: 14px;
         display: grid;
         place-items: center;
         width: 34px;
@@ -170,6 +174,10 @@
         background: var(--ink);
         color: #ffffff;
         font-weight: 900;
+      }
+
+      .steps li strong {
+        display: inline;
       }
 
       .helper-box {
@@ -370,11 +378,26 @@
         border: 2px solid var(--line);
       }
 
+      .school-yard {
+        position: absolute;
+        left: 74px;
+        top: 78px;
+        width: 320px;
+        height: 210px;
+        border: 4px solid rgb(31 41 51 / 18%);
+        border-radius: 8px;
+        background: rgb(15 118 110 / 8%);
+      }
+
       .axis-v,
       .axis-h,
       .vector-line,
       .dash-line,
-      .water-line {
+      .water-line,
+      .perp-line,
+      .segment-line,
+      .angle-ray,
+      .angle-bisector {
         position: absolute;
       }
 
@@ -405,6 +428,47 @@
         width: 270px;
         border-top: 3px dashed rgb(194 65 12 / 72%);
         transform: rotate(-18deg);
+      }
+
+      .segment-line {
+        left: 118px;
+        top: 190px;
+        width: 246px;
+        border-top: 4px solid var(--ink);
+        transform: rotate(-16deg);
+      }
+
+      .perp-line {
+        left: 214px;
+        top: 58px;
+        height: 250px;
+        border-left: 5px solid var(--blue);
+        transform: rotate(74deg);
+      }
+
+      .angle-ray {
+        left: 130px;
+        top: 244px;
+        width: 280px;
+        border-top: 5px solid var(--ink);
+        transform-origin: left center;
+      }
+
+      .angle-ray.upper {
+        transform: rotate(-48deg);
+      }
+
+      .angle-ray.lower {
+        transform: rotate(-8deg);
+      }
+
+      .angle-bisector {
+        left: 130px;
+        top: 244px;
+        width: 270px;
+        border-top: 5px solid var(--warm);
+        transform-origin: left center;
+        transform: rotate(-28deg);
       }
 
       .vector-line {
@@ -811,6 +875,98 @@
       </section>
 
       <section class="slide dark-slide" id="folie-12">
+        <div class="slide-inner wide">
+          <p class="eyebrow">Neuer Abschnitt</p>
+          <h2>Jetzt nutzen wir GeoGebra für klassische Konstruktionen.</h2>
+          <div class="two-grid">
+            <article class="card">
+              <strong>Mittelsenkrechte</strong>
+              <p>Sie hilft, Punkte zu finden, die von zwei Orten gleich weit entfernt sind.</p>
+            </article>
+            <article class="card" data-step>
+              <strong>Winkelhalbierende</strong>
+              <p>Sie hilft, eine Richtung zu finden, die genau zwischen zwei Seiten eines Winkels liegt.</p>
+            </article>
+          </div>
+          <div class="helper-box" data-step>
+            <strong>GeoGebra-Vorteil</strong>
+            <p>Ziehe an den Ausgangspunkten oder Winkelschenkeln. Die Hilfslinie soll automatisch richtig bleiben.</p>
+          </div>
+        </div>
+        <aside class="speaker-notes">
+          <strong>Überleitung</strong>
+          <p>Die Klasse kennt Mittelsenkrechte und Winkelhalbierende bereits aus dem Unterricht. Hier liegt der Fokus auf dynamischem Prüfen.</p>
+        </aside>
+      </section>
+
+      <section class="slide task-slide" id="folie-13">
+        <div class="slide-inner wide">
+          <p class="eyebrow">Textaufgabe 9</p>
+          <h2>Fairer Treffpunkt auf dem Pausenhof.</h2>
+          <div class="task-grid">
+            <div>
+              <article class="story-card text-problem">
+                <strong>Situation</strong>
+                <p>Zwei Türen A und B führen zum Pausenhof. Der Treffpunkt soll von beiden Türen gleich weit entfernt sein.</p>
+              </article>
+              <ol class="steps">
+                <li><strong>Konstruktionsauftrag:</strong> Setze zwei Punkte A und B für die Türen.</li>
+                <li>Zeichne die Strecke AB.</li>
+                <li>Konstruiere die <strong>Mittelsenkrechte</strong> von AB.</li>
+                <li><strong>Ziehe</strong> A oder B. Die Mittelsenkrechte soll automatisch fair bleiben.</li>
+              </ol>
+            </div>
+            <div class="canvas-demo" aria-label="Mittelsenkrechte als fairer Treffpunkt auf dem Pausenhof">
+              <div class="school-yard"></div>
+              <div class="segment-line"></div>
+              <div class="perp-line"></div>
+              <span class="marker-point" style="left: 108px; top: 174px;">A</span>
+              <span class="marker-point" style="right: 116px; top: 106px;">B</span>
+              <span class="label" style="left: 58px; top: 42px;">Pausenhof</span>
+              <span class="label" style="right: 56px; bottom: 48px;">gleich weit</span>
+            </div>
+          </div>
+        </div>
+        <aside class="speaker-notes">
+          <strong>Sicherung</strong>
+          <p>Alle Punkte auf der Mittelsenkrechten sind von A und B gleich weit entfernt. Das lässt sich durch Ziehen gut untersuchen.</p>
+        </aside>
+      </section>
+
+      <section class="slide story-slide" id="folie-14">
+        <div class="slide-inner wide">
+          <p class="eyebrow">Textaufgabe 10</p>
+          <h2>Ein Kuchenstück soll genau halbiert werden.</h2>
+          <div class="task-grid">
+            <div>
+              <article class="story-card text-problem">
+                <strong>Situation</strong>
+                <p>Ein dreieckiges Kuchenstück oder Beet hat an einer Ecke einen Winkel. Die Schnittlinie soll genau in der Mitte verlaufen.</p>
+              </article>
+              <ol class="steps">
+                <li><strong>Konstruktionsauftrag:</strong> Setze einen Punkt S als Spitze des Winkels.</li>
+                <li>Zeichne zwei Strahlen von S aus.</li>
+                <li>Konstruiere die <strong>Winkelhalbierende</strong>.</li>
+                <li><strong>Ziehe</strong> an einem Strahl. Die Winkelhalbierende soll die Mitte behalten.</li>
+              </ol>
+            </div>
+            <div class="canvas-demo" aria-label="Winkelhalbierende teilt ein Kuchenstück in zwei gleiche Winkel">
+              <div class="angle-ray upper"></div>
+              <div class="angle-ray lower"></div>
+              <div class="angle-bisector"></div>
+              <span class="marker-point" style="left: 118px; top: 232px;">S</span>
+              <span class="label" style="left: 58px; top: 52px;">Kuchenstück</span>
+              <span class="label" style="right: 62px; top: 156px;">halbiert</span>
+            </div>
+          </div>
+        </div>
+        <aside class="speaker-notes">
+          <strong>Sicherung</strong>
+          <p>Die Winkelhalbierende teilt einen Winkel in zwei gleich große Winkel. In GeoGebra kann die Spitze oder ein Schenkel bewegt werden.</p>
+        </aside>
+      </section>
+
+      <section class="slide dark-slide" id="folie-15">
         <div class="slide-inner wide compact">
           <p class="eyebrow">Fehlerdetektiv</p>
           <h2>Nicht jede gleich große Figur ist richtig konstruiert.</h2>
@@ -839,7 +995,7 @@
         </aside>
       </section>
 
-      <section class="slide story-slide" id="folie-13">
+      <section class="slide story-slide" id="folie-16">
         <div class="slide-inner wide">
           <p class="eyebrow">Partnerauftrag</p>
           <h2>Eine Person konstruiert, die andere testet.</h2>
@@ -864,7 +1020,7 @@
         </aside>
       </section>
 
-      <section class="slide task-slide" id="folie-14">
+      <section class="slide task-slide" id="folie-17">
         <div class="slide-inner wide">
           <p class="eyebrow">Eigene Textaufgabe</p>
           <h2>Erfinde eine Alltagssituation für eine Abbildung.</h2>
@@ -876,6 +1032,8 @@
                 <li>Eine Drohne fliegt immer denselben Weg.</li>
                 <li>Ein Fenster spiegelt ein Bild.</li>
                 <li>Ein Logo soll symmetrisch werden.</li>
+                <li>Ein Treffpunkt soll gleich weit entfernt sein.</li>
+                <li>Ein Winkel soll fair halbiert werden.</li>
               </ul>
             </article>
             <article class="task-card" data-step>
@@ -890,7 +1048,7 @@
         </aside>
       </section>
 
-      <section class="slide warm-slide" id="folie-15">
+      <section class="slide warm-slide" id="folie-18">
         <div class="slide-inner wide compact">
           <p class="eyebrow">Abgabe</p>
           <h2>Deine GeoGebra-Datei soll zeigen, dass du dynamisch konstruiert hast.</h2>
@@ -915,7 +1073,7 @@
         </aside>
       </section>
 
-      <section class="slide content compact" id="folie-16">
+      <section class="slide content compact" id="folie-19">
         <div class="slide-inner wide">
           <p class="eyebrow">Reflexion</p>
           <h2>Was kann GeoGebra besser als eine Zeichnung im Heft?</h2>
@@ -926,6 +1084,7 @@
                 <li>Welche Aufgabe war durch das Ziehen besonders gut zu verstehen?</li>
                 <li>Welche Konstruktion war am schwierigsten?</li>
                 <li>Wann ist eine Bildfigur wirklich abhängig konstruiert?</li>
+                <li>Wie helfen Mittelsenkrechte und Winkelhalbierende beim Begründen?</li>
               </ul>
             </article>
             <article class="card" data-step>
@@ -969,9 +1128,12 @@
         <a href="#folie-14" aria-label="Folie 14">14</a>
         <a href="#folie-15" aria-label="Folie 15">15</a>
         <a href="#folie-16" aria-label="Folie 16">16</a>
+        <a href="#folie-17" aria-label="Folie 17">17</a>
+        <a href="#folie-18" aria-label="Folie 18">18</a>
+        <a href="#folie-19" aria-label="Folie 19">19</a>
       </nav>
     </div>
-    <div class="slide-count" data-deck-status aria-hidden="true">1/16</div>
+    <div class="slide-count" data-deck-status aria-hidden="true">1/19</div>
     <script src="../../assets/deck.js"></script>
   </body>
 </html>
