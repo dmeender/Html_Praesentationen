@@ -1,0 +1,963 @@
+<!doctype html>
+<html lang="de">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>GeoGebra kennenlernen: Abbildungen in Klasse 6</title>
+    <link rel="stylesheet" href="../../assets/styles.css">
+    <style>
+      .slide {
+        overflow-y: auto;
+      }
+
+      .slide-inner {
+        width: 100%;
+        min-width: 0;
+      }
+
+      .slide h1,
+      .slide h2 {
+        overflow-wrap: anywhere;
+      }
+
+      .geo-title {
+        background:
+          radial-gradient(circle at 16% 18%, rgb(37 99 235 / 14%), transparent 28%),
+          linear-gradient(135deg, rgb(15 118 110 / 12%), transparent 44%),
+          #f8fafc;
+      }
+
+      .tool-slide {
+        background: #ffffff;
+      }
+
+      .task-slide {
+        background: #f8fafc;
+      }
+
+      .reflection-slide {
+        background: #fff8ed;
+      }
+
+      .dark-slide {
+        background: #1f2933;
+        color: #ffffff;
+      }
+
+      .dark-slide p,
+      .dark-slide li,
+      .dark-slide small {
+        color: rgb(255 255 255 / 78%);
+      }
+
+      .topic-strip {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
+        margin-top: 30px;
+        justify-content: center;
+      }
+
+      .topic-strip span,
+      .mini-tag {
+        display: inline-flex;
+        align-items: center;
+        min-height: 38px;
+        padding: 0 14px;
+        border: 1px solid var(--line);
+        border-radius: 999px;
+        background: #ffffff;
+        color: var(--accent-dark);
+        font-weight: 800;
+        white-space: nowrap;
+      }
+
+      .geo-grid,
+      .task-grid,
+      .compare-grid,
+      .help-grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 20px;
+        margin-top: 28px;
+      }
+
+      .task-grid {
+        grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.05fr);
+        align-items: stretch;
+      }
+
+      .geo-card,
+      .task-card,
+      .help-card,
+      .compare-card,
+      .check-card {
+        padding: 22px;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: #ffffff;
+        box-shadow: 0 18px 45px rgb(31 41 51 / 8%);
+      }
+
+      .geo-card strong,
+      .task-card strong,
+      .help-card strong,
+      .compare-card strong,
+      .check-card strong {
+        display: block;
+        margin-bottom: 10px;
+        color: var(--ink);
+        font-size: clamp(1.08rem, 1.6vw, 1.35rem);
+      }
+
+      .dark-slide .geo-card strong,
+      .dark-slide .task-card strong,
+      .dark-slide .help-card strong,
+      .dark-slide .compare-card strong {
+        color: #ffffff;
+      }
+
+      .geo-card p,
+      .task-card p,
+      .help-card p,
+      .compare-card p,
+      .check-card p,
+      .geo-card li,
+      .task-card li,
+      .help-card li,
+      .compare-card li {
+        font-size: clamp(0.98rem, 1.35vw, 1.2rem);
+      }
+
+      .tool-list {
+        display: grid;
+        gap: 12px;
+        margin: 24px 0 0;
+        padding: 0;
+        list-style: none;
+      }
+
+      .tool-list li {
+        display: grid;
+        grid-template-columns: 44px minmax(0, 1fr);
+        gap: 14px;
+        align-items: start;
+        padding: 14px 0;
+        border-top: 1px solid var(--line);
+      }
+
+      .tool-list span {
+        display: grid;
+        place-items: center;
+        width: 44px;
+        height: 44px;
+        border-radius: 8px;
+        background: #e7f2f0;
+        color: var(--accent-dark);
+        font-weight: 900;
+      }
+
+      .tool-list strong {
+        display: block;
+        color: var(--ink);
+        font-size: clamp(1.05rem, 1.6vw, 1.35rem);
+      }
+
+      .tool-list small {
+        display: block;
+        margin-top: 4px;
+        color: var(--muted);
+        font-size: clamp(0.92rem, 1.2vw, 1.05rem);
+        line-height: 1.4;
+      }
+
+      .steps {
+        counter-reset: task;
+        display: grid;
+        gap: 12px;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+      }
+
+      .steps li {
+        counter-increment: task;
+        display: grid;
+        grid-template-columns: 42px minmax(0, 1fr);
+        gap: 14px;
+        align-items: start;
+        padding: 14px;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: #ffffff;
+        font-size: clamp(0.95rem, 1.25vw, 1.1rem);
+      }
+
+      .steps li::before {
+        content: counter(task);
+        display: grid;
+        place-items: center;
+        width: 34px;
+        height: 34px;
+        border-radius: 999px;
+        background: var(--ink);
+        color: #ffffff;
+        font-weight: 900;
+      }
+
+      .helper-box {
+        margin-top: 18px;
+        padding: 18px 20px;
+        border-left: 8px solid var(--blue);
+        border-radius: 8px;
+        background: #ffffff;
+        box-shadow: 0 14px 36px rgb(31 41 51 / 8%);
+      }
+
+      .helper-box strong {
+        color: var(--ink);
+      }
+
+      .helper-box p {
+        margin-bottom: 0;
+        font-size: clamp(0.98rem, 1.3vw, 1.12rem);
+      }
+
+      .canvas-demo {
+        position: relative;
+        min-height: 360px;
+        border: 1px solid #d7dee8;
+        border-radius: 8px;
+        background:
+          linear-gradient(#e6edf5 1px, transparent 1px),
+          linear-gradient(90deg, #e6edf5 1px, transparent 1px),
+          #ffffff;
+        background-size: 32px 32px;
+        overflow: hidden;
+      }
+
+      .axis-line,
+      .mirror-line,
+      .vector-line,
+      .center-line {
+        position: absolute;
+        transform-origin: left center;
+      }
+
+      .axis-line {
+        left: 0;
+        top: 50%;
+        width: 100%;
+        border-top: 2px solid rgb(31 41 51 / 28%);
+      }
+
+      .mirror-line {
+        left: 50%;
+        top: 24px;
+        height: calc(100% - 48px);
+        border-left: 4px solid var(--blue);
+      }
+
+      .center-line {
+        left: 50%;
+        top: 50%;
+        width: 190px;
+        border-top: 3px dashed rgb(194 65 12 / 70%);
+        transform: rotate(155deg);
+      }
+
+      .vector-line {
+        left: 132px;
+        top: 250px;
+        width: 180px;
+        border-top: 5px solid var(--warm);
+        transform: rotate(-22deg);
+      }
+
+      .vector-line::after {
+        content: "";
+        position: absolute;
+        right: -2px;
+        top: -8px;
+        width: 16px;
+        height: 16px;
+        border-top: 5px solid var(--warm);
+        border-right: 5px solid var(--warm);
+        transform: rotate(45deg);
+      }
+
+      .triangle {
+        position: absolute;
+        width: 0;
+        height: 0;
+        border-left: 48px solid transparent;
+        border-right: 48px solid transparent;
+        border-bottom: 96px solid rgb(15 118 110 / 86%);
+        filter: drop-shadow(0 10px 18px rgb(31 41 51 / 16%));
+      }
+
+      .triangle.source {
+        left: 88px;
+        top: 116px;
+      }
+
+      .triangle.moved {
+        left: 268px;
+        top: 48px;
+        border-bottom-color: rgb(194 65 12 / 82%);
+      }
+
+      .triangle.mirrored {
+        left: 300px;
+        top: 116px;
+        border-bottom-color: rgb(37 99 235 / 78%);
+        transform: scaleX(-1);
+      }
+
+      .triangle.pointed {
+        left: 306px;
+        top: 186px;
+        border-bottom-color: rgb(180 83 9 / 78%);
+        transform: rotate(180deg);
+      }
+
+      .triangle.turned {
+        left: 296px;
+        top: 92px;
+        border-bottom-color: rgb(37 99 235 / 78%);
+        transform: rotate(90deg);
+      }
+
+      .point {
+        position: absolute;
+        display: grid;
+        place-items: center;
+        width: 24px;
+        height: 24px;
+        border-radius: 999px;
+        background: var(--warm);
+        color: #ffffff;
+        font-size: 0.72rem;
+        font-weight: 900;
+      }
+
+      .point.center {
+        left: calc(50% - 12px);
+        top: calc(50% - 12px);
+      }
+
+      .angle-arc {
+        position: absolute;
+        left: 210px;
+        top: 104px;
+        width: 120px;
+        height: 120px;
+        border: 5px solid var(--warm);
+        border-left-color: transparent;
+        border-bottom-color: transparent;
+        border-radius: 999px;
+        transform: rotate(12deg);
+      }
+
+      .demo-label {
+        position: absolute;
+        padding: 5px 9px;
+        border-radius: 999px;
+        background: rgb(255 255 255 / 90%);
+        color: var(--ink);
+        font-size: 0.85rem;
+        font-weight: 900;
+        box-shadow: 0 6px 18px rgb(31 41 51 / 12%);
+      }
+
+      .label-source {
+        left: 68px;
+        top: 72px;
+      }
+
+      .label-image {
+        right: 54px;
+        top: 54px;
+      }
+
+      .label-axis {
+        left: calc(50% + 12px);
+        bottom: 42px;
+      }
+
+      .challenge-board {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 14px;
+        margin-top: 28px;
+      }
+
+      .challenge-board div {
+        min-height: 132px;
+        padding: 18px;
+        border-radius: 8px;
+        background: #ffffff;
+        box-shadow: 0 18px 45px rgb(31 41 51 / 8%);
+      }
+
+      .challenge-board strong {
+        display: block;
+        margin-bottom: 10px;
+        color: var(--accent-dark);
+        font-size: clamp(1.4rem, 2.2vw, 2.2rem);
+      }
+
+      .challenge-board span {
+        color: var(--muted);
+        font-size: clamp(0.95rem, 1.2vw, 1.08rem);
+        line-height: 1.4;
+      }
+
+      .compact p,
+      .compact li {
+        font-size: clamp(0.95rem, 1.2vw, 1.08rem);
+      }
+
+      @media (max-width: 860px) {
+        .geo-grid,
+        .task-grid,
+        .compare-grid,
+        .help-grid,
+        .challenge-board {
+          grid-template-columns: 1fr;
+        }
+
+        .canvas-demo {
+          min-height: 300px;
+        }
+
+        .triangle.source {
+          left: 54px;
+        }
+
+        .triangle.moved,
+        .triangle.mirrored,
+        .triangle.pointed,
+        .triangle.turned {
+          left: 214px;
+        }
+      }
+    </style>
+  </head>
+  <body class="deck">
+    <main class="slides" id="slides" data-deck aria-label="GeoGebra kennenlernen: Abbildungen in Klasse 6">
+      <section class="slide title center geo-title" id="folie-1">
+        <div class="slide-inner">
+          <p class="eyebrow">Mathematik Klasse 6</p>
+          <h1>GeoGebra kennenlernen</h1>
+          <p class="lead">Wir verschieben, spiegeln und drehen Figuren in GeoGebra Classic 6.</p>
+          <div class="topic-strip">
+            <span>Verschiebung</span>
+            <span>Achsenspiegelung</span>
+            <span>Punktspiegelung</span>
+            <span>Drehung</span>
+          </div>
+        </div>
+        <aside class="speaker-notes">
+          <strong>Einstieg</strong>
+          <p>Die Folien sind als Arbeitsanleitung gedacht. Schülerinnen und Schüler sollen parallel in GeoGebra Classic 6 arbeiten.</p>
+          <p>Empfohlene Form: Lehrkraft zeigt kurz den Auftrag, danach arbeiten die Schülerinnen und Schüler zwei bis vier Minuten selbst.</p>
+        </aside>
+      </section>
+
+      <section class="slide agenda" id="folie-2">
+        <div class="slide-inner wide">
+          <p class="eyebrow">Ziel der Stunde</p>
+          <h2>Du lernst GeoGebra durch Ausprobieren kennen.</h2>
+          <ol class="agenda-list">
+            <li>
+              <span>1</span>
+              <div>
+                <strong>Orientieren</strong>
+                <small>Wo sind Zeichenfläche, Werkzeugleiste, Eingabezeile und Rückgängig?</small>
+              </div>
+            </li>
+            <li data-step>
+              <span>2</span>
+              <div>
+                <strong>Figur bauen</strong>
+                <small>Du zeichnest eine Startfigur aus Punkten und Strecken.</small>
+              </div>
+            </li>
+            <li data-step>
+              <span>3</span>
+              <div>
+                <strong>Abbildungen nachvollziehen</strong>
+                <small>Du prüfst, was bei Verschiebung, Spiegelung, Punktspiegelung und Drehung gleich bleibt.</small>
+              </div>
+            </li>
+          </ol>
+        </div>
+        <aside class="speaker-notes">
+          <strong>Arbeitsziel</strong>
+          <p>Der Fokus liegt nicht auf perfekter Fachsprache am Anfang, sondern auf Beobachtung: Was passiert mit der Figur? Was bleibt gleich?</p>
+        </aside>
+      </section>
+
+      <section class="slide tool-slide" id="folie-3">
+        <div class="slide-inner wide">
+          <p class="eyebrow">GeoGebra Classic 6</p>
+          <h2>So findest du dich auf dem Bildschirm zurecht.</h2>
+          <ul class="tool-list">
+            <li>
+              <span>1</span>
+              <div>
+                <strong>Werkzeugleiste</strong>
+                <small>Oben findest du Werkzeuge wie Punkt, Strecke, Vieleck, Spiegelung, Drehung und Verschiebung.</small>
+              </div>
+            </li>
+            <li data-step>
+              <span>2</span>
+              <div>
+                <strong>Zeichenfläche</strong>
+                <small>Hier setzt du Punkte, zeichnest Figuren und siehst die Bildfigur.</small>
+              </div>
+            </li>
+            <li data-step>
+              <span>3</span>
+              <div>
+                <strong>Eingabezeile und Algebra-Ansicht</strong>
+                <small>Links oder unten erscheinen Namen, Koordinaten und Objekte. Du musst dort heute nur schauen, nicht rechnen.</small>
+              </div>
+            </li>
+          </ul>
+        </div>
+        <aside class="speaker-notes">
+          <strong>Bedienhinweis</strong>
+          <p>Bei GeoGebra Classic 6 kann die Eingabezeile je nach Fensterbreite unten oder links wirken. Die Schülerinnen und Schüler sollen vor allem Werkzeugleiste und Zeichenfläche sicher finden.</p>
+        </aside>
+      </section>
+
+      <section class="slide task-slide" id="folie-4">
+        <div class="slide-inner wide">
+          <p class="eyebrow">Bedienung</p>
+          <h2>Diese vier Handgriffe brauchst du ständig.</h2>
+          <div class="geo-grid">
+            <article class="geo-card">
+              <strong>Bewegen-Werkzeug</strong>
+              <p>Der Pfeil ist dein Standardwerkzeug. Damit ziehst du Punkte und Figuren vorsichtig an eine andere Stelle.</p>
+            </article>
+            <article class="geo-card" data-step>
+              <strong>Rückgängig</strong>
+              <p>Wenn etwas falsch ist: Nutze den Rückgängig-Pfeil oder die Tastenkombination <strong>Cmd/Strg + Z</strong>.</p>
+            </article>
+            <article class="geo-card" data-step>
+              <strong>Werkzeuggruppen öffnen</strong>
+              <p>Viele Symbole haben ein kleines Dreieck. Klicke länger oder öffne die Gruppe, wenn du ein Werkzeug nicht sofort siehst.</p>
+            </article>
+            <article class="geo-card" data-step>
+              <strong>Objekte anklicken</strong>
+              <p>GeoGebra fragt oft nach Reihenfolge: erst Figur, dann Achse; erst Figur, dann Mittelpunkt; erst Zentrum, dann Winkel.</p>
+            </article>
+          </div>
+        </div>
+        <aside class="speaker-notes">
+          <strong>Wichtig für Klasse 6</strong>
+          <p>Die Reihenfolge der Klicks ist die häufigste Hürde. Bei jedem Auftrag steht deshalb explizit, was zuerst und was danach angeklickt wird.</p>
+        </aside>
+      </section>
+
+      <section class="slide task-slide" id="folie-5">
+        <div class="slide-inner wide">
+          <p class="eyebrow">Startfigur</p>
+          <h2>Baue zuerst eine eigene Figur.</h2>
+          <div class="task-grid">
+            <div>
+              <ol class="steps">
+                <li>Öffne GeoGebra Classic 6 und wähle die Geometrie-Ansicht.</li>
+                <li>Wähle das Werkzeug <strong>Vieleck</strong>.</li>
+                <li>Setze drei oder vier Punkte und klicke am Ende wieder auf den ersten Punkt.</li>
+                <li>Wechsle zum <strong>Bewegen-Werkzeug</strong> und ziehe einen Eckpunkt vorsichtig.</li>
+              </ol>
+              <div class="helper-box">
+                <strong>Hilfestellung</strong>
+                <p>Wenn die Figur nicht geschlossen ist, klicke mit dem Vieleck-Werkzeug noch einmal auf den ersten Punkt.</p>
+              </div>
+            </div>
+            <div class="canvas-demo" aria-label="Beispiel einer Startfigur auf einer GeoGebra-Zeichenfläche">
+              <div class="axis-line"></div>
+              <div class="triangle source"></div>
+              <span class="point" style="left: 78px; top: 196px;">A</span>
+              <span class="point" style="left: 176px; top: 196px;">B</span>
+              <span class="point" style="left: 126px; top: 100px;">C</span>
+              <span class="demo-label label-source">Startfigur</span>
+            </div>
+          </div>
+        </div>
+        <aside class="speaker-notes">
+          <strong>Tempo</strong>
+          <p>Für diese Folie reichen zwei bis drei Minuten. Wer schneller fertig ist, darf die Farbe der Figur ändern oder eine zweite Form testen.</p>
+        </aside>
+      </section>
+
+      <section class="slide content" id="folie-6">
+        <div class="slide-inner wide">
+          <p class="eyebrow">Verschiebung</p>
+          <h2>Bei einer Verschiebung wandert jeder Punkt gleich weit.</h2>
+          <div class="task-grid">
+            <div class="canvas-demo" aria-label="Eine Figur wird entlang eines Pfeils verschoben">
+              <div class="axis-line"></div>
+              <div class="triangle source"></div>
+              <div class="triangle moved"></div>
+              <div class="vector-line"></div>
+              <span class="demo-label label-source">Original</span>
+              <span class="demo-label label-image">Bildfigur</span>
+            </div>
+            <div class="check-card">
+              <strong>Merksatz</strong>
+              <p>Alle Punkte bewegen sich in dieselbe Richtung und um dieselbe Strecke. Die Figur bleibt gleich groß und gleich herum.</p>
+              <div class="helper-box">
+                <strong>Prüffrage</strong>
+                <p>Kannst du dir für jeden Eckpunkt denselben Pfeil vorstellen?</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <aside class="speaker-notes">
+          <strong>Fachliche Einordnung</strong>
+          <p>Hier noch nicht mit Vektorkoordinaten überfrachten. Der Pfeil beschreibt Richtung und Länge der Verschiebung.</p>
+        </aside>
+      </section>
+
+      <section class="slide task-slide" id="folie-7">
+        <div class="slide-inner wide">
+          <p class="eyebrow">Schülerauftrag</p>
+          <h2>Verschiebe deine Figur in GeoGebra.</h2>
+          <div class="task-grid">
+            <div>
+              <ol class="steps">
+                <li>Wähle das Werkzeug <strong>Vektor</strong> und zeichne einen Pfeil neben deine Figur.</li>
+                <li>Öffne die Werkzeuggruppe für Abbildungen und wähle <strong>Verschiebe Objekt um Vektor</strong>.</li>
+                <li>Klicke zuerst deine Figur an.</li>
+                <li>Klicke danach den Vektor an.</li>
+              </ol>
+            </div>
+            <div>
+              <article class="help-card">
+                <strong>Hilfestellung</strong>
+                <p>Wenn nichts passiert, hast du wahrscheinlich zuerst den Vektor angeklickt. Nutze Rückgängig und probiere: erst Figur, dann Pfeil.</p>
+              </article>
+              <article class="help-card" data-step>
+                <strong>Kontrolle</strong>
+                <p>Ziehe am Startpunkt oder Endpunkt des Vektors. Die Bildfigur soll sich mitverändern.</p>
+              </article>
+            </div>
+          </div>
+        </div>
+        <aside class="speaker-notes">
+          <strong>GeoGebra-Werkzeugname</strong>
+          <p>In Classic 6 können Werkzeugnamen je nach Sprache leicht abweichen. Entscheidend ist das Werkzeug für Verschiebung eines Objekts um einen Vektor.</p>
+        </aside>
+      </section>
+
+      <section class="slide content" id="folie-8">
+        <div class="slide-inner wide">
+          <p class="eyebrow">Achsenspiegelung</p>
+          <h2>Bei einer Spiegelung ist die Achse die Mitte zwischen Original und Bild.</h2>
+          <div class="task-grid">
+            <div class="canvas-demo" aria-label="Eine Figur wird an einer senkrechten Achse gespiegelt">
+              <div class="mirror-line"></div>
+              <div class="triangle source"></div>
+              <div class="triangle mirrored"></div>
+              <span class="demo-label label-source">Original</span>
+              <span class="demo-label label-image">Spiegelbild</span>
+              <span class="demo-label label-axis">Spiegelachse</span>
+            </div>
+            <div class="check-card">
+              <strong>Merksatz</strong>
+              <p>Jeder Punkt und sein Spiegelpunkt haben denselben Abstand zur Spiegelachse. Die Figur ist danach seitenverkehrt.</p>
+              <div class="helper-box">
+                <strong>Prüffrage</strong>
+                <p>Liegt die Spiegelachse genau zwischen einem Punkt und seinem Bildpunkt?</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <aside class="speaker-notes">
+          <strong>Begriff</strong>
+          <p>In der Präsentation wird "Achsenspiegelung" benutzt, damit der Unterschied zur Punktspiegelung klar bleibt.</p>
+        </aside>
+      </section>
+
+      <section class="slide task-slide" id="folie-9">
+        <div class="slide-inner wide">
+          <p class="eyebrow">Schülerauftrag</p>
+          <h2>Spiegle deine Figur an einer Geraden.</h2>
+          <div class="task-grid">
+            <div>
+              <ol class="steps">
+                <li>Zeichne mit dem Werkzeug <strong>Gerade</strong> eine Spiegelachse neben deine Figur.</li>
+                <li>Wähle <strong>Spiegle Objekt an Gerade</strong>.</li>
+                <li>Klicke zuerst deine Figur an.</li>
+                <li>Klicke danach die Gerade an.</li>
+              </ol>
+            </div>
+            <div>
+              <article class="help-card">
+                <strong>Hilfestellung</strong>
+                <p>Wenn du die Gerade schlecht triffst, zoome nicht sofort. Wechsle zum Bewegen-Werkzeug und klicke in Ruhe auf die Linie.</p>
+              </article>
+              <article class="help-card" data-step>
+                <strong>Kontrolle</strong>
+                <p>Ziehe die Spiegelachse. Das Spiegelbild soll auf der anderen Seite passend mitwandern.</p>
+              </article>
+            </div>
+          </div>
+        </div>
+        <aside class="speaker-notes">
+          <strong>Didaktischer Hinweis</strong>
+          <p>Gute Anschlussfrage: Was passiert, wenn ein Eckpunkt genau auf der Achse liegt?</p>
+        </aside>
+      </section>
+
+      <section class="slide content" id="folie-10">
+        <div class="slide-inner wide">
+          <p class="eyebrow">Punktspiegelung</p>
+          <h2>Bei einer Punktspiegelung liegt der Mittelpunkt genau dazwischen.</h2>
+          <div class="task-grid">
+            <div class="canvas-demo" aria-label="Eine Figur wird an einem Mittelpunkt punktgespiegelt">
+              <div class="center-line"></div>
+              <span class="point center">M</span>
+              <div class="triangle source"></div>
+              <div class="triangle pointed"></div>
+              <span class="demo-label label-source">Original</span>
+              <span class="demo-label label-image">Bildfigur</span>
+            </div>
+            <div class="check-card">
+              <strong>Merksatz</strong>
+              <p>Originalpunkt, Mittelpunkt und Bildpunkt liegen auf einer Linie. Der Mittelpunkt ist genau in der Mitte.</p>
+              <div class="helper-box">
+                <strong>Prüffrage</strong>
+                <p>Wenn du Originalpunkt und Bildpunkt verbindest: Liegt der Mittelpunkt genau auf der Verbindung?</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <aside class="speaker-notes">
+          <strong>Verständnis</strong>
+          <p>Die Punktspiegelung kann auch als Drehung um 180 Grad vorbereitet werden, aber diese Verbindung erst nach der GeoGebra-Erfahrung herstellen.</p>
+        </aside>
+      </section>
+
+      <section class="slide task-slide" id="folie-11">
+        <div class="slide-inner wide">
+          <p class="eyebrow">Schülerauftrag</p>
+          <h2>Spiegle deine Figur an einem Punkt.</h2>
+          <div class="task-grid">
+            <div>
+              <ol class="steps">
+                <li>Setze mit dem Werkzeug <strong>Punkt</strong> einen Mittelpunkt M neben deine Figur.</li>
+                <li>Wähle <strong>Spiegle Objekt an Punkt</strong>.</li>
+                <li>Klicke zuerst deine Figur an.</li>
+                <li>Klicke danach den Mittelpunkt M an.</li>
+              </ol>
+            </div>
+            <div>
+              <article class="help-card">
+                <strong>Hilfestellung</strong>
+                <p>Wenn du aus Versehen einen Eckpunkt statt M erwischst: Rückgängig, dann den Mittelpunkt etwas größer oder freier platzieren.</p>
+              </article>
+              <article class="help-card" data-step>
+                <strong>Kontrolle</strong>
+                <p>Ziehe M mit dem Bewegen-Werkzeug. Original und Bild sollen auf gegenüberliegenden Seiten bleiben.</p>
+              </article>
+            </div>
+          </div>
+        </div>
+        <aside class="speaker-notes">
+          <strong>Vertiefung</strong>
+          <p>Wer fertig ist, kann eine Strecke zwischen einem Originalpunkt und seinem Bildpunkt zeichnen und prüfen, ob M darauf liegt.</p>
+        </aside>
+      </section>
+
+      <section class="slide content" id="folie-12">
+        <div class="slide-inner wide">
+          <p class="eyebrow">Drehung</p>
+          <h2>Bei einer Drehung bleibt die Figur gleich groß, aber sie bekommt eine neue Richtung.</h2>
+          <div class="task-grid">
+            <div class="canvas-demo" aria-label="Eine Figur wird um ein Zentrum gedreht">
+              <span class="point center">Z</span>
+              <div class="angle-arc"></div>
+              <div class="triangle source"></div>
+              <div class="triangle turned"></div>
+              <span class="demo-label label-source">Original</span>
+              <span class="demo-label label-image">90 Grad</span>
+            </div>
+            <div class="check-card">
+              <strong>Merksatz</strong>
+              <p>Du brauchst ein Drehzentrum und einen Winkel. Jeder Punkt dreht sich um das Zentrum um denselben Winkel.</p>
+              <div class="helper-box">
+                <strong>Prüffrage</strong>
+                <p>Ist der Abstand zum Drehzentrum vor und nach der Drehung gleich?</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <aside class="speaker-notes">
+          <strong>Winkelwahl</strong>
+          <p>Für den Einstieg eignen sich 90 Grad und 180 Grad. Negative Winkel oder Drehrichtung nur bei Bedarf thematisieren.</p>
+        </aside>
+      </section>
+
+      <section class="slide task-slide" id="folie-13">
+        <div class="slide-inner wide">
+          <p class="eyebrow">Schülerauftrag</p>
+          <h2>Drehe deine Figur um ein Zentrum.</h2>
+          <div class="task-grid">
+            <div>
+              <ol class="steps">
+                <li>Setze mit dem Werkzeug <strong>Punkt</strong> ein Drehzentrum Z.</li>
+                <li>Wähle <strong>Drehe Objekt um Punkt mit Winkel</strong>.</li>
+                <li>Klicke zuerst deine Figur an.</li>
+                <li>Klicke danach Z an und gib <strong>90 Grad</strong> ein.</li>
+              </ol>
+            </div>
+            <div>
+              <article class="help-card">
+                <strong>Hilfestellung</strong>
+                <p>Wenn ein Fenster erscheint: Trage 90 ein und bestätige. Falls die Richtung falsch wirkt, ist das trotzdem eine gültige Drehung.</p>
+              </article>
+              <article class="help-card" data-step>
+                <strong>Kontrolle</strong>
+                <p>Ziehe Z. Die gedrehte Figur soll ihre Lage ändern, aber gleich groß bleiben.</p>
+              </article>
+            </div>
+          </div>
+        </div>
+        <aside class="speaker-notes">
+          <strong>Bedienhinweis</strong>
+          <p>Manche Klassen brauchen hier eine gemeinsame Demonstration, weil das Winkelfenster eine zusätzliche Bedienebene ist.</p>
+        </aside>
+      </section>
+
+      <section class="slide dark-slide" id="folie-14">
+        <div class="slide-inner wide">
+          <p class="eyebrow">Vergleich</p>
+          <h2>Woran erkennst du welche Abbildung?</h2>
+          <div class="compare-grid">
+            <article class="compare-card">
+              <strong>Verschiebung</strong>
+              <p>Gleiche Richtung, gleiche Strecke, keine Drehung.</p>
+            </article>
+            <article class="compare-card" data-step>
+              <strong>Achsenspiegelung</strong>
+              <p>Spiegelachse liegt zwischen Original und Bild. Die Figur ist seitenverkehrt.</p>
+            </article>
+            <article class="compare-card" data-step>
+              <strong>Punktspiegelung</strong>
+              <p>Ein Mittelpunkt liegt genau zwischen jedem Punkt und seinem Bildpunkt.</p>
+            </article>
+            <article class="compare-card" data-step>
+              <strong>Drehung</strong>
+              <p>Drehzentrum und Winkel bestimmen die neue Lage.</p>
+            </article>
+          </div>
+        </div>
+        <aside class="speaker-notes">
+          <strong>Sicherung</strong>
+          <p>Diese Folie eignet sich als Tafelbildersatz. Schülerinnen und Schüler können die vier Sätze ins Heft übertragen.</p>
+        </aside>
+      </section>
+
+      <section class="slide reflection-slide" id="folie-15">
+        <div class="slide-inner wide">
+          <p class="eyebrow">Challenge</p>
+          <h2>Baue ein GeoGebra-Muster aus einer Startfigur.</h2>
+          <p class="lead">Nutze mindestens zwei verschiedene Abbildungen und mache dein Muster nachvollziehbar.</p>
+          <div class="challenge-board">
+            <div>
+              <strong>1</strong>
+              <span>Starte mit einem Dreieck oder Viereck.</span>
+            </div>
+            <div data-step>
+              <strong>2</strong>
+              <span>Nutze zwei Abbildungen, zum Beispiel Spiegelung und Drehung.</span>
+            </div>
+            <div data-step>
+              <strong>3</strong>
+              <span>Ziehe einen Punkt deiner Startfigur und beobachte alle Bildfiguren.</span>
+            </div>
+            <div data-step>
+              <strong>4</strong>
+              <span>Erkläre deiner Nachbarin oder deinem Nachbarn deinen Weg.</span>
+            </div>
+          </div>
+        </div>
+        <aside class="speaker-notes">
+          <strong>Differenzierung</strong>
+          <p>Schnelle Schülerinnen und Schüler können Farben ändern, Hilfslinien einblenden oder eine dritte Abbildung ergänzen.</p>
+        </aside>
+      </section>
+
+      <section class="slide content compact" id="folie-16">
+        <div class="slide-inner wide">
+          <p class="eyebrow">Reflexion</p>
+          <h2>Zum Schluss: Was hast du verstanden?</h2>
+          <div class="help-grid">
+            <article class="help-card">
+              <strong>GeoGebra bedienen</strong>
+              <ul>
+                <li>Welches Werkzeug brauchst du zuerst, wenn du etwas ziehen willst?</li>
+                <li>Was machst du, wenn ein Klick falsch war?</li>
+              </ul>
+            </article>
+            <article class="help-card" data-step>
+              <strong>Mathematik erkennen</strong>
+              <ul>
+                <li>Welche Abbildung braucht eine Achse?</li>
+                <li>Welche Abbildungen brauchen einen Punkt als Zentrum?</li>
+                <li>Welche Abbildung braucht einen Vektor?</li>
+              </ul>
+            </article>
+          </div>
+          <div class="helper-box" data-step>
+            <strong>Exit-Ticket</strong>
+            <p>Schreibe einen Satz: "Ich erkenne eine ... daran, dass ..."</p>
+          </div>
+        </div>
+        <aside class="speaker-notes">
+          <strong>Abschluss</strong>
+          <p>Das Exit-Ticket kann mündlich, im Heft oder digital erfolgen. Es zeigt schnell, ob Bedienung und mathematische Idee zusammenkommen.</p>
+        </aside>
+      </section>
+    </main>
+
+    <div class="deck-nav-shell">
+      <button
+        class="deck-nav-toggle"
+        type="button"
+        aria-label="Foliennavigation ein- oder ausklappen"
+        aria-expanded="false"
+        aria-controls="deck-nav"
+        data-nav-toggle
+      >
+        ...
+      </button>
+      <nav class="deck-nav" id="deck-nav" aria-label="Foliennavigation">
+        <a href="#folie-1" aria-label="Folie 1">1</a>
+        <a href="#folie-2" aria-label="Folie 2">2</a>
+        <a href="#folie-3" aria-label="Folie 3">3</a>
+        <a href="#folie-4" aria-label="Folie 4">4</a>
+        <a href="#folie-5" aria-label="Folie 5">5</a>
+        <a href="#folie-6" aria-label="Folie 6">6</a>
+        <a href="#folie-7" aria-label="Folie 7">7</a>
+        <a href="#folie-8" aria-label="Folie 8">8</a>
+        <a href="#folie-9" aria-label="Folie 9">9</a>
+        <a href="#folie-10" aria-label="Folie 10">10</a>
+        <a href="#folie-11" aria-label="Folie 11">11</a>
+        <a href="#folie-12" aria-label="Folie 12">12</a>
+        <a href="#folie-13" aria-label="Folie 13">13</a>
+        <a href="#folie-14" aria-label="Folie 14">14</a>
+        <a href="#folie-15" aria-label="Folie 15">15</a>
+        <a href="#folie-16" aria-label="Folie 16">16</a>
+      </nav>
+    </div>
+    <div class="slide-count" data-deck-status aria-hidden="true">1/16</div>
+    <script src="../../assets/deck.js"></script>
+  </body>
+</html>
