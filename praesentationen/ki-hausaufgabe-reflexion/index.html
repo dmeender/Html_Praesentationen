@@ -1,0 +1,732 @@
+<!doctype html>
+<html lang="de">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>KI als Lernhilfe reflektieren | Werte und Normen Klasse 10</title>
+    <link rel="stylesheet" href="../../assets/styles.css">
+    <style>
+      :root {
+        --gem-ink: #172033;
+        --gem-teal: #0f766e;
+        --gem-blue: #2563eb;
+        --gem-red: #b42318;
+        --gem-gold: #b45309;
+        --gem-soft: #e8f5f1;
+        --gem-paper: #fbfaf7;
+      }
+
+      .slide.gem-title {
+        overflow: hidden;
+        background:
+          radial-gradient(circle at 78% 22%, rgb(37 99 235 / 14%), transparent 28%),
+          linear-gradient(135deg, rgb(15 118 110 / 16%), transparent 42%),
+          var(--gem-paper);
+      }
+
+      .slide.gem-title .slide-inner {
+        position: relative;
+        z-index: 1;
+      }
+
+      .slide.gem-title::after {
+        content: "KI";
+        position: absolute;
+        right: 7vw;
+        bottom: 2vh;
+        z-index: 0;
+        color: rgb(23 32 51 / 5%);
+        font-size: clamp(9rem, 22vw, 22rem);
+        font-weight: 950;
+        line-height: 1;
+        pointer-events: none;
+      }
+
+      .slide.gem-dark {
+        background: var(--gem-ink);
+        color: #ffffff;
+      }
+
+      .slide.gem-dark p,
+      .slide.gem-dark li,
+      .slide.gem-dark small {
+        color: rgb(255 255 255 / 78%);
+      }
+
+      .slide.gem-soft {
+        background: var(--gem-soft);
+      }
+
+      .slide.gem-blue {
+        background: #eef4ff;
+      }
+
+      .slide.gem-warm {
+        background: #fff7ed;
+      }
+
+      .slide-inner.wide {
+        width: min(1180px, 100%);
+      }
+
+      .meta-row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin-top: 28px;
+      }
+
+      .pill {
+        display: inline-flex;
+        align-items: center;
+        min-height: 34px;
+        padding: 0 12px;
+        border-radius: 999px;
+        background: rgb(15 118 110 / 11%);
+        color: #134e4a;
+        font-size: 0.95rem;
+        font-weight: 850;
+      }
+
+      .gem-dark .pill {
+        background: rgb(255 255 255 / 12%);
+        color: #ffffff;
+      }
+
+      .focus-box {
+        max-width: 1000px;
+        margin-top: 30px;
+        padding: 28px;
+        border-left: 10px solid var(--gem-teal);
+        border-radius: 8px;
+        background: #ffffff;
+        box-shadow: 0 18px 45px rgb(31 41 51 / 10%);
+      }
+
+      .focus-box p {
+        margin: 0;
+        color: var(--gem-ink);
+        font-size: clamp(1.35rem, 2.45vw, 2.75rem);
+        font-weight: 850;
+        line-height: 1.18;
+      }
+
+      .card-grid,
+      .step-grid,
+      .rubric-grid,
+      .traffic-grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 18px;
+        margin-top: 30px;
+      }
+
+      .card,
+      .step-card,
+      .rubric-card,
+      .traffic-card {
+        border: 1px solid rgb(31 41 51 / 12%);
+        border-radius: 8px;
+        background: #ffffff;
+        box-shadow: 0 16px 40px rgb(31 41 51 / 8%);
+      }
+
+      .card,
+      .rubric-card,
+      .traffic-card {
+        padding: 22px;
+      }
+
+      .card strong,
+      .rubric-card strong,
+      .traffic-card strong {
+        display: block;
+        color: var(--gem-ink);
+        font-size: clamp(1.1rem, 1.5vw, 1.34rem);
+        line-height: 1.25;
+      }
+
+      .card p,
+      .rubric-card p,
+      .traffic-card p {
+        margin-top: 9px;
+        color: var(--muted);
+        font-size: clamp(0.98rem, 1.22vw, 1.1rem);
+        line-height: 1.42;
+      }
+
+      .card.warning {
+        border-top: 8px solid var(--gem-red);
+      }
+
+      .card.good {
+        border-top: 8px solid var(--gem-teal);
+      }
+
+      .card.blue {
+        border-top: 8px solid var(--gem-blue);
+      }
+
+      .card.gold {
+        border-top: 8px solid var(--gem-gold);
+      }
+
+      .step-grid {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 14px;
+      }
+
+      .step-card {
+        min-height: 168px;
+        padding: 20px;
+      }
+
+      .step-card span {
+        color: var(--gem-blue);
+        font-size: 2rem;
+        font-weight: 950;
+        line-height: 1;
+      }
+
+      .step-card strong {
+        display: block;
+        margin-top: 14px;
+        color: var(--gem-ink);
+        font-size: clamp(1rem, 1.28vw, 1.16rem);
+      }
+
+      .step-card p {
+        margin-top: 8px;
+        color: var(--muted);
+        font-size: 0.98rem;
+        line-height: 1.35;
+      }
+
+      .task-layout {
+        display: grid;
+        grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr);
+        gap: 34px;
+        align-items: start;
+        margin-top: 28px;
+      }
+
+      .task-focus {
+        padding: 26px;
+        border-radius: 8px;
+        background: #ffffff;
+        box-shadow: 0 18px 45px rgb(31 41 51 / 10%);
+      }
+
+      .task-focus strong {
+        display: block;
+        color: var(--gem-teal);
+        font-size: clamp(1.08rem, 1.6vw, 1.42rem);
+      }
+
+      .task-focus p {
+        margin-top: 12px;
+        color: var(--gem-ink);
+        font-size: clamp(1.16rem, 1.7vw, 1.55rem);
+        font-weight: 800;
+        line-height: 1.28;
+      }
+
+      .task-list {
+        display: grid;
+        gap: 10px;
+        margin: 0;
+        padding-left: 1.1em;
+      }
+
+      .task-list li {
+        color: var(--muted);
+        font-size: clamp(0.98rem, 1.24vw, 1.12rem);
+        line-height: 1.38;
+      }
+
+      .prompt-box {
+        margin-top: 28px;
+        padding: 22px 24px;
+        border-left: 8px solid var(--gem-blue);
+        border-radius: 8px;
+        background: #ffffff;
+        box-shadow: 0 18px 45px rgb(31 41 51 / 10%);
+      }
+
+      .prompt-box code {
+        color: var(--gem-ink);
+        font-size: clamp(1rem, 1.3vw, 1.22rem);
+        line-height: 1.55;
+        white-space: normal;
+      }
+
+      .process-table {
+        display: grid;
+        margin-top: 30px;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        overflow: hidden;
+        background: #ffffff;
+        box-shadow: 0 16px 40px rgb(31 41 51 / 8%);
+      }
+
+      .process-row {
+        display: grid;
+        grid-template-columns: 0.8fr 1.25fr 1.25fr 1fr;
+      }
+
+      .process-row > * {
+        min-height: 58px;
+        padding: 14px;
+        border-top: 1px solid var(--line);
+        border-left: 1px solid var(--line);
+        color: var(--muted);
+        font-size: clamp(0.9rem, 1.08vw, 1rem);
+        line-height: 1.34;
+      }
+
+      .process-row > *:first-child {
+        border-left: 0;
+      }
+
+      .process-row.header > * {
+        border-top: 0;
+        background: #eef5f3;
+        color: var(--gem-ink);
+        font-weight: 850;
+      }
+
+      .traffic-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+
+      .traffic-card {
+        min-height: 210px;
+      }
+
+      .traffic-card.green {
+        border-top: 10px solid #15803d;
+      }
+
+      .traffic-card.yellow {
+        border-top: 10px solid #b45309;
+      }
+
+      .traffic-card.red {
+        border-top: 10px solid #b42318;
+      }
+
+      .reflection-question {
+        max-width: 980px;
+        margin-top: 34px;
+        padding: 30px;
+        border-radius: 8px;
+        background: #ffffff;
+        box-shadow: 0 18px 45px rgb(31 41 51 / 10%);
+      }
+
+      .reflection-question p {
+        margin: 0;
+        color: var(--gem-ink);
+        font-size: clamp(1.5rem, 2.7vw, 3.05rem);
+        font-weight: 850;
+        line-height: 1.15;
+      }
+
+      @media (max-width: 1080px) {
+        .slide {
+          padding: 5vh 6vw;
+        }
+
+        .step-grid,
+        .traffic-grid {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+
+        .task-layout {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      @media (max-width: 760px) {
+        .slides {
+          height: 100dvh;
+        }
+
+        .slide {
+          min-height: 100dvh;
+          height: auto;
+          overflow-y: auto;
+          padding-bottom: 92px;
+        }
+
+        .card-grid,
+        .step-grid,
+        .rubric-grid,
+        .traffic-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .process-row {
+          grid-template-columns: 1fr;
+        }
+
+        .process-row > * {
+          border-left: 0;
+        }
+      }
+    </style>
+  </head>
+  <body class="deck">
+    <main class="slides" id="slides" data-deck aria-label="KI als Lernhilfe reflektieren">
+      <section class="slide gem-title center" id="folie-1">
+        <div class="slide-inner wide">
+          <p class="eyebrow">Werte und Normen | Klasse 10</p>
+          <h1>Kann KI meine Hausaufgabe besser lösen als ich?</h1>
+          <p class="lead">Eine Arbeitspräsentation zum Lösen, Dokumentieren und Reflektieren mit Google Gemini.</p>
+          <div class="meta-row" aria-label="Unterrichtsrahmen">
+            <span class="pill">Einzel- oder Partnerarbeit</span>
+            <span class="pill">Prozessdokumentation</span>
+            <span class="pill">Reflexion statt Abgabe</span>
+            <span class="pill">Präsentation am Ende</span>
+          </div>
+        </div>
+        <aside class="speaker-notes">
+          <strong>Moderationsnotiz</strong>
+          <p>Den Fokus direkt setzen: Bewertet wird nicht die perfekte KI-Loesung, sondern der reflektierte Umgang damit.</p>
+        </aside>
+      </section>
+
+      <section class="slide gem-dark" id="folie-2">
+        <div class="slide-inner wide">
+          <p class="eyebrow">Grundregel</p>
+          <h2>Erst schützen, dann ausprobieren</h2>
+          <div class="card-grid">
+            <article class="card warning">
+              <strong>Keine privaten Daten</strong>
+              <p>Keine Namen, Adressen, echten Klassenlisten, Chatverläufe oder persönlichen Dokumente eingeben.</p>
+            </article>
+            <article class="card warning" data-step>
+              <strong>Aufgabe anonymisieren</strong>
+              <p>Formuliert die Schulaufgabe so, dass keine Person und keine Schule erkennbar ist.</p>
+            </article>
+            <article class="card good" data-step>
+              <strong>Prozess sichern</strong>
+              <p>Speichert eure Prompts, Antworten, Änderungen und Entscheidungen in einer Dokumentation.</p>
+            </article>
+            <article class="card blue" data-step>
+              <strong>Zugang prüfen</strong>
+              <p>Nutzt Gemini nur, wenn euer Account Zugriff erlaubt. Der Webzugang ist: gemini.google.com/app</p>
+            </article>
+          </div>
+        </div>
+        <aside class="speaker-notes">
+          <strong>Moderationsnotiz</strong>
+          <p>Vor dem Start kurz klaeren, welche Accounts genutzt werden duerfen. Kein Upload privater Dateien.</p>
+        </aside>
+      </section>
+
+      <section class="slide agenda" id="folie-3">
+        <div class="slide-inner wide">
+          <p class="eyebrow">Arbeitsauftrag</p>
+          <h2>Was ihr am Ende zeigen sollt</h2>
+          <ol class="agenda-list">
+            <li>
+              <span>1</span>
+              <div>
+                <strong>Ausgangsaufgabe</strong>
+                <small>Welche alte Aufgabe habt ihr gewählt und warum eignet sie sich?</small>
+              </div>
+            </li>
+            <li data-step>
+              <span>2</span>
+              <div>
+                <strong>Prompt-Prozess</strong>
+                <small>Wie habt ihr Gemini gesteuert, verbessert und überprüft?</small>
+              </div>
+            </li>
+            <li data-step>
+              <span>3</span>
+              <div>
+                <strong>Reflexion</strong>
+                <small>Was kam von euch, was kam von Gemini, und was habt ihr gelernt?</small>
+              </div>
+            </li>
+          </ol>
+        </div>
+      </section>
+
+      <section class="slide content" id="folie-4">
+        <div class="slide-inner wide">
+          <p class="eyebrow">Schritt 1</p>
+          <h2>Aufgabe auswählen</h2>
+          <div class="task-layout">
+            <div class="task-focus">
+              <strong>Auswahlfrage</strong>
+              <p>Welche vergangene Aufgabe eignet sich, um KI-Hilfe wirklich zu testen?</p>
+            </div>
+            <ul class="task-list">
+              <li>Wählt eine alte Hausaufgabe, Übungsaufgabe oder Schulaufgabe.</li>
+              <li>Die Aufgabe sollte eine echte Denkleistung verlangen.</li>
+              <li>Die Lösung sollte überprüfbar sein.</li>
+              <li>Entfernt persönliche Daten und konkrete Namen.</li>
+              <li>Notiert, warum ihr genau diese Aufgabe gewählt habt.</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section class="slide gem-soft" id="folie-5">
+        <div class="slide-inner wide">
+          <p class="eyebrow">Schritt 2</p>
+          <h2>Erst selbst einschätzen</h2>
+          <p class="lead">Bevor ihr Gemini nutzt, braucht ihr einen Maßstab. Sonst könnt ihr die Antwort später kaum beurteilen.</p>
+          <div class="card-grid">
+            <article class="card good">
+              <strong>Eigene Lösungsidee</strong>
+              <p>Wie würdet ihr die Aufgabe ohne KI beginnen?</p>
+            </article>
+            <article class="card blue" data-step>
+              <strong>Schwierigkeit</strong>
+              <p>Wo würdet ihr selbst wahrscheinlich hängen bleiben?</p>
+            </article>
+            <article class="card gold" data-step>
+              <strong>Qualitätsmaßstab</strong>
+              <p>Woran erkennt man eine sehr gute Lösung?</p>
+            </article>
+            <article class="card warning" data-step>
+              <strong>Prüfkriterien</strong>
+              <p>Woran würdet ihr merken, dass Gemini falsch oder oberflächlich arbeitet?</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="slide content" id="folie-6">
+        <div class="slide-inner wide">
+          <p class="eyebrow">Schritt 3</p>
+          <h2>Erster Prompt</h2>
+          <p class="lead">Startet einfach, aber dokumentiert genau. Der erste Versuch ist wichtig, weil er zeigt, wie Gemini ohne eure Steuerung arbeitet.</p>
+          <div class="prompt-box">
+            <code>Ich bearbeite eine anonymisierte Schulaufgabe. Löse sie bitte sorgfältig und erkläre deinen Lösungsweg. Aufgabe: ...</code>
+          </div>
+          <div class="card-grid">
+            <article class="card blue">
+              <strong>Dokumentiert</strong>
+              <p>Prompt, erste Antwort, hilfreiche Teile, unklare Stellen und mögliche Fehler.</p>
+            </article>
+            <article class="card good" data-step>
+              <strong>Vergleicht</strong>
+              <p>Passt Geminis Antwort zu eurer eigenen ersten Einschätzung?</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="slide gem-blue" id="folie-7">
+        <div class="slide-inner wide">
+          <p class="eyebrow">Schritt 4</p>
+          <h2>Nachfragen und verbessern</h2>
+          <div class="step-grid">
+            <article class="step-card">
+              <span>1</span>
+              <strong>Genauer erklären lassen</strong>
+              <p>„Erkläre den schwierigen Teil langsamer.“</p>
+            </article>
+            <article class="step-card" data-step>
+              <span>2</span>
+              <strong>Alternative verlangen</strong>
+              <p>„Gib mir einen zweiten Lösungsweg.“</p>
+            </article>
+            <article class="step-card" data-step>
+              <span>3</span>
+              <strong>Fehler suchen lassen</strong>
+              <p>„Prüfe deine Antwort kritisch.“</p>
+            </article>
+            <article class="step-card" data-step>
+              <span>4</span>
+              <strong>Kriterien nutzen</strong>
+              <p>„Verbessere die Lösung anhand dieser Kriterien: ...“</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="slide content" id="folie-8">
+        <div class="slide-inner wide">
+          <p class="eyebrow">Schritt 5</p>
+          <h2>Prozess dokumentieren</h2>
+          <p class="lead">Eure Dokumentation ist wichtiger als die fertige Lösung. Sie zeigt, ob ihr KI steuern und prüfen könnt.</p>
+          <div class="process-table" aria-label="Prozesstabelle">
+            <div class="process-row header">
+              <div>Schritt</div>
+              <div>Prompt</div>
+              <div>Geminis Antwort</div>
+              <div>Eure Bewertung</div>
+            </div>
+            <div class="process-row">
+              <div>1</div>
+              <div>Erster Versuch</div>
+              <div>Was kam heraus?</div>
+              <div>Hilfreich, unklar, falsch?</div>
+            </div>
+            <div class="process-row" data-step>
+              <div>2</div>
+              <div>Nachfrage</div>
+              <div>Was wurde besser?</div>
+              <div>Was habt ihr entschieden?</div>
+            </div>
+            <div class="process-row" data-step>
+              <div>3</div>
+              <div>Verbesserung</div>
+              <div>Beste Fassung</div>
+              <div>Was bleibt problematisch?</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="slide gem-warm" id="folie-9">
+        <div class="slide-inner wide">
+          <p class="eyebrow">Schritt 6</p>
+          <h2>Ergebnis kritisch prüfen</h2>
+          <div class="rubric-grid">
+            <article class="rubric-card">
+              <strong>Richtigkeit</strong>
+              <p>Ist die Lösung sachlich und fachlich richtig?</p>
+            </article>
+            <article class="rubric-card">
+              <strong>Vollständigkeit</strong>
+              <p>Wurde wirklich alles beantwortet, was die Aufgabe verlangt?</p>
+            </article>
+            <article class="rubric-card" data-step>
+              <strong>Verständlichkeit</strong>
+              <p>Könnt ihr die Lösung selbst erklären?</p>
+            </article>
+            <article class="rubric-card" data-step>
+              <strong>Passung</strong>
+              <p>Passt Sprache, Niveau und Methode zur Schule und zu euch?</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="slide content" id="folie-10">
+        <div class="slide-inner wide">
+          <p class="eyebrow">Schritt 7</p>
+          <h2>Eigenanteil analysieren</h2>
+          <div class="task-layout">
+            <div class="task-focus">
+              <strong>Kernfrage</strong>
+              <p>War das noch eure eigene Leistung oder nur eine übernommene KI-Lösung?</p>
+            </div>
+            <ul class="task-list">
+              <li>Was kam von Gemini?</li>
+              <li>Was kam von euch?</li>
+              <li>Wo habt ihr nur übernommen?</li>
+              <li>Wo habt ihr wirklich entschieden, geprüft oder verbessert?</li>
+              <li>Hättet ihr ohne KI etwas gelernt?</li>
+              <li>Habt ihr mit KI etwas gelernt?</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section class="slide gem-soft" id="folie-11">
+        <div class="slide-inner wide">
+          <p class="eyebrow">Ampelbewertung</p>
+          <h2>Wie ordnet ihr euren Prozess ein?</h2>
+          <div class="traffic-grid">
+            <article class="traffic-card green">
+              <strong>Grün</strong>
+              <p>Gemini hat beim Lernen geholfen. Ihr habt verstanden, geprüft und eigene Entscheidungen getroffen.</p>
+            </article>
+            <article class="traffic-card yellow" data-step>
+              <strong>Gelb</strong>
+              <p>Gemini war hilfreich, aber nur mit Prüfung, Offenlegung oder klarer Begrenzung vertretbar.</p>
+            </article>
+            <article class="traffic-card red" data-step>
+              <strong>Rot</strong>
+              <p>Gemini hat die eigentliche Leistung ersetzt. Ihr könntet das Ergebnis nicht selbst erklären.</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="slide agenda" id="folie-12">
+        <div class="slide-inner wide">
+          <p class="eyebrow">Präsentation</p>
+          <h2>Was ihr am Ende vorstellt</h2>
+          <ol class="agenda-list">
+            <li>
+              <span>1</span>
+              <div>
+                <strong>Aufgabe und bester Prompt</strong>
+                <small>Welche Aufgabe habt ihr gewählt, und welcher Prompt hat am meisten gebracht?</small>
+              </div>
+            </li>
+            <li data-step>
+              <span>2</span>
+              <div>
+                <strong>Beste Lösung und kritischster Fehler</strong>
+                <small>Was war überzeugend, und wo musste Gemini korrigiert werden?</small>
+              </div>
+            </li>
+            <li data-step>
+              <span>3</span>
+              <div>
+                <strong>Eigenanteil und Ampel</strong>
+                <small>Was war eure Leistung, und wie bewertet ihr den Prozess?</small>
+              </div>
+            </li>
+          </ol>
+        </div>
+      </section>
+
+      <section class="slide gem-dark" id="folie-13">
+        <div class="slide-inner wide">
+          <p class="eyebrow">Abschlussreflexion</p>
+          <h2>Die entscheidende Frage</h2>
+          <div class="reflection-question">
+            <p>Wann macht KI mich besser und wann nimmt KI mir das Denken ab?</p>
+          </div>
+          <p class="lead">Begründet eure Antwort mit einem konkreten Moment aus eurem Arbeitsprozess.</p>
+        </div>
+        <aside class="speaker-notes">
+          <strong>Moderationsnotiz</strong>
+          <p>Diese Folie eignet sich fuer eine kurze Abschlussrunde oder als schriftliches Exit-Ticket.</p>
+        </aside>
+      </section>
+    </main>
+
+    <div class="deck-nav-shell">
+      <button
+        class="deck-nav-toggle"
+        type="button"
+        aria-label="Foliennavigation ein- oder ausklappen"
+        aria-expanded="false"
+        aria-controls="deck-nav"
+        data-nav-toggle
+      >
+        ...
+      </button>
+      <nav class="deck-nav" id="deck-nav" aria-label="Foliennavigation">
+        <a href="#folie-1" aria-label="Folie 1">1</a>
+        <a href="#folie-2" aria-label="Folie 2">2</a>
+        <a href="#folie-3" aria-label="Folie 3">3</a>
+        <a href="#folie-4" aria-label="Folie 4">4</a>
+        <a href="#folie-5" aria-label="Folie 5">5</a>
+        <a href="#folie-6" aria-label="Folie 6">6</a>
+        <a href="#folie-7" aria-label="Folie 7">7</a>
+        <a href="#folie-8" aria-label="Folie 8">8</a>
+        <a href="#folie-9" aria-label="Folie 9">9</a>
+        <a href="#folie-10" aria-label="Folie 10">10</a>
+        <a href="#folie-11" aria-label="Folie 11">11</a>
+        <a href="#folie-12" aria-label="Folie 12">12</a>
+        <a href="#folie-13" aria-label="Folie 13">13</a>
+      </nav>
+    </div>
+    <div class="slide-count" data-deck-status aria-hidden="true">1/13</div>
+    <script src="../../assets/deck.js"></script>
+  </body>
+</html>
