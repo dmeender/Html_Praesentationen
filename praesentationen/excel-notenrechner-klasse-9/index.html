@@ -144,6 +144,19 @@
         line-height: 1.45;
       }
 
+      .excel-deck .slide {
+        overflow-y: auto;
+        overscroll-behavior: contain;
+      }
+
+      .excel-deck .slide-inner {
+        align-self: start;
+      }
+
+      .excel-deck .slide.title .slide-inner {
+        align-self: center;
+      }
+
       @media (max-width: 900px) {
         .excel-grid,
         .stat-grid {
@@ -156,7 +169,7 @@
       }
     </style>
   </head>
-  <body class="deck">
+  <body class="deck excel-deck">
     <main class="slides" id="slides" data-deck aria-label="Excel kennenlernen: Zeugnisnoten-Rechner Klasse 9">
       <section class="slide title center" id="folie-1">
         <div class="slide-inner">

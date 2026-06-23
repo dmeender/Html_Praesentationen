@@ -13,9 +13,13 @@ assert.match(home, /Excel kennenlernen/);
 const deck = readFileSync(deckPath, "utf8");
 
 assert.match(deck, /aria-label="Excel kennenlernen: Zeugnisnoten-Rechner Klasse 9"/);
+assert.match(deck, /<body class="deck excel-deck">/);
 assert.match(deck, /data-deck/);
 assert.match(deck, /deck\.js/);
 assert.match(deck, /Excel auf Windows/);
+assert.match(deck, /\.excel-deck \.slide\s*\{[\s\S]*overflow-y: auto;/);
+assert.match(deck, /\.excel-deck \.slide-inner\s*\{[\s\S]*align-self: start;/);
+assert.match(deck, /\.excel-deck \.slide\.title \.slide-inner\s*\{[\s\S]*align-self: center;/);
 
 const requiredTerms = [
   "Zeugnisnoten-Rechner",
