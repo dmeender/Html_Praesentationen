@@ -1,0 +1,782 @@
+<!doctype html>
+<html lang="de">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Excel kennenlernen: Zeugnisnoten-Rechner</title>
+    <link rel="stylesheet" href="../../assets/styles.css">
+    <style>
+      .excel-grid {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 18px;
+        margin-top: 30px;
+      }
+
+      .excel-card,
+      .task-card,
+      .hint-card,
+      .check-card {
+        border-radius: 8px;
+        background: #ffffff;
+        box-shadow: 0 18px 45px rgb(31 41 51 / 9%);
+      }
+
+      .excel-card {
+        padding: 24px;
+      }
+
+      .excel-card strong {
+        display: block;
+        margin-bottom: 10px;
+        color: var(--accent-dark);
+        font-size: clamp(1.1rem, 1.8vw, 1.6rem);
+      }
+
+      .excel-card span,
+      .excel-card code {
+        color: var(--muted);
+        font-size: clamp(1rem, 1.4vw, 1.2rem);
+        line-height: 1.45;
+      }
+
+      .task-stack {
+        display: grid;
+        gap: 18px;
+        margin-top: 28px;
+      }
+
+      .task-card,
+      .hint-card,
+      .check-card {
+        padding: 22px 26px;
+      }
+
+      .task-card {
+        border-left: 8px solid var(--accent);
+      }
+
+      .hint-card {
+        border-left: 8px solid var(--blue);
+        background: #f8fbff;
+      }
+
+      .check-card {
+        border-left: 8px solid var(--gold);
+        background: #fffbf2;
+      }
+
+      .task-card h3,
+      .hint-card h3,
+      .check-card h3 {
+        margin-bottom: 10px;
+        font-size: clamp(1.15rem, 1.8vw, 1.55rem);
+      }
+
+      .task-card p,
+      .hint-card p,
+      .check-card p,
+      .task-card li,
+      .hint-card li,
+      .check-card li {
+        font-size: clamp(1rem, 1.35vw, 1.2rem);
+      }
+
+      .formula {
+        display: inline-block;
+        padding: 0.1em 0.35em;
+        border-radius: 6px;
+        background: #eef5f3;
+        color: var(--accent-dark);
+        font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+        font-weight: 800;
+      }
+
+      .mini-table {
+        width: 100%;
+        margin-top: 24px;
+        border-collapse: collapse;
+        overflow: hidden;
+        border-radius: 8px;
+        background: #ffffff;
+        box-shadow: 0 18px 45px rgb(31 41 51 / 9%);
+      }
+
+      .mini-table th,
+      .mini-table td {
+        padding: 14px 16px;
+        border: 1px solid var(--line);
+        color: var(--ink);
+        font-size: clamp(0.95rem, 1.2vw, 1.15rem);
+        text-align: left;
+      }
+
+      .mini-table th {
+        background: #e7f2f0;
+        color: var(--accent-dark);
+      }
+
+      .level-row {
+        display: grid;
+        gap: 14px;
+        margin-top: 28px;
+      }
+
+      .level {
+        display: grid;
+        grid-template-columns: 140px minmax(0, 1fr);
+        gap: 18px;
+        align-items: start;
+        padding: 18px 22px;
+        border-radius: 8px;
+        background: #ffffff;
+        box-shadow: 0 18px 45px rgb(31 41 51 / 8%);
+      }
+
+      .level strong {
+        color: var(--warm);
+        font-size: clamp(1rem, 1.4vw, 1.25rem);
+      }
+
+      .level span {
+        color: var(--muted);
+        font-size: clamp(1rem, 1.35vw, 1.2rem);
+        line-height: 1.45;
+      }
+
+      @media (max-width: 900px) {
+        .excel-grid,
+        .stat-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .level {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
+  </head>
+  <body class="deck">
+    <main class="slides" id="slides" data-deck aria-label="Excel kennenlernen: Zeugnisnoten-Rechner Klasse 9">
+      <section class="slide title center" id="folie-1">
+        <div class="slide-inner">
+          <p class="eyebrow">Informatik Klasse 9</p>
+          <h1>Excel kennenlernen</h1>
+          <p class="lead">Baue deinen eigenen Zeugnisnoten-Rechner in Excel auf Windows.</p>
+        </div>
+      </section>
+
+      <section class="slide agenda" id="folie-2">
+        <div class="slide-inner wide">
+          <p class="eyebrow">Lernziele</p>
+          <h2>Was du am Ende kannst</h2>
+          <ol class="agenda-list">
+            <li>
+              <span>1</span>
+              <div>
+                <strong>Tabellen strukturieren</strong>
+                <small>Du legst Daten so ab, dass Excel sinnvoll damit arbeiten kann.</small>
+              </div>
+            </li>
+            <li>
+              <span>2</span>
+              <div>
+                <strong>Formeln und Funktionen nutzen</strong>
+                <small>Du berechnest Durchschnitt, beste Note, schlechteste Note und Anzahl.</small>
+              </div>
+            </li>
+            <li>
+              <span>3</span>
+              <div>
+                <strong>Ergebnisse darstellen und prüfen</strong>
+                <small>Du formatierst Daten, findest typische Fehler und probierst eine Challenge.</small>
+              </div>
+            </li>
+          </ol>
+        </div>
+      </section>
+
+      <section class="slide content" id="folie-3">
+        <div class="slide-inner wide">
+          <p class="eyebrow">Orientierung</p>
+          <h2>Was ist Excel?</h2>
+          <p class="lead">Excel ist eine Tabellenkalkulation: Du sammelst Daten, rechnest mit ihnen und stellst Ergebnisse dar.</p>
+          <div class="excel-grid">
+            <article class="excel-card">
+              <strong>Daten sammeln</strong>
+              <span>Noten, Umfrageantworten, Einnahmen, Messwerte oder Spielergebnisse.</span>
+            </article>
+            <article class="excel-card">
+              <strong>Berechnen</strong>
+              <span>Summen, Durchschnitte, Vergleiche und automatische Auswertungen.</span>
+            </article>
+            <article class="excel-card">
+              <strong>Darstellen</strong>
+              <span>Tabellen, Farben, Sortierungen und Diagramme machen Daten lesbar.</span>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="slide content" id="folie-4">
+        <div class="slide-inner wide">
+          <p class="eyebrow">Excel-Oberfläche</p>
+          <h2>Die wichtigsten Begriffe</h2>
+          <div class="excel-grid">
+            <article class="excel-card">
+              <strong>Arbeitsmappe</strong>
+              <span>Die ganze Excel-Datei, zum Beispiel <code>notenrechner-mia.xlsx</code>.</span>
+            </article>
+            <article class="excel-card">
+              <strong>Tabellenblatt</strong>
+              <span>Eine einzelne Seite in der Arbeitsmappe. Unten findest du die Blattregister.</span>
+            </article>
+            <article class="excel-card">
+              <strong>Zelle</strong>
+              <span>Ein einzelnes Feld. Jede Zelle hat eine Adresse wie <code>B3</code>.</span>
+            </article>
+          </div>
+          <div class="task-stack">
+            <article class="hint-card">
+              <h3>Wenn du nicht weiterkommst</h3>
+              <p>Öffne Excel auf Windows und wähle <strong>Leere Arbeitsmappe</strong>.</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="slide split" id="folie-5">
+        <div class="slide-inner wide">
+          <p class="eyebrow">Zelladressen</p>
+          <h2>Spalte plus Zeile</h2>
+          <p class="lead">Die Adresse <span class="formula">B3</span> bedeutet: Spalte B, Zeile 3.</p>
+          <div class="task-stack">
+            <article class="task-card">
+              <h3>Auftrag</h3>
+              <p>Klicke nacheinander einige Zellen an und lies links oben im Namensfeld die Zelladresse ab.</p>
+            </article>
+            <article class="check-card">
+              <h3>Denkfrage</h3>
+              <p>Warum ist eine eindeutige Zelladresse praktisch, wenn Excel mit Daten rechnen soll?</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="slide content" id="folie-6">
+        <div class="slide-inner wide">
+          <p class="eyebrow">Datei vorbereiten</p>
+          <h2>Speichere deine Arbeitsmappe</h2>
+          <div class="task-stack">
+            <article class="task-card">
+              <h3>Auftrag</h3>
+              <p>Speichere deine Datei mit einem sinnvollen Namen, zum Beispiel <span class="formula">notenrechner-vorname.xlsx</span>.</p>
+            </article>
+            <article class="hint-card">
+              <h3>Wenn du nicht weiterkommst</h3>
+              <p>Klicke auf <strong>Datei</strong> &gt; <strong>Speichern unter</strong> &gt; wähle deinen Ordner &gt; gib den Dateinamen ein &gt; <strong>Speichern</strong>.</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="slide content" id="folie-7">
+        <div class="slide-inner wide">
+          <p class="eyebrow">Datenmodell</p>
+          <h2>Lege deine Tabelle an</h2>
+          <table class="mini-table" aria-label="Beispieltabelle mit Fach und Note">
+            <thead>
+              <tr>
+                <th>Fach</th>
+                <th>Note</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Deutsch</td>
+                <td></td>
+              </tr>
+              <tr>
+                <td>Mathematik</td>
+                <td></td>
+              </tr>
+              <tr>
+                <td>Englisch</td>
+                <td></td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="task-stack">
+            <article class="task-card">
+              <h3>Auftrag</h3>
+              <p>Schreibe in <span class="formula">A1</span> die Überschrift <strong>Fach</strong> und in <span class="formula">B1</span> die Überschrift <strong>Note</strong>.</p>
+            </article>
+            <article class="hint-card">
+              <h3>Wenn du nicht weiterkommst</h3>
+              <p>Klicke in <span class="formula">A1</span>, tippe <strong>Fach</strong>, drücke <strong>Tab</strong>, tippe <strong>Note</strong>.</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="slide content" id="folie-8">
+        <div class="slide-inner wide">
+          <p class="eyebrow">Daten eintragen</p>
+          <h2>Fächer ergänzen</h2>
+          <div class="task-stack">
+            <article class="task-card">
+              <h3>Auftrag</h3>
+              <p>Trage mindestens acht Fächer ein. Nutze deine echten Fächer oder die Beispiele unten.</p>
+            </article>
+          </div>
+          <div class="excel-grid">
+            <article class="excel-card"><strong>Beispiele 1</strong><span>Deutsch, Mathematik, Englisch</span></article>
+            <article class="excel-card"><strong>Beispiele 2</strong><span>Biologie, Geschichte, Sport</span></article>
+            <article class="excel-card"><strong>Beispiele 3</strong><span>Kunst, Musik, Informatik</span></article>
+          </div>
+        </div>
+      </section>
+
+      <section class="slide content" id="folie-9">
+        <div class="slide-inner wide">
+          <p class="eyebrow">Datenqualität</p>
+          <h2>Noten eintragen</h2>
+          <div class="task-stack">
+            <article class="task-card">
+              <h3>Auftrag</h3>
+              <p>Trage Beispielnoten von <span class="formula">1</span> bis <span class="formula">6</span> ein. Die Noten dürfen erfunden sein.</p>
+            </article>
+            <article class="check-card">
+              <h3>Denkfrage</h3>
+              <p>Warum sollte in der Spalte <strong>Note</strong> nur eine Zahl stehen und kein Text wie <strong>gut</strong>?</p>
+            </article>
+            <article class="hint-card">
+              <h3>Wenn du nicht weiterkommst</h3>
+              <p>Klicke in <span class="formula">B2</span>, tippe eine Note, drücke <strong>Enter</strong> und wiederhole das bis zur letzten Fachzeile.</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="slide content" id="folie-10">
+        <div class="slide-inner wide">
+          <p class="eyebrow">Lesbarkeit</p>
+          <h2>Formatiere deine Tabelle</h2>
+          <div class="task-stack">
+            <article class="task-card">
+              <h3>Auftrag</h3>
+              <p>Mach deine Tabelle übersichtlich: Überschriften fett, Spalten passend breit, Rahmen setzen, Noten zentrieren.</p>
+            </article>
+            <article class="hint-card">
+              <h3>Wenn du nicht weiterkommst</h3>
+              <p>Fett: <span class="formula">A1:B1</span> markieren &gt; Register <strong>Start</strong> &gt; <strong>F</strong>. Rahmen: Bereich markieren &gt; <strong>Start</strong> &gt; Rahmen-Symbol.</p>
+              <p>Spaltenbreite: Doppelklick auf die Grenze zwischen den Spaltenbuchstaben. Zentrieren: Notenzellen markieren &gt; <strong>Start</strong> &gt; Zentrieren-Symbol.</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="slide content" id="folie-11">
+        <div class="slide-inner wide">
+          <p class="eyebrow">Formelprinzip</p>
+          <h2>Formeln beginnen mit =</h2>
+          <p class="lead">Excel erkennt eine Rechnung daran, dass sie mit einem Gleichheitszeichen beginnt.</p>
+          <div class="task-stack">
+            <article class="task-card">
+              <h3>Auftrag</h3>
+              <p>Teste in einer freien Zelle die Formel <span class="formula">=2+3</span>.</p>
+            </article>
+            <article class="hint-card">
+              <h3>Wenn du nicht weiterkommst</h3>
+              <p>Klicke zum Beispiel in <span class="formula">D2</span>, tippe <span class="formula">=2+3</span> und drücke <strong>Enter</strong>.</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="slide content" id="folie-12">
+        <div class="slide-inner wide">
+          <p class="eyebrow">Zellbezüge</p>
+          <h2>Rechne mit Zellen</h2>
+          <p class="lead">Eine Formel kann direkt auf Zellen zeigen. Dann bleibt sie mit den Daten verbunden.</p>
+          <div class="task-stack">
+            <article class="task-card">
+              <h3>Auftrag</h3>
+              <p>Schreibe zwei Zahlen in freie Zellen und addiere sie mit Zellbezug.</p>
+            </article>
+            <article class="hint-card">
+              <h3>Wenn du nicht weiterkommst</h3>
+              <p>Schreibe <span class="formula">2</span> in <span class="formula">D2</span>, <span class="formula">3</span> in <span class="formula">D3</span> und in <span class="formula">D4</span> die Formel <span class="formula">=D2+D3</span>.</p>
+            </article>
+            <article class="check-card">
+              <h3>Check</h3>
+              <p>Ändere <span class="formula">D2</span>. Verändert sich das Ergebnis in <span class="formula">D4</span>?</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="slide content" id="folie-13">
+        <div class="slide-inner wide">
+          <p class="eyebrow">Funktion</p>
+          <h2>Durchschnitt berechnen</h2>
+          <p class="lead">Die Funktion <span class="formula">MITTELWERT</span> berechnet den Durchschnitt eines Zellbereichs.</p>
+          <div class="task-stack">
+            <article class="task-card">
+              <h3>Auftrag</h3>
+              <p>Berechne unter deinen Noten die Durchschnittsnote mit <span class="formula">=MITTELWERT(B2:B9)</span>.</p>
+            </article>
+            <article class="hint-card">
+              <h3>Wenn du nicht weiterkommst</h3>
+              <p>Klicke unter die letzte Note, zum Beispiel in <span class="formula">B10</span>. Tippe <span class="formula">=MITTELWERT(B2:B9)</span> und drücke <strong>Enter</strong>.</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="slide content" id="folie-14">
+        <div class="slide-inner wide">
+          <p class="eyebrow">Bereiche</p>
+          <h2>Was bedeutet B2:B9?</h2>
+          <p class="lead">Der Doppelpunkt beschreibt einen Bereich: von der ersten bis zur letzten Zelle.</p>
+          <div class="excel-grid">
+            <article class="excel-card"><strong>B2:B9</strong><span>Alle Zellen von B2 bis B9.</span></article>
+            <article class="excel-card"><strong>A1:C1</strong><span>Die Zellen A1, B1 und C1 in einer Zeile.</span></article>
+            <article class="excel-card"><strong>A1:C5</strong><span>Ein rechteckiger Bereich über mehrere Zeilen und Spalten.</span></article>
+          </div>
+          <div class="task-stack">
+            <article class="check-card">
+              <h3>Kontrollfrage</h3>
+              <p>Welcher Bereich enthält alle Noten in deiner eigenen Tabelle?</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="slide content" id="folie-15">
+        <div class="slide-inner wide">
+          <p class="eyebrow">Automatik</p>
+          <h2>Teste das Neuberechnen</h2>
+          <div class="task-stack">
+            <article class="task-card">
+              <h3>Auftrag</h3>
+              <p>Ändere eine Note und beobachte, ob sich der Durchschnitt automatisch verändert.</p>
+            </article>
+            <article class="check-card">
+              <h3>Check</h3>
+              <p>Wenn sich nichts verändert: Prüfe, ob deine Durchschnittsformel auf die richtige Notenspalte zeigt.</p>
+            </article>
+            <article class="hint-card">
+              <h3>Wenn du nicht weiterkommst</h3>
+              <p>Klicke die Durchschnittszelle an. In der Bearbeitungsleiste oben siehst du die Formel und kannst den Bereich korrigieren.</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="slide split" id="folie-16">
+        <div class="slide-inner wide">
+          <p class="eyebrow">Fehlersuche</p>
+          <h2>Typische Fehler finden</h2>
+          <ul>
+            <li>Eine Note steht außerhalb des Formelbereichs.</li>
+            <li>Eine Note wurde als Text eingetragen.</li>
+            <li>Die Formel steht mitten im Notenbereich.</li>
+            <li>Die Durchschnittszelle wurde versehentlich mitgerechnet.</li>
+          </ul>
+          <div class="task-stack">
+            <article class="task-card">
+              <h3>Auftrag</h3>
+              <p>Prüfe deine Formel und korrigiere mindestens einen möglichen Fehler bewusst.</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="slide content" id="folie-17">
+        <div class="slide-inner wide">
+          <p class="eyebrow">Weitere Funktionen</p>
+          <h2>Beste und schlechteste Note</h2>
+          <div class="task-stack">
+            <article class="task-card">
+              <h3>Auftrag</h3>
+              <p>Ergänze zwei Zeilen: <strong>Beste Note</strong> und <strong>Schlechteste Note</strong>.</p>
+            </article>
+            <article class="hint-card">
+              <h3>Wenn du nicht weiterkommst</h3>
+              <p>Beste Note, wenn 1 die beste Note ist: <span class="formula">=MIN(B2:B9)</span></p>
+              <p>Schlechteste Note: <span class="formula">=MAX(B2:B9)</span></p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="slide content" id="folie-18">
+        <div class="slide-inner wide">
+          <p class="eyebrow">Zählen</p>
+          <h2>Anzahl der Noten</h2>
+          <p class="lead">Die Funktion <span class="formula">ANZAHL</span> zählt, wie viele Zahlen in einem Bereich stehen.</p>
+          <div class="task-stack">
+            <article class="task-card">
+              <h3>Auftrag</h3>
+              <p>Ergänze eine Zeile <strong>Anzahl Noten</strong> und berechne, wie viele Noten eingetragen sind.</p>
+            </article>
+            <article class="hint-card">
+              <h3>Wenn du nicht weiterkommst</h3>
+              <p>Nutze die Formel <span class="formula">=ANZAHL(B2:B9)</span>.</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="slide content" id="folie-19">
+        <div class="slide-inner wide">
+          <p class="eyebrow">Automatische Gestaltung</p>
+          <h2>Bedingte Formatierung</h2>
+          <p class="lead">Excel kann Zellen automatisch einfärben, wenn eine Regel erfüllt ist.</p>
+          <div class="task-stack">
+            <article class="task-card">
+              <h3>Auftrag</h3>
+              <p>Markiere gute und schwache Noten automatisch farbig.</p>
+            </article>
+            <article class="hint-card">
+              <h3>Wenn du nicht weiterkommst</h3>
+              <p>Markiere die Noten &gt; <strong>Start</strong> &gt; <strong>Bedingte Formatierung</strong> &gt; <strong>Regeln zum Hervorheben von Zellen</strong> oder <strong>Neue Regel</strong>.</p>
+              <p>Vorschlag: kleiner oder gleich 2 grün, zwischen 3 und 4 gelb, größer oder gleich 5 rot.</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="slide content" id="folie-20">
+        <div class="slide-inner wide">
+          <p class="eyebrow">Darstellung</p>
+          <h2>Diagramm erstellen</h2>
+          <div class="task-stack">
+            <article class="task-card">
+              <h3>Auftrag</h3>
+              <p>Erstelle ein Säulendiagramm oder Balkendiagramm aus Fächern und Noten.</p>
+            </article>
+            <article class="hint-card">
+              <h3>Wenn du nicht weiterkommst</h3>
+              <p>Markiere <span class="formula">A1:B9</span> &gt; <strong>Einfügen</strong> &gt; <strong>Säulendiagramm</strong> oder <strong>Balkendiagramm</strong>.</p>
+            </article>
+            <article class="check-card">
+              <h3>Reflexion</h3>
+              <p>Ist ein Diagramm bei Noten hilfreich? Was erkennt man schnell, was eher nicht?</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="slide content" id="folie-21">
+        <div class="slide-inner wide">
+          <p class="eyebrow">Challenge 1</p>
+          <h2>Gewichteter Durchschnitt</h2>
+          <table class="mini-table" aria-label="Tabelle mit Gewichtung">
+            <thead>
+              <tr>
+                <th>Fach</th>
+                <th>Note</th>
+                <th>Gewichtung</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Deutsch</td>
+                <td>2</td>
+                <td>2</td>
+              </tr>
+              <tr>
+                <td>Biologie</td>
+                <td>3</td>
+                <td>1</td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="task-stack">
+            <article class="task-card">
+              <h3>Auftrag</h3>
+              <p>Ergänze eine Spalte <strong>Gewichtung</strong>. Hauptfächer zählen doppelt, andere Fächer einfach.</p>
+            </article>
+            <article class="hint-card">
+              <h3>Wenn du nicht weiterkommst</h3>
+              <p>Schreibe in <span class="formula">C1</span> die Überschrift <strong>Gewichtung</strong>. Nutze dann <span class="formula">=SUMMENPRODUKT(B2:B9;C2:C9)/SUMME(C2:C9)</span>.</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="slide content" id="folie-22">
+        <div class="slide-inner wide">
+          <p class="eyebrow">Challenge 2</p>
+          <h2>Notenverbesserungs-Simulator</h2>
+          <p class="lead">Teste Was-wäre-wenn-Fragen: Wie verändert eine zusätzliche Leistung deinen Durchschnitt?</p>
+          <div class="task-stack">
+            <article class="task-card">
+              <h3>Basis-Auftrag</h3>
+              <p>Füge eine Zeile <strong>nächste Leistung</strong> hinzu. Trage verschiedene mögliche Noten ein und beobachte den neuen Durchschnitt.</p>
+            </article>
+            <article class="task-card">
+              <h3>Challenge-Auftrag</h3>
+              <p>Erstelle eine kleine Szenariotabelle mit <strong>mögliche neue Note</strong> und <strong>neuer Durchschnitt</strong>.</p>
+            </article>
+            <article class="hint-card">
+              <h3>Wenn du nicht weiterkommst</h3>
+              <p>Kopiere deine Durchschnittsformel in mehrere Zeilen und passe jeweils die zusätzliche Note an. Vergleiche die Ergebnisse.</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="slide content" id="folie-23">
+        <div class="slide-inner wide">
+          <p class="eyebrow">Challenge 3</p>
+          <h2>Rückmeldung mit WENN</h2>
+          <p class="lead">Mit <span class="formula">WENN</span> kann Excel abhängig von einer Bedingung verschiedene Texte ausgeben.</p>
+          <div class="task-stack">
+            <article class="task-card">
+              <h3>Auftrag</h3>
+              <p>Gib automatisch eine Rückmeldung zu deinem Durchschnitt aus.</p>
+            </article>
+            <article class="hint-card">
+              <h3>Wenn du nicht weiterkommst</h3>
+              <p>Wenn dein Durchschnitt in <span class="formula">B10</span> steht, teste: <span class="formula">=WENN(B10&lt;=2,5;"starker Durchschnitt";"weiter verbessern")</span></p>
+            </article>
+            <article class="check-card">
+              <h3>Denkfrage</h3>
+              <p>Welche Grenze würdest du für eine andere Rückmeldung wählen? Begründe deine Regel.</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="slide agenda" id="folie-24">
+        <div class="slide-inner wide">
+          <p class="eyebrow">Wahlaufgaben</p>
+          <h2>Wähle eine Erweiterung</h2>
+          <ol class="agenda-list">
+            <li>
+              <span>A</span>
+              <div>
+                <strong>Notenverbesserungs-Simulator</strong>
+                <small>Teste mehrere Szenarien für eine zusätzliche Leistung.</small>
+              </div>
+            </li>
+            <li>
+              <span>B</span>
+              <div>
+                <strong>Taschengeld-Planer</strong>
+                <small>Einnahmen, Ausgaben, Restbetrag und Diagramm.</small>
+              </div>
+            </li>
+            <li>
+              <span>C</span>
+              <div>
+                <strong>Klassenumfrage</strong>
+                <small>Antworten sammeln, zählen und als Diagramm auswerten.</small>
+              </div>
+            </li>
+          </ol>
+        </div>
+      </section>
+
+      <section class="slide content" id="folie-25">
+        <div class="slide-inner wide">
+          <p class="eyebrow">Weitere Wahlaufgaben</p>
+          <h2>Mehr Ideen</h2>
+          <div class="excel-grid">
+            <article class="excel-card">
+              <strong>Sportturnier-Tabelle</strong>
+              <span>Teams, Punkte, Tore, Rangliste und Sortierung.</span>
+            </article>
+            <article class="excel-card">
+              <strong>Lernzeit-Tracker</strong>
+              <span>Fach, Lernzeit, Wochensumme und Diagramm.</span>
+            </article>
+            <article class="excel-card">
+              <strong>Eigene Idee</strong>
+              <span>Nutze mindestens eine Formel, eine Formatierung und eine Auswertung.</span>
+            </article>
+          </div>
+          <div class="task-stack">
+            <article class="hint-card">
+              <h3>Wenn du nicht weiterkommst</h3>
+              <p>Starte wie beim Notenrechner: Überlege zuerst, welche Spalten deine Tabelle braucht. Danach fügst du Formeln und Darstellung hinzu.</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="slide content" id="folie-26">
+        <div class="slide-inner wide">
+          <p class="eyebrow">Selbstcheck</p>
+          <h2>Prüfe dein Ergebnis</h2>
+          <div class="level-row">
+            <div class="level">
+              <strong>Basis</strong>
+              <span>Ich habe eine Tabelle aufgebaut, Zelladressen genutzt und den Durchschnitt mit <span class="formula">MITTELWERT</span> berechnet.</span>
+            </div>
+            <div class="level">
+              <strong>Plus</strong>
+              <span>Ich habe <span class="formula">MIN</span>, <span class="formula">MAX</span>, <span class="formula">ANZAHL</span>, bedingte Formatierung oder ein Diagramm ergänzt.</span>
+            </div>
+            <div class="level">
+              <strong>Challenge</strong>
+              <span>Ich habe Gewichtung, Notenverbesserungs-Simulator, <span class="formula">WENN</span> oder eine eigene Wahlaufgabe bearbeitet.</span>
+            </div>
+          </div>
+          <div class="task-stack">
+            <article class="hint-card">
+              <h3>Wenn du nicht weiterkommst</h3>
+              <p>Speichern geht jederzeit mit <strong>Strg + S</strong> oder über <strong>Datei</strong> &gt; <strong>Speichern</strong>.</p>
+            </article>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <div class="deck-nav-shell">
+      <button
+        class="deck-nav-toggle"
+        type="button"
+        aria-label="Foliennavigation ein- oder ausklappen"
+        aria-expanded="false"
+        aria-controls="deck-nav"
+        data-nav-toggle
+      >
+        ...
+      </button>
+      <nav class="deck-nav" id="deck-nav" aria-label="Foliennavigation">
+        <a href="#folie-1" aria-label="Folie 1">1</a>
+        <a href="#folie-2" aria-label="Folie 2">2</a>
+        <a href="#folie-3" aria-label="Folie 3">3</a>
+        <a href="#folie-4" aria-label="Folie 4">4</a>
+        <a href="#folie-5" aria-label="Folie 5">5</a>
+        <a href="#folie-6" aria-label="Folie 6">6</a>
+        <a href="#folie-7" aria-label="Folie 7">7</a>
+        <a href="#folie-8" aria-label="Folie 8">8</a>
+        <a href="#folie-9" aria-label="Folie 9">9</a>
+        <a href="#folie-10" aria-label="Folie 10">10</a>
+        <a href="#folie-11" aria-label="Folie 11">11</a>
+        <a href="#folie-12" aria-label="Folie 12">12</a>
+        <a href="#folie-13" aria-label="Folie 13">13</a>
+        <a href="#folie-14" aria-label="Folie 14">14</a>
+        <a href="#folie-15" aria-label="Folie 15">15</a>
+        <a href="#folie-16" aria-label="Folie 16">16</a>
+        <a href="#folie-17" aria-label="Folie 17">17</a>
+        <a href="#folie-18" aria-label="Folie 18">18</a>
+        <a href="#folie-19" aria-label="Folie 19">19</a>
+        <a href="#folie-20" aria-label="Folie 20">20</a>
+        <a href="#folie-21" aria-label="Folie 21">21</a>
+        <a href="#folie-22" aria-label="Folie 22">22</a>
+        <a href="#folie-23" aria-label="Folie 23">23</a>
+        <a href="#folie-24" aria-label="Folie 24">24</a>
+        <a href="#folie-25" aria-label="Folie 25">25</a>
+        <a href="#folie-26" aria-label="Folie 26">26</a>
+      </nav>
+    </div>
+    <div class="slide-count" data-deck-status aria-hidden="true">1/26</div>
+    <script src="../../assets/deck.js"></script>
+  </body>
+</html>
