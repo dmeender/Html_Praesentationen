@@ -599,9 +599,14 @@
               <h3>Auftrag</h3>
               <p>Ergänze eine Spalte <strong>Gewichtung</strong>. Hauptfächer zählen doppelt, andere Fächer einfach.</p>
             </article>
+            <article class="check-card">
+              <h3>Leitfragen</h3>
+              <p>Welche Fächer sollen stärker zählen? Welche Zahl steht für einfache Gewichtung, welche für doppelte Gewichtung?</p>
+            </article>
             <article class="hint-card">
               <h3>Wenn du nicht weiterkommst</h3>
               <p>Schreibe in <span class="formula">C1</span> die Überschrift <strong>Gewichtung</strong>. Nutze dann <span class="formula">=SUMMENPRODUKT(B2:B9;C2:C9)/SUMME(C2:C9)</span>.</p>
+              <p>Denke so: Jede Note wird zuerst mit ihrer Gewichtung multipliziert. Danach wird durch die Summe aller Gewichtungen geteilt.</p>
             </article>
           </div>
         </div>
@@ -621,9 +626,14 @@
               <h3>Challenge-Auftrag</h3>
               <p>Erstelle eine kleine Szenariotabelle mit <strong>mögliche neue Note</strong> und <strong>neuer Durchschnitt</strong>.</p>
             </article>
+            <article class="check-card">
+              <h3>Leitfragen</h3>
+              <p>Welche neue Note möchtest du testen? Wird die neue Leistung wie ein normales Fach gezählt oder gehört sie zu einem bestimmten Fach?</p>
+            </article>
             <article class="hint-card">
               <h3>Wenn du nicht weiterkommst</h3>
               <p>Kopiere deine Durchschnittsformel in mehrere Zeilen und passe jeweils die zusätzliche Note an. Vergleiche die Ergebnisse.</p>
+              <p>Starte mit drei Szenarien: neue Note <span class="formula">1</span>, <span class="formula">3</span> und <span class="formula">5</span>. Beschreibe danach in einem Satz, was sich verändert.</p>
             </article>
           </div>
         </div>
@@ -639,9 +649,14 @@
               <h3>Auftrag</h3>
               <p>Gib automatisch eine Rückmeldung zu deinem Durchschnitt aus.</p>
             </article>
+            <article class="check-card">
+              <h3>Leitfragen</h3>
+              <p>Welche Grenze ist sinnvoll? Welche Rückmeldung soll erscheinen, wenn die Bedingung stimmt? Welche, wenn sie nicht stimmt?</p>
+            </article>
             <article class="hint-card">
               <h3>Wenn du nicht weiterkommst</h3>
               <p>Wenn dein Durchschnitt in <span class="formula">B10</span> steht, teste: <span class="formula">=WENN(B10&lt;=2,5;"starker Durchschnitt";"weiter verbessern")</span></p>
+              <p>Aufbau: <span class="formula">=WENN(Bedingung;"Text wenn wahr";"Text wenn falsch")</span></p>
             </article>
             <article class="check-card">
               <h3>Denkfrage</h3>
@@ -654,61 +669,167 @@
       <section class="slide agenda" id="folie-24">
         <div class="slide-inner wide">
           <p class="eyebrow">Wahlaufgaben</p>
-          <h2>Wähle eine Erweiterung</h2>
-          <ol class="agenda-list">
-            <li>
-              <span>A</span>
-              <div>
-                <strong>Notenverbesserungs-Simulator</strong>
-                <small>Teste mehrere Szenarien für eine zusätzliche Leistung.</small>
-              </div>
-            </li>
-            <li>
-              <span>B</span>
-              <div>
-                <strong>Taschengeld-Planer</strong>
-                <small>Einnahmen, Ausgaben, Restbetrag und Diagramm.</small>
-              </div>
-            </li>
-            <li>
-              <span>C</span>
-              <div>
-                <strong>Klassenumfrage</strong>
-                <small>Antworten sammeln, zählen und als Diagramm auswerten.</small>
-              </div>
-            </li>
-          </ol>
+          <h2>So planst du deine Erweiterung</h2>
+          <div class="level-row">
+            <div class="level">
+              <strong>1. Thema</strong>
+              <span>Was möchtest du auswerten: Geld, Umfrage, Turnier, Lernzeit oder eine eigene Idee?</span>
+            </div>
+            <div class="level">
+              <strong>2. Spalten</strong>
+              <span>Welche Spalten brauche ich? Jede Spalte sollte genau eine Art von Information enthalten.</span>
+            </div>
+            <div class="level">
+              <strong>3. Auswertung</strong>
+              <span>Welche Formel passt? Nutze mindestens eine Rechnung und eine Darstellung.</span>
+            </div>
+          </div>
+          <div class="task-stack">
+            <article class="check-card">
+              <h3>Planungsschritte</h3>
+              <p>Skizziere zuerst auf Papier oder in freien Excel-Zellen: Überschriften, Beispieldaten, Formel und gewünschtes Diagramm.</p>
+            </article>
+          </div>
         </div>
       </section>
 
       <section class="slide content" id="folie-25">
         <div class="slide-inner wide">
-          <p class="eyebrow">Weitere Wahlaufgaben</p>
-          <h2>Mehr Ideen</h2>
-          <div class="excel-grid">
-            <article class="excel-card">
-              <strong>Sportturnier-Tabelle</strong>
-              <span>Teams, Punkte, Tore, Rangliste und Sortierung.</span>
-            </article>
-            <article class="excel-card">
-              <strong>Lernzeit-Tracker</strong>
-              <span>Fach, Lernzeit, Wochensumme und Diagramm.</span>
-            </article>
-            <article class="excel-card">
-              <strong>Eigene Idee</strong>
-              <span>Nutze mindestens eine Formel, eine Formatierung und eine Auswertung.</span>
-            </article>
-          </div>
+          <p class="eyebrow">Wahlaufgabe A</p>
+          <h2>Taschengeld-Planer</h2>
+          <table class="mini-table" aria-label="Spalten fuer Taschengeld-Planer">
+            <thead>
+              <tr>
+                <th>Datum</th>
+                <th>Beschreibung</th>
+                <th>Einnahme</th>
+                <th>Ausgabe</th>
+                <th>Restbetrag</th>
+              </tr>
+            </thead>
+          </table>
           <div class="task-stack">
+            <article class="check-card">
+              <h3>Leitfragen</h3>
+              <p>Welche Einnahmen gibt es? Welche Ausgaben sind regelmäßig? Welche Aussage soll dein Diagramm zeigen?</p>
+            </article>
             <article class="hint-card">
               <h3>Wenn du nicht weiterkommst</h3>
-              <p>Starte wie beim Notenrechner: Überlege zuerst, welche Spalten deine Tabelle braucht. Danach fügst du Formeln und Darstellung hinzu.</p>
+              <p>Nutze für die Gesamteinnahmen <span class="formula">=SUMME(C2:C10)</span>, für die Gesamtausgaben <span class="formula">=SUMME(D2:D10)</span> und für den Restbetrag Einnahmen minus Ausgaben.</p>
+              <p>Diagrammidee: Vergleiche Einnahmen und Ausgaben als Säulendiagramm.</p>
             </article>
           </div>
         </div>
       </section>
 
       <section class="slide content" id="folie-26">
+        <div class="slide-inner wide">
+          <p class="eyebrow">Wahlaufgabe B</p>
+          <h2>Klassenumfrage</h2>
+          <table class="mini-table" aria-label="Spalten fuer Klassenumfrage">
+            <thead>
+              <tr>
+                <th>Name oder Nummer</th>
+                <th>Antwort</th>
+                <th>Kategorie</th>
+              </tr>
+            </thead>
+          </table>
+          <div class="task-stack">
+            <article class="check-card">
+              <h3>Leitfragen</h3>
+              <p>Welche Frage ist eindeutig beantwortbar? Welche Antwortmöglichkeiten gibt es? Welche Antwort soll gezählt werden?</p>
+            </article>
+            <article class="hint-card">
+              <h3>Wenn du nicht weiterkommst</h3>
+              <p>Beispielfrage: <strong>Wie kommst du zur Schule?</strong> Antwortmöglichkeiten: Bus, Fahrrad, zu Fuß, Auto.</p>
+              <p>Eine Antwort zählen: <span class="formula">=ZÄHLENWENN(B2:B30;"Bus")</span>. Diagrammidee: Kreisdiagramm oder Säulendiagramm der Antwortzahlen.</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="slide content" id="folie-27">
+        <div class="slide-inner wide">
+          <p class="eyebrow">Wahlaufgabe C</p>
+          <h2>Sportturnier-Tabelle</h2>
+          <table class="mini-table" aria-label="Spalten fuer Sportturnier-Tabelle">
+            <thead>
+              <tr>
+                <th>Team</th>
+                <th>Siege</th>
+                <th>Unentschieden</th>
+                <th>Niederlagen</th>
+                <th>Punkte gesamt</th>
+              </tr>
+            </thead>
+          </table>
+          <div class="task-stack">
+            <article class="check-card">
+              <h3>Leitfragen</h3>
+              <p>Wie viele Punkte gibt es für Sieg, Unentschieden und Niederlage? Nach welcher Spalte soll die Rangliste sortiert werden?</p>
+            </article>
+            <article class="hint-card">
+              <h3>Wenn du nicht weiterkommst</h3>
+              <p>Bei 3 Punkten für Sieg und 1 Punkt für Unentschieden: <span class="formula">=B2*3+C2*1</span>.</p>
+              <p>Sortieren: Tabelle markieren &gt; <strong>Daten</strong> &gt; <strong>Sortieren</strong> &gt; nach <strong>Punkte gesamt</strong> absteigend.</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="slide content" id="folie-28">
+        <div class="slide-inner wide">
+          <p class="eyebrow">Wahlaufgabe D</p>
+          <h2>Lernzeit-Tracker</h2>
+          <table class="mini-table" aria-label="Spalten fuer Lernzeit-Tracker">
+            <thead>
+              <tr>
+                <th>Fach</th>
+                <th>Montag</th>
+                <th>Dienstag</th>
+                <th>Mittwoch</th>
+                <th>Wochensumme</th>
+              </tr>
+            </thead>
+          </table>
+          <div class="task-stack">
+            <article class="check-card">
+              <h3>Leitfragen</h3>
+              <p>Erfasst du Minuten oder Stunden? Vergleichst du Fächer, Wochentage oder deine gesamte Lernzeit?</p>
+            </article>
+            <article class="hint-card">
+              <h3>Wenn du nicht weiterkommst</h3>
+              <p>Wochensumme für ein Fach: <span class="formula">=SUMME(B2:F2)</span>. Gesamte Lernzeit: <span class="formula">=SUMME(G2:G8)</span>.</p>
+              <p>Diagrammidee: Säulendiagramm mit Fach und Wochensumme.</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="slide content" id="folie-29">
+        <div class="slide-inner wide">
+          <p class="eyebrow">Wahlaufgabe E</p>
+          <h2>Eigene Idee entwickeln</h2>
+          <div class="task-stack">
+            <article class="task-card">
+              <h3>Auftrag</h3>
+              <p>Entwickle eine eigene Excel-Auswertung mit mindestens einer Formel, einer Formatierung und einer grafischen Darstellung.</p>
+            </article>
+            <article class="check-card">
+              <h3>Leitfragen</h3>
+              <p>Welche Daten sammelst du? Welche Spalten brauche ich? Welche Formel passt? Welche Aussage soll dein Diagramm zeigen?</p>
+            </article>
+            <article class="hint-card">
+              <h3>Wenn du nicht weiterkommst</h3>
+              <p>Wähle ein Thema mit Zahlen: Bildschirmzeit, Schritte, Trainingsplan, Punkte in einem Spiel oder Temperaturwerte.</p>
+              <p>Starte mit drei Spalten: <strong>Kategorie</strong>, <strong>Wert</strong>, <strong>Bemerkung</strong>. Ergänze danach <span class="formula">SUMME</span>, <span class="formula">MITTELWERT</span> oder ein Diagramm.</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="slide content" id="folie-30">
         <div class="slide-inner wide">
           <p class="eyebrow">Selbstcheck</p>
           <h2>Prüfe dein Ergebnis</h2>
@@ -774,9 +895,13 @@
         <a href="#folie-24" aria-label="Folie 24">24</a>
         <a href="#folie-25" aria-label="Folie 25">25</a>
         <a href="#folie-26" aria-label="Folie 26">26</a>
+        <a href="#folie-27" aria-label="Folie 27">27</a>
+        <a href="#folie-28" aria-label="Folie 28">28</a>
+        <a href="#folie-29" aria-label="Folie 29">29</a>
+        <a href="#folie-30" aria-label="Folie 30">30</a>
       </nav>
     </div>
-    <div class="slide-count" data-deck-status aria-hidden="true">1/26</div>
+    <div class="slide-count" data-deck-status aria-hidden="true">1/30</div>
     <script src="../../assets/deck.js"></script>
   </body>
 </html>

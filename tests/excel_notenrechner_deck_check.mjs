@@ -35,7 +35,16 @@ const requiredTerms = [
   "Taschengeld-Planer",
   "Klassenumfrage",
   "Sportturnier-Tabelle",
-  "Lernzeit-Tracker"
+  "Lernzeit-Tracker",
+  "Leitfragen",
+  "Planungsschritte",
+  "Welche Spalten brauche ich?",
+  "Welche Formel passt?",
+  "SUMME",
+  "ZÄHLENWENN",
+  "Punkte gesamt",
+  "Wochensumme",
+  "Welche Aussage soll dein Diagramm zeigen?"
 ];
 
 for (const term of requiredTerms) {
@@ -43,13 +52,16 @@ for (const term of requiredTerms) {
 }
 
 const helperCount = (deck.match(/Wenn du nicht weiterkommst/g) || []).length;
-assert.ok(helperCount >= 12, `Expected at least 12 fallback hints, found ${helperCount}`);
+assert.ok(helperCount >= 18, `Expected at least 18 fallback hints, found ${helperCount}`);
 
 const challengeCount = (deck.match(/Challenge/g) || []).length;
 assert.ok(challengeCount >= 3, `Expected at least 3 challenge markers, found ${challengeCount}`);
 
+const planningPromptCount = (deck.match(/Leitfragen|Planungsschritte|Denkfrage/g) || []).length;
+assert.ok(planningPromptCount >= 10, `Expected at least 10 planning prompts, found ${planningPromptCount}`);
+
 const slideCount = (deck.match(/<section class="slide/g) || []).length;
-assert.ok(slideCount >= 24, `Expected at least 24 slides, found ${slideCount}`);
+assert.ok(slideCount >= 30, `Expected at least 30 slides, found ${slideCount}`);
 
 const navCount = (deck.match(/href="#folie-/g) || []).length;
 assert.equal(navCount, slideCount, "Navigation should contain one link per slide");
