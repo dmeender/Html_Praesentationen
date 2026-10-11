@@ -1,0 +1,726 @@
+<!doctype html>
+<html lang="de">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <meta name="theme-color" content="#07111f">
+    <title>LearnPocket – Status Version 1.0</title>
+    <style>
+      :root {
+        color-scheme: dark;
+        --ink: #f7fbff;
+        --muted: #a7b6c8;
+        --dim: #718197;
+        --bg: #07111f;
+        --bg-soft: #0c192a;
+        --panel: rgba(17, 34, 54, 0.78);
+        --panel-solid: #102238;
+        --line: rgba(167, 199, 229, 0.16);
+        --blue: #55b7ff;
+        --cyan: #4fe0d0;
+        --green: #70df9b;
+        --amber: #ffc86b;
+        --red: #ff8f8f;
+        --shadow: 0 24px 70px rgba(0, 0, 0, 0.34);
+        --radius: 24px;
+      }
+
+      * { box-sizing: border-box; }
+      html, body { margin: 0; height: 100%; }
+      html { background: var(--bg); scroll-behavior: smooth; }
+      body {
+        overflow: hidden;
+        color: var(--ink);
+        background:
+          radial-gradient(circle at 12% 8%, rgba(85, 183, 255, 0.16), transparent 32rem),
+          radial-gradient(circle at 90% 88%, rgba(79, 224, 208, 0.10), transparent 34rem),
+          var(--bg);
+        font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      }
+
+      button, a { font: inherit; }
+      button { color: inherit; }
+      a { color: inherit; }
+      .deck {
+        display: flex;
+        width: 100vw;
+        height: 100dvh;
+        overflow-x: auto;
+        overflow-y: hidden;
+        scroll-snap-type: x mandatory;
+        scrollbar-width: none;
+      }
+      .deck::-webkit-scrollbar { display: none; }
+
+      .slide {
+        position: relative;
+        flex: 0 0 100vw;
+        width: 100vw;
+        height: 100dvh;
+        overflow: hidden;
+        scroll-snap-align: start;
+        isolation: isolate;
+      }
+      .slide::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        z-index: -2;
+        background-image:
+          linear-gradient(rgba(255,255,255,.025) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(255,255,255,.025) 1px, transparent 1px);
+        background-size: 44px 44px;
+        mask-image: linear-gradient(to bottom, rgba(0,0,0,.7), transparent 88%);
+      }
+      .slide::after {
+        content: "";
+        position: absolute;
+        width: 34vw;
+        aspect-ratio: 1;
+        right: -15vw;
+        top: -16vw;
+        z-index: -1;
+        border-radius: 50%;
+        background: rgba(85,183,255,.09);
+        filter: blur(1px);
+      }
+
+      .frame {
+        width: min(1440px, calc(100% - clamp(40px, 7vw, 112px)));
+        height: 100%;
+        margin: 0 auto;
+        padding: clamp(36px, 6vh, 72px) 0 clamp(64px, 8vh, 92px);
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+      }
+      .frame.top { justify-content: flex-start; }
+
+      .kicker {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        margin: 0 0 18px;
+        color: var(--cyan);
+        font-size: clamp(.76rem, 1.1vw, .96rem);
+        font-weight: 800;
+        letter-spacing: .16em;
+        text-transform: uppercase;
+      }
+      .kicker::before {
+        content: "";
+        width: 28px;
+        height: 2px;
+        background: currentColor;
+        box-shadow: 10px 0 18px currentColor;
+      }
+      h1, h2, h3, p { margin-top: 0; }
+      h1 {
+        max-width: 1040px;
+        margin-bottom: 24px;
+        font-size: clamp(3.1rem, 7.1vw, 7.2rem);
+        line-height: .94;
+        letter-spacing: -.065em;
+      }
+      h2 {
+        max-width: 1120px;
+        margin-bottom: clamp(22px, 4vh, 42px);
+        font-size: clamp(2.25rem, 4.6vw, 5rem);
+        line-height: 1;
+        letter-spacing: -.045em;
+      }
+      h3 {
+        margin-bottom: 10px;
+        font-size: clamp(1.05rem, 1.55vw, 1.42rem);
+        line-height: 1.18;
+      }
+      p { color: var(--muted); line-height: 1.5; }
+      .lead {
+        max-width: 890px;
+        margin-bottom: 0;
+        font-size: clamp(1.18rem, 2vw, 1.85rem);
+        line-height: 1.5;
+      }
+      .accent { color: var(--cyan); }
+      .blue { color: var(--blue); }
+      .good { color: var(--green); }
+      .warn { color: var(--amber); }
+      .quiet { color: var(--dim); }
+
+      .title-layout {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) minmax(270px, .42fr);
+        align-items: center;
+        gap: clamp(36px, 6vw, 110px);
+      }
+      .app-orbit {
+        position: relative;
+        display: grid;
+        place-items: center;
+        width: min(29vw, 380px);
+        aspect-ratio: 1;
+        justify-self: end;
+        border: 1px solid rgba(85,183,255,.26);
+        border-radius: 50%;
+        box-shadow: inset 0 0 80px rgba(85,183,255,.07), 0 0 80px rgba(79,224,208,.06);
+      }
+      .app-orbit::before, .app-orbit::after {
+        content: "";
+        position: absolute;
+        border: 1px dashed rgba(79,224,208,.22);
+        border-radius: 50%;
+      }
+      .app-orbit::before { inset: 12%; }
+      .app-orbit::after { inset: -8%; }
+      .app-mark {
+        display: grid;
+        place-items: center;
+        width: 42%;
+        aspect-ratio: 1;
+        border-radius: 29%;
+        background: linear-gradient(145deg, #62c4ff, #32cdbd);
+        color: #062033;
+        font-size: clamp(2rem, 4vw, 4rem);
+        font-weight: 950;
+        letter-spacing: -.08em;
+        box-shadow: 0 20px 60px rgba(79,224,208,.26);
+      }
+      .version-chip {
+        position: absolute;
+        right: -4%;
+        bottom: 15%;
+        padding: 10px 14px;
+        border: 1px solid rgba(112,223,155,.32);
+        border-radius: 999px;
+        background: rgba(7,17,31,.9);
+        color: var(--green);
+        font-weight: 800;
+      }
+
+      .grid-4, .grid-3, .grid-2 {
+        display: grid;
+        gap: clamp(14px, 1.8vw, 24px);
+      }
+      .grid-4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+      .grid-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+      .grid-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .card {
+        min-width: 0;
+        padding: clamp(20px, 2.2vw, 32px);
+        border: 1px solid var(--line);
+        border-radius: var(--radius);
+        background: linear-gradient(145deg, rgba(19,40,64,.84), rgba(11,27,46,.74));
+        box-shadow: var(--shadow);
+        backdrop-filter: blur(16px);
+      }
+      .card.compact { padding: clamp(18px, 1.8vw, 26px); }
+      .card .label {
+        display: block;
+        margin-bottom: 14px;
+        color: var(--dim);
+        font-size: .74rem;
+        font-weight: 850;
+        letter-spacing: .13em;
+        text-transform: uppercase;
+      }
+      .metric {
+        display: block;
+        margin-bottom: 14px;
+        color: var(--ink);
+        font-size: clamp(2rem, 4vw, 4.4rem);
+        font-weight: 900;
+        line-height: .95;
+        letter-spacing: -.055em;
+      }
+      .card p { margin-bottom: 0; font-size: clamp(.92rem, 1.25vw, 1.16rem); }
+      .icon {
+        display: grid;
+        place-items: center;
+        width: 46px;
+        height: 46px;
+        margin-bottom: 20px;
+        border-radius: 15px;
+        background: rgba(85,183,255,.12);
+        color: var(--blue);
+        font-weight: 950;
+      }
+      .icon.green { background: rgba(112,223,155,.12); color: var(--green); }
+      .icon.amber { background: rgba(255,200,107,.12); color: var(--amber); }
+
+      .flow {
+        display: grid;
+        grid-template-columns: 1fr auto 1fr auto 1fr;
+        align-items: stretch;
+        gap: clamp(12px, 1.5vw, 22px);
+      }
+      .flow-step { min-height: 240px; }
+      .flow-no {
+        color: var(--cyan);
+        font-size: .85rem;
+        font-weight: 900;
+        letter-spacing: .12em;
+      }
+      .flow-arrow { align-self: center; color: var(--dim); font-size: 1.6rem; }
+      .tag-row { display: flex; flex-wrap: wrap; gap: 9px; margin-top: 20px; }
+      .tag {
+        padding: 7px 10px;
+        border: 1px solid var(--line);
+        border-radius: 999px;
+        color: var(--muted);
+        background: rgba(255,255,255,.025);
+        font-size: .78rem;
+        font-weight: 750;
+      }
+
+      .subject-shell {
+        display: grid;
+        grid-template-columns: 240px minmax(0, 1fr);
+        min-height: min(54vh, 520px);
+        overflow: hidden;
+        border: 1px solid var(--line);
+        border-radius: 30px;
+        background: rgba(12,25,42,.8);
+        box-shadow: var(--shadow);
+      }
+      .side-panel { padding: 28px; border-right: 1px solid var(--line); }
+      .mini-brand { display: flex; gap: 11px; align-items: center; margin-bottom: 30px; font-weight: 850; }
+      .mini-logo { width: 34px; height: 34px; border-radius: 11px; background: linear-gradient(145deg,#62c4ff,#32cdbd); }
+      .side-list { display: grid; gap: 12px; color: var(--muted); font-size: .9rem; }
+      .side-list span:first-child { color: var(--ink); }
+      .subjects { padding: 28px; }
+      .subjects-head { display:flex; align-items:center; justify-content:space-between; gap:20px; margin-bottom:24px; }
+      .subjects-head h3 { margin: 0; font-size: 1.5rem; }
+      .subject-grid { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:14px; }
+      .subject {
+        position:relative;
+        min-height: 128px;
+        padding: 18px;
+        border: 1px solid var(--line);
+        border-radius: 20px;
+        background: rgba(255,255,255,.035);
+      }
+      .subject::before { content:""; display:block; width:34px; height:7px; margin-bottom:24px; border-radius:999px; background:var(--subject); }
+      .subject strong { display:block; margin-bottom:6px; }
+      .subject small { color:var(--dim); }
+      .subject.add { display:grid; place-items:center; color:var(--dim); border-style:dashed; font-size:1.4rem; }
+
+      .privacy-layout { display:grid; grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr); gap:clamp(24px,4vw,64px); align-items:center; }
+      .shield {
+        position: relative;
+        display:grid;
+        place-items:center;
+        width:min(34vw,420px);
+        aspect-ratio:1;
+        margin:auto;
+        border:1px solid rgba(79,224,208,.24);
+        border-radius:50%;
+        background:radial-gradient(circle,rgba(79,224,208,.14),transparent 65%);
+      }
+      .shield-core {
+        display:grid;
+        place-items:center;
+        width:44%;
+        aspect-ratio:1;
+        border-radius:42% 42% 52% 52% / 32% 32% 68% 68%;
+        background:linear-gradient(160deg,rgba(79,224,208,.9),rgba(85,183,255,.72));
+        color:#062033;
+        font-size:3rem;
+        font-weight:950;
+      }
+      .privacy-list { display:grid; gap:14px; }
+      .privacy-item { display:grid; grid-template-columns:34px minmax(0,1fr); gap:14px; padding-bottom:14px; border-bottom:1px solid var(--line); }
+      .privacy-item:last-child { border-bottom:0; }
+      .privacy-item b { color:var(--green); }
+      .privacy-item p { margin:0; font-size:clamp(.95rem,1.25vw,1.12rem); }
+
+      .test-panel { display:grid; grid-template-columns:minmax(0,.72fr) minmax(0,1.28fr); gap:clamp(20px,3vw,44px); align-items:stretch; }
+      .test-score { display:flex; flex-direction:column; justify-content:space-between; min-height:360px; background:linear-gradient(145deg,rgba(31,92,83,.62),rgba(10,35,49,.82)); }
+      .score-ring { display:grid; place-items:center; width:180px; aspect-ratio:1; border-radius:50%; background:conic-gradient(var(--green) 0 100%,rgba(255,255,255,.08) 0); padding:12px; }
+      .score-ring > div { display:grid; place-items:center; width:100%; height:100%; border-radius:50%; background:#0a1c2c; text-align:center; }
+      .score-ring strong { display:block; font-size:2.5rem; line-height:1; }
+      .score-ring small { color:var(--muted); }
+      .evidence { display:grid; gap:14px; }
+      .evidence-row { display:grid; grid-template-columns:15px minmax(0,1fr) auto; gap:14px; align-items:center; padding:18px 20px; border:1px solid var(--line); border-radius:18px; background:rgba(255,255,255,.025); }
+      .dot { width:10px; height:10px; border-radius:50%; background:var(--green); box-shadow:0 0 18px var(--green); }
+      .evidence-row span { color:var(--muted); }
+      .evidence-row b { color:var(--ink); }
+
+      .compare { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:clamp(18px,2.5vw,34px); }
+      .compare .card { min-height:380px; }
+      .list { display:grid; gap:15px; margin:20px 0 0; padding:0; list-style:none; }
+      .list li { position:relative; padding-left:28px; color:var(--muted); font-size:clamp(.95rem,1.25vw,1.15rem); line-height:1.42; }
+      .list li::before { content:""; position:absolute; left:0; top:.48em; width:10px; height:10px; border-radius:50%; background:var(--green); }
+      .compare .pending .list li::before { background:var(--amber); }
+
+      .readiness { display:grid; grid-template-columns:minmax(0,.7fr) minmax(0,1.3fr); gap:clamp(24px,4vw,64px); align-items:center; }
+      .gauge { position:relative; width:min(38vw,430px); aspect-ratio:2/1; overflow:hidden; margin:auto; }
+      .gauge-ring { position:absolute; inset:0; border:52px solid rgba(255,255,255,.07); border-bottom:0; border-radius:430px 430px 0 0; }
+      .gauge-fill { position:absolute; inset:0; border:52px solid transparent; border-top-color:var(--cyan); border-left-color:var(--cyan); border-radius:430px 430px 0 0; transform:rotate(31deg); transform-origin:50% 100%; filter:drop-shadow(0 0 14px rgba(79,224,208,.4)); }
+      .gauge-copy { position:absolute; inset:auto 0 0; text-align:center; }
+      .gauge-copy strong { display:block; font-size:clamp(2rem,4vw,4.2rem); letter-spacing:-.05em; }
+      .gauge-copy span { color:var(--muted); }
+      .recommendation { padding:clamp(26px,3vw,42px); border-left:4px solid var(--cyan); border-radius:0 var(--radius) var(--radius) 0; background:linear-gradient(90deg,rgba(79,224,208,.09),rgba(17,34,54,.46)); }
+      .recommendation p { margin:0; font-size:clamp(1.15rem,1.8vw,1.65rem); line-height:1.5; }
+
+      .steps { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:clamp(16px,2vw,26px); counter-reset:pilot; }
+      .pilot-step { position:relative; min-height:270px; counter-increment:pilot; }
+      .pilot-step::before { content:"0" counter(pilot); display:block; margin-bottom:26px; color:var(--cyan); font-size:.85rem; font-weight:900; letter-spacing:.15em; }
+      .pilot-step p { margin-bottom:0; }
+      .closing-line { margin-top:clamp(26px,4vh,48px); color:var(--ink); font-size:clamp(1.18rem,1.8vw,1.6rem); }
+
+      .chrome {
+        position: fixed;
+        inset: auto 0 0;
+        z-index: 20;
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        padding: 12px max(18px, env(safe-area-inset-right)) max(12px, env(safe-area-inset-bottom)) max(18px, env(safe-area-inset-left));
+        background: linear-gradient(transparent, rgba(7,17,31,.92) 40%);
+      }
+      .progress { flex:1; height:3px; overflow:hidden; border-radius:999px; background:rgba(255,255,255,.1); }
+      .progress > span { display:block; width:11.111%; height:100%; border-radius:inherit; background:linear-gradient(90deg,var(--blue),var(--cyan)); transition:width .25s ease; }
+      .counter { min-width:56px; color:var(--muted); font-size:.82rem; font-variant-numeric:tabular-nums; }
+      .control {
+        display:grid;
+        place-items:center;
+        width:38px;
+        height:38px;
+        border:1px solid var(--line);
+        border-radius:50%;
+        background:rgba(12,25,42,.88);
+        cursor:pointer;
+      }
+      .control:hover, .control:focus-visible { border-color:var(--cyan); outline:none; }
+      .overview {
+        position:fixed;
+        inset:0;
+        z-index:50;
+        display:none;
+        padding:clamp(20px,4vw,56px);
+        overflow:auto;
+        background:rgba(4,10,18,.96);
+        backdrop-filter:blur(20px);
+      }
+      .overview.open { display:block; }
+      .overview-head { display:flex; align-items:center; justify-content:space-between; gap:20px; max-width:1200px; margin:0 auto 26px; }
+      .overview-head h2 { margin:0; font-size:clamp(2rem,4vw,3.8rem); }
+      .overview-grid { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:16px; max-width:1200px; margin:auto; }
+      .overview-link { display:block; padding:22px; border:1px solid var(--line); border-radius:20px; background:var(--panel); text-decoration:none; }
+      .overview-link small { display:block; margin-bottom:10px; color:var(--cyan); font-weight:850; }
+      .overview-link strong { font-size:1.08rem; }
+      .overview-link.active { border-color:var(--cyan); box-shadow:0 0 0 1px var(--cyan); }
+
+      .slide.is-active .reveal { animation:rise .55s both; }
+      .slide.is-active .reveal:nth-child(2) { animation-delay:.08s; }
+      .slide.is-active .reveal:nth-child(3) { animation-delay:.16s; }
+      @keyframes rise { from { opacity:0; transform:translateY(18px); } to { opacity:1; transform:none; } }
+      @media (prefers-reduced-motion: reduce) { *, *::before, *::after { scroll-behavior:auto !important; animation:none !important; transition:none !important; } }
+
+      @media (max-width: 900px) {
+        .frame { width:min(100% - 34px, 760px); padding-top:40px; overflow-y:auto; justify-content:flex-start; }
+        h1 { font-size:clamp(3rem,12vw,5rem); }
+        h2 { font-size:clamp(2.1rem,8vw,3.8rem); }
+        .title-layout, .privacy-layout, .test-panel, .readiness { grid-template-columns:1fr; }
+        .app-orbit, .shield, .gauge { display:none; }
+        .grid-4, .grid-3 { grid-template-columns:repeat(2,minmax(0,1fr)); }
+        .flow { grid-template-columns:1fr; }
+        .flow-arrow { display:none; }
+        .flow-step { min-height:0; }
+        .subject-shell { grid-template-columns:1fr; min-height:0; }
+        .side-panel { display:none; }
+        .subject-grid { grid-template-columns:repeat(3,minmax(0,1fr)); }
+        .compare, .steps { grid-template-columns:1fr; }
+        .compare .card, .pilot-step { min-height:0; }
+        .overview-grid { grid-template-columns:repeat(2,minmax(0,1fr)); }
+      }
+      @media (max-width: 560px) {
+        .grid-4, .grid-3, .grid-2 { grid-template-columns:1fr; }
+        .subject-grid { grid-template-columns:repeat(2,minmax(0,1fr)); }
+        .subject { min-height:104px; }
+        .test-score { min-height:0; }
+        .score-ring { width:130px; }
+        .overview-grid { grid-template-columns:1fr; }
+      }
+    </style>
+  </head>
+  <body>
+    <main class="deck" id="deck" aria-label="LearnPocket Statuspräsentation">
+      <section class="slide" id="folie-1" data-title="LearnPocket Version 1.0">
+        <div class="frame">
+          <div class="title-layout">
+            <div>
+              <p class="kicker reveal">Produktstatus · Juli 2026</p>
+              <h1 class="reveal">LearnPocket ist bereit für den <span class="accent">Praxistest</span></h1>
+              <p class="lead reveal">Ein stabiler MVP zum lokalen Importieren, Ordnen und Offline-Anzeigen schulischer Lernmaterialien auf iPhone und iPad.</p>
+            </div>
+            <div class="app-orbit reveal" aria-hidden="true">
+              <div class="app-mark">LP</div>
+              <span class="version-chip">Version 1.0</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="slide" id="folie-2" data-title="Der Status auf einen Blick">
+        <div class="frame top">
+          <p class="kicker reveal">Management Summary</p>
+          <h2 class="reveal">Die Kernidee funktioniert und ist technisch belastbar</h2>
+          <div class="grid-4 reveal">
+            <article class="card">
+              <span class="label">Reifegrad</span>
+              <strong class="metric good">MVP</strong>
+              <p>Funktionsfähiger erster vollständiger Stand für einen kontrollierten Schuleinsatz.</p>
+            </article>
+            <article class="card">
+              <span class="label">Automatische Tests</span>
+              <strong class="metric">10/10</strong>
+              <p>Alle vorhandenen automatischen Prüfungen laufen erfolgreich.</p>
+            </article>
+            <article class="card">
+              <span class="label">Zielgeräte</span>
+              <strong class="metric blue">iOS 17+</strong>
+              <p>Unterstützt werden iPhone und iPad ab iOS 17.</p>
+            </article>
+            <article class="card">
+              <span class="label">Betriebsmodell</span>
+              <strong class="metric accent">Offline</strong>
+              <p>Materialien bleiben lokal und sind nach dem Import ohne Internet verfügbar.</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="slide" id="folie-3" data-title="Materialien kommen in drei Schritten aufs Gerät">
+        <div class="frame top">
+          <p class="kicker reveal">Materialfluss</p>
+          <h2 class="reveal">Vom Materialpaket zur Offline-Nutzung in drei Schritten</h2>
+          <div class="flow reveal">
+            <article class="card flow-step">
+              <span class="flow-no">01 · Importieren</span>
+              <div class="icon">↓</div>
+              <h3>Flexible Quellen</h3>
+              <p>HTML-Seiten, PDFs, ZIP-Pakete und komplette Materialordner werden übernommen.</p>
+              <div class="tag-row"><span class="tag">Dateien-App</span><span class="tag">Öffnen mit</span></div>
+            </article>
+            <span class="flow-arrow" aria-hidden="true">→</span>
+            <article class="card flow-step">
+              <span class="flow-no">02 · Prüfen</span>
+              <div class="icon amber">Δ</div>
+              <h3>Änderungen erkennen</h3>
+              <p>Vor größeren Ordnerimporten zeigt die App neue, geänderte und veraltete Dateien.</p>
+              <div class="tag-row"><span class="tag">neu</span><span class="tag">geändert</span><span class="tag">veraltet</span></div>
+            </article>
+            <span class="flow-arrow" aria-hidden="true">→</span>
+            <article class="card flow-step">
+              <span class="flow-no">03 · Nutzen</span>
+              <div class="icon green">✓</div>
+              <h3>Lokal anzeigen</h3>
+              <p>Mitgelieferte Bilder, Gestaltung und Dateien bleiben verbunden und funktionieren offline.</p>
+              <div class="tag-row"><span class="tag">ohne Internet</span><span class="tag">auf dem Gerät</span></div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="slide" id="folie-4" data-title="Das Dashboard schafft Ordnung">
+        <div class="frame top">
+          <p class="kicker reveal">Organisation</p>
+          <h2 class="reveal">Das Fächer-Dashboard macht Material schnell auffindbar</h2>
+          <div class="subject-shell reveal" aria-label="Schematische Darstellung des LearnPocket-Dashboards">
+            <aside class="side-panel">
+              <div class="mini-brand"><span class="mini-logo"></span><span>LearnPocket</span></div>
+              <div class="side-list"><span>Meine Fächer</span><span>Material importieren</span><span>LearnPocket-Guide</span><span>Einstellungen</span></div>
+            </aside>
+            <div class="subjects">
+              <div class="subjects-head"><h3>Meine Fächer</h3><span class="tag">bis zu 12 Kacheln</span></div>
+              <div class="subject-grid">
+                <div class="subject" style="--subject:#55b7ff"><strong>Mathematik</strong><small>18 Materialien</small></div>
+                <div class="subject" style="--subject:#70df9b"><strong>Biologie</strong><small>12 Materialien</small></div>
+                <div class="subject" style="--subject:#ffc86b"><strong>Geschichte</strong><small>9 Materialien</small></div>
+                <div class="subject" style="--subject:#c590ff"><strong>Englisch</strong><small>14 Materialien</small></div>
+                <div class="subject" style="--subject:#ff8f8f"><strong>Deutsch</strong><small>11 Materialien</small></div>
+                <div class="subject" style="--subject:#4fe0d0"><strong>Physik</strong><small>7 Materialien</small></div>
+                <div class="subject add" aria-label="Weiteres Fach">+</div>
+              </div>
+            </div>
+          </div>
+          <div class="tag-row reveal"><span class="tag">umbenennen</span><span class="tag">Farbe anpassen</span><span class="tag">leeren</span><span class="tag">löschen</span><span class="tag">eigenes Logo</span><span class="tag">integrierter Guide</span></div>
+        </div>
+      </section>
+
+      <section class="slide" id="folie-5" data-title="Datenschutz beginnt lokal">
+        <div class="frame">
+          <div class="privacy-layout">
+            <div class="shield reveal" aria-hidden="true"><div class="shield-core">✓</div></div>
+            <div>
+              <p class="kicker reveal">Datenschutz</p>
+              <h2 class="reveal">Lokale Speicherung reduziert die zentrale Datenspur</h2>
+              <div class="privacy-list reveal">
+                <div class="privacy-item"><b>✓</b><p><strong>Kein Benutzerkonto:</strong> Die App verlangt keine persönliche Registrierung.</p></div>
+                <div class="privacy-item"><b>✓</b><p><strong>Keine eigene Cloud:</strong> Es gibt derzeit keine zentrale Material- oder Nutzerdatensammlung.</p></div>
+                <div class="privacy-item"><b>✓</b><p><strong>Kontrolliertes Löschen:</strong> Datenschutzerklärung und abgesicherte Löschfunktion sind vorhanden.</p></div>
+                <div class="privacy-item"><b class="warn">!</b><p><strong>Backup-Hinweis:</strong> Normale iPhone- oder iPad-Backups können lokale App-Daten mitsichern.</p></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="slide" id="folie-6" data-title="Die technische Basis ist grün">
+        <div class="frame top">
+          <p class="kicker reveal">Technische Evidenz</p>
+          <h2 class="reveal">Build und vorhandene Tests liefern ein klares grünes Signal</h2>
+          <div class="test-panel reveal">
+            <article class="card test-score">
+              <div><span class="label">Prüfergebnis</span><h3>Alle automatischen Tests bestanden</h3></div>
+              <div class="score-ring"><div><strong>10/10</strong><small>erfolgreich</small></div></div>
+            </article>
+            <div class="evidence">
+              <div class="evidence-row"><i class="dot"></i><span>Build für den iOS-Simulator</span><b>erfolgreich</b></div>
+              <div class="evidence-row"><i class="dot"></i><span>Automatische Tests</span><b>10 bestanden</b></div>
+              <div class="evidence-row"><i class="dot"></i><span>Projektstatus</span><b>keine offenen Änderungen</b></div>
+              <div class="evidence-row"><i class="dot"></i><span>Letzter eingecheckter Stand</span><b>9. Juli 2026</b></div>
+              <div class="card compact"><span class="label warn">Einordnung</span><p>Diese Evidenz bestätigt den stabilen Teststand. Sie ersetzt noch keine längere Erprobung auf vielen echten Schülergeräten.</p></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="slide" id="folie-7" data-title="Der Produktumfang ist bewusst fokussiert">
+        <div class="frame top">
+          <p class="kicker reveal">Abgrenzung</p>
+          <h2 class="reveal">Version 1.0 kann verteilen und anzeigen, aber noch nicht zentral verwalten</h2>
+          <div class="compare reveal">
+            <article class="card">
+              <span class="label good">Heute belastbar</span>
+              <h3>Lokale Materialbibliothek</h3>
+              <ul class="list">
+                <li>Materialien importieren, sortieren und offline öffnen</li>
+                <li>Fächer und Darstellung individuell organisieren</li>
+                <li>Komplexe HTML-Pakete mit Begleitdateien anzeigen</li>
+                <li>Materialbestand vor Aktualisierungen vergleichen</li>
+              </ul>
+            </article>
+            <article class="card pending">
+              <span class="label warn">Noch nicht enthalten oder belegt</span>
+              <h3>Breiter Plattformbetrieb</h3>
+              <ul class="list">
+                <li>Synchronisierung zwischen mehreren Geräten</li>
+                <li>Benutzerkonten und zentrale Materialverteilung</li>
+                <li>Materialerstellung innerhalb der App</li>
+                <li>Automatische Tests der sichtbaren Bedienoberfläche</li>
+                <li>Bestätigte App-Store-Veröffentlichung</li>
+              </ul>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="slide" id="folie-8" data-title="Der nächste Schritt ist ein Pilot">
+        <div class="frame">
+          <div class="readiness">
+            <div class="gauge reveal" aria-hidden="true">
+              <div class="gauge-ring"></div><div class="gauge-fill"></div>
+              <div class="gauge-copy"><strong>Pilotbereit</strong><span>noch nicht flächendeckend validiert</span></div>
+            </div>
+            <div>
+              <p class="kicker reveal">Bewertung</p>
+              <h2 class="reveal">Der richtige nächste Schritt ist ein kontrollierter Schulversuch</h2>
+              <div class="recommendation reveal"><p>Die App kann bereits sinnvoll zum Verteilen und Offline-Anzeigen von Lernmaterialien eingesetzt werden. Vor einem breiten Schuleinsatz sollten reale Abläufe, große Materialsammlungen und verschiedene iPads getestet werden.</p></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="slide" id="folie-9" data-title="Drei Schritte zur Einsatzentscheidung">
+        <div class="frame top">
+          <p class="kicker reveal">Empfohlener Pilot</p>
+          <h2 class="reveal">Drei Schritte schaffen die Grundlage für eine belastbare Einsatzentscheidung</h2>
+          <div class="steps reveal">
+            <article class="card pilot-step"><h3>Reale Nutzung testen</h3><p>Kleine Gruppe aus Lehrkräften und Schülerinnen und Schülern mit typischen Materialien und echten Unterrichtssituationen.</p></article>
+            <article class="card pilot-step"><h3>Grenzfälle prüfen</h3><p>Große Ordner, umfangreiche HTML-Pakete, mehrere Gerätetypen, Backups und das vollständige Löschen gezielt erproben.</p></article>
+            <article class="card pilot-step"><h3>Ergebnisse bewerten</h3><p>Bedienbarkeit, Stabilität und schulische Prozesse dokumentieren und daraus Freigabe oder Verbesserungsbedarf ableiten.</p></article>
+          </div>
+          <p class="closing-line reveal"><strong>Fazit:</strong> Die technische Basis steht. Jetzt muss der Schulalltag zeigen, wie gut sie trägt.</p>
+          <div class="tag-row reveal"><span class="tag">App-Symbol: LearnPocket</span><span class="tag">In der App: Pufferfish LearnPocket</span></div>
+        </div>
+      </section>
+    </main>
+
+    <div class="chrome" aria-label="Präsentationssteuerung">
+      <button class="control" id="prev" type="button" aria-label="Vorherige Folie">←</button>
+      <div class="progress" aria-hidden="true"><span id="progress"></span></div>
+      <span class="counter" id="counter">01 / 09</span>
+      <button class="control" id="overviewButton" type="button" aria-label="Folienübersicht">☷</button>
+      <button class="control" id="fullscreen" type="button" aria-label="Vollbild umschalten">⛶</button>
+      <button class="control" id="next" type="button" aria-label="Nächste Folie">→</button>
+    </div>
+
+    <aside class="overview" id="overview" aria-label="Folienübersicht" aria-hidden="true">
+      <div class="overview-head"><h2>Folienübersicht</h2><button class="control" id="closeOverview" type="button" aria-label="Übersicht schließen">×</button></div>
+      <nav class="overview-grid" id="overviewGrid"></nav>
+    </aside>
+
+    <script>
+      (() => {
+        const deck = document.getElementById('deck');
+        const slides = [...document.querySelectorAll('.slide')];
+        const counter = document.getElementById('counter');
+        const progress = document.getElementById('progress');
+        const overview = document.getElementById('overview');
+        const overviewGrid = document.getElementById('overviewGrid');
+        let index = 0;
+        let touchStart = 0;
+
+        slides.forEach((slide, i) => {
+          const link = document.createElement('a');
+          link.className = 'overview-link';
+          link.href = `#${slide.id}`;
+          link.innerHTML = `<small>Folie ${String(i + 1).padStart(2, '0')}</small><strong>${slide.dataset.title}</strong>`;
+          link.addEventListener('click', event => { event.preventDefault(); go(i); closeOverview(); });
+          overviewGrid.append(link);
+        });
+        const overviewLinks = [...overviewGrid.children];
+
+        function render() {
+          slides.forEach((slide, i) => slide.classList.toggle('is-active', i === index));
+          overviewLinks.forEach((link, i) => link.classList.toggle('active', i === index));
+          counter.textContent = `${String(index + 1).padStart(2, '0')} / ${String(slides.length).padStart(2, '0')}`;
+          progress.style.width = `${((index + 1) / slides.length) * 100}%`;
+          document.title = `${slides[index].dataset.title} · LearnPocket`;
+        }
+        function go(nextIndex) {
+          index = Math.max(0, Math.min(slides.length - 1, nextIndex));
+          slides[index].scrollIntoView({ behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth', inline: 'start' });
+          history.replaceState(null, '', `#${slides[index].id}`);
+          render();
+        }
+        function openOverview() { overview.classList.add('open'); overview.setAttribute('aria-hidden', 'false'); document.getElementById('closeOverview').focus(); }
+        function closeOverview() { overview.classList.remove('open'); overview.setAttribute('aria-hidden', 'true'); document.getElementById('overviewButton').focus(); }
+
+        document.getElementById('prev').addEventListener('click', () => go(index - 1));
+        document.getElementById('next').addEventListener('click', () => go(index + 1));
+        document.getElementById('overviewButton').addEventListener('click', openOverview);
+        document.getElementById('closeOverview').addEventListener('click', closeOverview);
+        document.getElementById('fullscreen').addEventListener('click', () => document.fullscreenElement ? document.exitFullscreen() : document.documentElement.requestFullscreen());
+        document.addEventListener('keydown', event => {
+          if (event.key === 'ArrowRight' || event.key === ' ' || event.key === 'PageDown') { event.preventDefault(); go(index + 1); }
+          if (event.key === 'ArrowLeft' || event.key === 'PageUp') { event.preventDefault(); go(index - 1); }
+          if (event.key === 'Home') { event.preventDefault(); go(0); }
+          if (event.key === 'End') { event.preventDefault(); go(slides.length - 1); }
+          if (event.key.toLowerCase() === 'o') { event.preventDefault(); overview.classList.contains('open') ? closeOverview() : openOverview(); }
+          if (event.key === 'Escape' && overview.classList.contains('open')) closeOverview();
+        });
+        deck.addEventListener('touchstart', event => { touchStart = event.changedTouches[0].clientX; }, { passive: true });
+        deck.addEventListener('touchend', event => { const delta = event.changedTouches[0].clientX - touchStart; if (Math.abs(delta) > 55) go(index + (delta < 0 ? 1 : -1)); }, { passive: true });
+        let frame;
+        deck.addEventListener('scroll', () => { cancelAnimationFrame(frame); frame = requestAnimationFrame(() => { const next = Math.round(deck.scrollLeft / deck.clientWidth); if (next !== index) { index = next; render(); } }); });
+
+        const requested = slides.findIndex(slide => `#${slide.id}` === location.hash);
+        if (requested >= 0) index = requested;
+        go(index);
+      })();
+    </script>
+  </body>
+</html>

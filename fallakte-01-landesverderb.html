@@ -1,0 +1,1184 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Fallakte 01: Landesverderb - Die Anklage gegen Herzog Erich II.</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --paper: #ead8ad;
+      --paper-light: #f7edcf;
+      --paper-deep: #d5b978;
+      --ink: #2b1a10;
+      --brown: #4b2d18;
+      --brown-soft: #7a5330;
+      --gold: #a87d25;
+      --red: #8e2f26;
+      --red-dark: #5f1d19;
+      --green: #49633b;
+      --grey: #8a8170;
+      --line: rgba(75, 45, 24, 0.28);
+      --shadow: rgba(43, 26, 16, 0.22);
+      --focus: #173b67;
+      font-family: Georgia, "Times New Roman", serif;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      min-height: 100%;
+      font-size: 18px;
+      background:
+        radial-gradient(circle at 20% 10%, rgba(255, 249, 225, 0.55), transparent 28rem),
+        linear-gradient(135deg, #d1b06f 0%, #f2e2b9 42%, #c99f5d 100%);
+    }
+
+    body {
+      min-height: 100vh;
+      margin: 0;
+      color: var(--ink);
+      line-height: 1.55;
+      background:
+        linear-gradient(90deg, rgba(75, 45, 24, 0.08) 1px, transparent 1px),
+        linear-gradient(rgba(75, 45, 24, 0.06) 1px, transparent 1px);
+      background-size: 34px 34px;
+    }
+
+    button,
+    input,
+    textarea {
+      font: inherit;
+    }
+
+    button {
+      min-height: 52px;
+      border: 2px solid var(--brown);
+      border-radius: 8px;
+      padding: 0.78rem 1rem;
+      color: var(--paper-light);
+      background: linear-gradient(180deg, var(--brown-soft), var(--brown));
+      box-shadow: 0 3px 0 var(--red-dark), 0 9px 18px rgba(43, 26, 16, 0.18);
+      cursor: pointer;
+      touch-action: manipulation;
+    }
+
+    button:focus-visible,
+    input:focus-visible,
+    textarea:focus-visible {
+      outline: 4px solid var(--focus);
+      outline-offset: 3px;
+    }
+
+    button:active {
+      transform: translateY(2px);
+      box-shadow: 0 1px 0 var(--red-dark), 0 5px 12px rgba(43, 26, 16, 0.18);
+    }
+
+    button.secondary {
+      color: var(--brown);
+      background: linear-gradient(180deg, #f5e7c3, #d8bf82);
+      box-shadow: 0 3px 0 rgba(75, 45, 24, 0.35);
+    }
+
+    button.danger {
+      background: linear-gradient(180deg, #a63b30, var(--red-dark));
+    }
+
+    .app {
+      width: min(1180px, 100%);
+      margin: 0 auto;
+      padding: clamp(0.8rem, 2vw, 1.4rem);
+    }
+
+    .case-shell {
+      min-height: calc(100vh - 2rem);
+      border: 3px solid var(--brown);
+      border-radius: 10px;
+      background:
+        linear-gradient(90deg, rgba(142, 47, 38, 0.16), transparent 1.1rem),
+        linear-gradient(180deg, rgba(255, 255, 255, 0.22), transparent 14rem),
+        var(--paper);
+      box-shadow: 0 18px 42px var(--shadow);
+      overflow: hidden;
+    }
+
+    .case-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      padding: 0.85rem clamp(1rem, 3vw, 1.6rem);
+      color: var(--paper-light);
+      background: linear-gradient(90deg, var(--red-dark), var(--red), var(--brown));
+      border-bottom: 3px double rgba(247, 237, 207, 0.5);
+    }
+
+    .case-mark {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    .seal {
+      display: inline-grid;
+      place-items: center;
+      width: 48px;
+      height: 48px;
+      border: 3px double #f7d686;
+      border-radius: 50%;
+      color: #f7d686;
+      background: #7b231d;
+      font-size: 1.2rem;
+      line-height: 1;
+      flex: 0 0 auto;
+    }
+
+    .reset-inline {
+      min-height: 46px;
+      padding: 0.55rem 0.8rem;
+      font-size: 0.95rem;
+    }
+
+    .screen {
+      display: none;
+      padding: clamp(1rem, 3vw, 2rem);
+    }
+
+    .screen.active {
+      display: block;
+    }
+
+    .hero {
+      min-height: 72vh;
+      display: grid;
+      align-content: center;
+      gap: 1.4rem;
+      position: relative;
+      padding: clamp(1rem, 4vw, 3rem);
+    }
+
+    .hero:before {
+      content: "";
+      position: absolute;
+      inset: clamp(0.5rem, 2vw, 1.4rem);
+      border: 2px solid rgba(75, 45, 24, 0.28);
+      pointer-events: none;
+    }
+
+    .kicker {
+      margin: 0;
+      color: var(--red-dark);
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    h1,
+    h2,
+    h3 {
+      margin: 0 0 0.6rem;
+      line-height: 1.15;
+      color: var(--brown);
+    }
+
+    h1 {
+      max-width: 13ch;
+      font-size: clamp(2.15rem, 7vw, 5rem);
+      letter-spacing: 0;
+    }
+
+    h2 {
+      font-size: clamp(1.65rem, 4vw, 2.8rem);
+    }
+
+    h3 {
+      font-size: 1.35rem;
+    }
+
+    p {
+      margin: 0 0 1rem;
+    }
+
+    .lead {
+      max-width: 780px;
+      font-size: clamp(1.1rem, 2.2vw, 1.35rem);
+      color: #3a2415;
+    }
+
+    .notice {
+      width: fit-content;
+      max-width: 100%;
+      padding: 0.7rem 0.95rem;
+      border-left: 6px solid var(--red);
+      background: rgba(247, 237, 207, 0.72);
+      font-weight: 700;
+    }
+
+    .layout {
+      display: grid;
+      grid-template-columns: minmax(260px, 320px) 1fr;
+      gap: clamp(1rem, 2vw, 1.5rem);
+      align-items: start;
+    }
+
+    .progress-panel {
+      position: sticky;
+      top: 1rem;
+      border: 2px solid var(--brown);
+      border-radius: 8px;
+      background: rgba(247, 237, 207, 0.86);
+      box-shadow: 0 10px 24px rgba(43, 26, 16, 0.12);
+      overflow: hidden;
+    }
+
+    .progress-panel header {
+      padding: 0.8rem 1rem;
+      color: var(--paper-light);
+      background: var(--brown);
+      font-weight: 700;
+    }
+
+    .meter {
+      height: 18px;
+      margin: 1rem;
+      border: 2px solid var(--brown);
+      border-radius: 20px;
+      background: #c9bea5;
+      overflow: hidden;
+    }
+
+    .meter span {
+      display: block;
+      width: 0%;
+      height: 100%;
+      background: linear-gradient(90deg, var(--red), var(--gold), var(--green));
+      transition: width 260ms ease;
+    }
+
+    .evidence-list {
+      display: grid;
+      gap: 0.55rem;
+      padding: 0 1rem 1rem;
+    }
+
+    .evidence-item {
+      display: flex;
+      justify-content: space-between;
+      gap: 0.7rem;
+      align-items: center;
+      padding: 0.65rem 0.7rem;
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      color: #51483d;
+      background: rgba(138, 129, 112, 0.18);
+    }
+
+    .evidence-item.found {
+      color: var(--ink);
+      background: #f2dfaa;
+      border-color: var(--gold);
+    }
+
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      min-height: 34px;
+      border-radius: 999px;
+      padding: 0.2rem 0.55rem;
+      font-size: 0.88rem;
+      font-weight: 700;
+      color: #fff7da;
+      background: var(--grey);
+      white-space: nowrap;
+    }
+
+    .tag.load {
+      background: var(--red);
+    }
+
+    .tag.relief {
+      background: var(--green);
+    }
+
+    .dossier {
+      display: grid;
+      gap: 1rem;
+    }
+
+    .paper-card,
+    .station,
+    .result-card {
+      border: 2px solid var(--brown);
+      border-radius: 8px;
+      padding: clamp(1rem, 2.4vw, 1.35rem);
+      background:
+        linear-gradient(180deg, rgba(255, 255, 255, 0.25), rgba(255, 255, 255, 0)),
+        var(--paper-light);
+      box-shadow: 0 8px 18px rgba(43, 26, 16, 0.12);
+    }
+
+    .source {
+      margin: 1rem 0;
+      padding: 1rem;
+      border-left: 6px solid var(--gold);
+      background: #fff4cd;
+      font-style: italic;
+    }
+
+    .place {
+      display: inline-block;
+      margin-bottom: 0.8rem;
+      color: var(--red-dark);
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    .choice-grid,
+    .button-row {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+      gap: 0.75rem;
+      margin-top: 1rem;
+    }
+
+    .choice {
+      min-height: 64px;
+      text-align: left;
+      color: var(--brown);
+      background: linear-gradient(180deg, #fff1c8, #d8bd7b);
+      box-shadow: 0 3px 0 rgba(75, 45, 24, 0.35);
+    }
+
+    .choice.selected {
+      color: var(--paper-light);
+      background: linear-gradient(180deg, var(--red), var(--brown));
+      border-color: var(--red-dark);
+    }
+
+    .feedback {
+      min-height: 3.2rem;
+      margin-top: 1rem;
+      padding: 0.9rem;
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      background: rgba(234, 216, 173, 0.62);
+      font-weight: 700;
+    }
+
+    .evidence-reveal {
+      display: none;
+      margin-top: 1rem;
+      padding: 0.95rem;
+      border: 2px dashed var(--red);
+      border-radius: 8px;
+      background: #f6e1ab;
+    }
+
+    .evidence-reveal.visible {
+      display: block;
+    }
+
+    .check-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 0.65rem;
+      margin-top: 1rem;
+    }
+
+    .context-card {
+      margin: 1rem 0;
+      padding: 1rem;
+      border: 1px solid rgba(168, 125, 37, 0.65);
+      border-radius: 8px;
+      background: #f7e7b7;
+    }
+
+    .context-card strong {
+      color: var(--red-dark);
+    }
+
+    .observation-box {
+      margin-top: 1rem;
+      padding: 1rem;
+      border: 2px solid rgba(75, 45, 24, 0.35);
+      border-radius: 8px;
+      background: rgba(255, 247, 221, 0.72);
+    }
+
+    .observation-box h3 {
+      margin-bottom: 0.35rem;
+    }
+
+    .observation-note {
+      min-height: 96px;
+    }
+
+    label.check {
+      display: flex;
+      align-items: center;
+      gap: 0.7rem;
+      min-height: 58px;
+      padding: 0.7rem;
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      background: rgba(255, 244, 205, 0.72);
+    }
+
+    input[type="checkbox"] {
+      width: 28px;
+      height: 28px;
+      accent-color: var(--red);
+      flex: 0 0 auto;
+    }
+
+    .slider-wrap {
+      margin-top: 1rem;
+      padding: 1rem;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: rgba(255, 244, 205, 0.72);
+    }
+
+    input[type="range"] {
+      width: 100%;
+      min-height: 48px;
+      accent-color: var(--red);
+    }
+
+    .slider-scale {
+      display: flex;
+      justify-content: space-between;
+      gap: 0.5rem;
+      color: #4b3b2a;
+      font-size: 0.95rem;
+    }
+
+    textarea {
+      width: 100%;
+      min-height: 150px;
+      margin-top: 0.8rem;
+      padding: 0.85rem;
+      border: 2px solid var(--brown);
+      border-radius: 8px;
+      color: var(--ink);
+      background: #fff7dd;
+      resize: vertical;
+    }
+
+    .verdict-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+      gap: 0.75rem;
+      margin-top: 1rem;
+    }
+
+    .comparison {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 1rem;
+    }
+
+    .column {
+      padding: 1rem;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: rgba(255, 244, 205, 0.72);
+    }
+
+    .column ul {
+      margin: 0;
+      padding-left: 1.2rem;
+    }
+
+    .notes {
+      display: none;
+      white-space: pre-wrap;
+      padding: 1rem;
+      border: 2px solid var(--brown);
+      border-radius: 8px;
+      background: #fff7dd;
+    }
+
+    .notes.visible {
+      display: block;
+    }
+
+    .copy-status {
+      min-height: 1.6rem;
+      margin-top: 0.65rem;
+      font-weight: 700;
+    }
+
+    .hidden {
+      display: none !important;
+    }
+
+    @media (max-width: 820px) {
+      .case-top {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+
+      .layout {
+        grid-template-columns: 1fr;
+      }
+
+      .progress-panel {
+        position: static;
+      }
+
+      .comparison {
+        grid-template-columns: 1fr;
+      }
+
+      .screen {
+        padding: 0.9rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="app">
+    <section class="case-shell" aria-live="polite">
+      <div class="case-top">
+        <div class="case-mark"><span class="seal" aria-hidden="true">I</span><span>Historische Ermittlungsakte</span></div>
+        <button class="danger reset-inline" id="resetProgress" type="button">Fortschritt zurücksetzen</button>
+      </div>
+
+      <section class="screen active" id="screen-start">
+        <div class="hero">
+          <p class="kicker">Fallakte 01</p>
+          <h1>Landesverderb</h1>
+          <p class="lead">Die Anklage gegen Herzog Erich II. Sie untersuchen Schloss Landestrost vor Ort und prüfen, ob der Bau ein notwendiges Modernisierungsprojekt oder ein ruinöses Prestigeprojekt war.</p>
+          <p class="notice">Dieser Fall ist für die Nutzung vor Ort am Schloss Landestrost konzipiert.</p>
+          <div class="button-row">
+            <button id="beginCase" type="button">Ermittlung beginnen</button>
+          </div>
+        </div>
+      </section>
+
+      <section class="screen" id="screen-case">
+        <div class="layout">
+          <aside class="progress-panel" aria-label="Ermittlungsbogen">
+            <header>Ermittlungsbogen</header>
+            <div class="meter" aria-label="Fortschritt"><span id="progressFill"></span></div>
+            <div class="evidence-list" id="evidenceList"></div>
+          </aside>
+
+          <div class="dossier">
+            <article class="paper-card" id="briefing">
+              <p class="kicker">Ermittlerbriefing</p>
+              <h2>Die Anklage</h2>
+              <p>Neustadt, Ende des 16. Jahrhunderts. Herzog Erich II. ließ ein Schloss errichten, das Bewunderung und Wut zugleich auslöste. Die einen nannten es Landestrost. Andere sprachen spöttisch von Landesverderb. Ihre Aufgabe: Prüfen Sie die Anklage. War der Bau ein notwendiger Schritt zur Stärkung Neustadts - oder ein ruinöses Prestigeprojekt auf Kosten der Bevölkerung?</p>
+              <div class="context-card"><strong>Historischer Kontext:</strong> Erich II. aus dem Haus der Welfen regierte im Fürstentum Calenberg-Göttingen in einer Zeit religiöser Konflikte, fürstlicher Konkurrenz und wachsender Verwaltungsansprüche. Schloss Landestrost entstand nicht im luftleeren Raum: Renaissance-Repräsentation, militärische Sicherung und landesherrliche Ordnung gehörten zusammen.</div>
+              <h3>Welche Ausgangshypothese verfolgen Sie?</h3>
+              <div class="choice-grid" data-question="hypothesis">
+                <button class="choice" type="button" data-value="Der Herzog handelte verantwortungslos.">Der Herzog handelte verantwortungslos.</button>
+                <button class="choice" type="button" data-value="Der Bau war notwendig.">Der Bau war notwendig.</button>
+                <button class="choice" type="button" data-value="Ich ermittle zunächst neutral.">Ich ermittle zunächst neutral.</button>
+              </div>
+              <div class="feedback" id="feedback-hypothesis">Wählen Sie eine Ausgangshypothese, bevor Sie die Spur aufnehmen.</div>
+            </article>
+
+            <article class="station" id="station-a">
+              <span class="place">Vor dem Schloss Landestrost</span>
+              <h2>Station 1: Die Größe des Projekts</h2>
+              <div class="source">Ein Chronist behauptet: Kein Fürst unserer Gegend errichtete ein solches Bauwerk.</div>
+              <p>Treten Sie einen Schritt zurück und betrachten Sie die Wirkung der Anlage. Welche politische Botschaft sendet ein Bau dieser Größe am Ort selbst?</p>
+              <div class="context-card"><strong>Kontext zur Renaissance:</strong> Fürstenbauten des 16. Jahrhunderts waren sichtbare Regierungserklärungen. Regelmäßige Fassaden, große Hofflächen und kontrollierte Zugänge zeigten Ordnung, Anspruch und Rang. Genau deshalb ist die bloße Größe historisch nicht neutral.</div>
+              <div class="observation-box">
+                <h3>Gebäudeprotokoll</h3>
+                <p><strong>Ortsbeobachtung erforderlich:</strong> Beobachtung vor Ort sichern: Markieren Sie mindestens zwei sichtbare Hinweise, bevor Sie eine Einschätzung abgeben.</p>
+                <div class="check-grid">
+                  <label class="check"><input type="checkbox" data-station="stationA" data-observation="breite-front"> breite, geschlossene Frontwirkung</label>
+                  <label class="check"><input type="checkbox" data-station="stationA" data-observation="hofwirkung"> Wirkung eines planvoll gefassten Hof- oder Schlossraums</label>
+                  <label class="check"><input type="checkbox" data-station="stationA" data-observation="stadtbezug"> deutlicher Bezug zur Stadt oder zum Zugang nach Neustadt</label>
+                  <label class="check"><input type="checkbox" data-station="stationA" data-observation="rangsignal"> Bauteile, die Rang und Herrschaft sichtbar machen</label>
+                </div>
+                <label for="note-stationA"><strong>Kurznotiz zum Eindruck vor Ort</strong></label>
+                <textarea class="observation-note" id="note-stationA" data-note="stationA" placeholder="Was sehen Sie am Gebäude, das Ihre Einschätzung stützt?"></textarea>
+              </div>
+              <div class="choice-grid" data-question="stationA">
+                <button class="choice" type="button" data-value="gewöhnlicher Adelssitz">gewöhnlicher Adelssitz</button>
+                <button class="choice" type="button" data-value="ehrgeiziges Bauprojekt">ehrgeiziges Bauprojekt</button>
+                <button class="choice" type="button" data-value="überdimensioniertes Prestigeprojekt">überdimensioniertes Prestigeprojekt</button>
+              </div>
+              <div class="feedback" id="feedback-stationA">Ihre Beobachtung entscheidet, wie schwer dieses Indiz wiegt.</div>
+              <div class="evidence-reveal" id="evidence-a"><strong>Beweisstück A:</strong> Der Bau war außergewöhnlich ambitioniert. <span class="tag load">Belastend</span></div>
+            </article>
+
+            <article class="station" id="station-b">
+              <span class="place">Schlossfassade, Wall- und Befestigungsbereich</span>
+              <h2>Station 2: Repräsentation oder Verteidigung?</h2>
+              <div class="source">Ein Ratsmitglied wirft dem Herzog vor, das Schloss diene nur seinem eigenen Ruhm. Andere Quellen verweisen auf strategische Gründe.</div>
+              <p>Suchen Sie Hinweise auf Verteidigungscharakter: Lage, Mauern, Sichtachsen, Nähe zu ehemaligen Befestigungen und die geschlossene Anlage.</p>
+              <div class="context-card"><strong>Landesherrschaft vor Ort:</strong> Ein Schloss konnte zugleich Bühne, Amtssitz und Sicherungspunkt sein. Für Calenberg-Göttingen war ein befestigter Verwaltungsort an einem wichtigen Stadtraum mehr als private Bequemlichkeit.</div>
+              <div class="observation-box">
+                <h3>Geländeprotokoll</h3>
+                <p><strong>Ortsbeobachtung erforderlich:</strong> Gehen Sie Fassade, Wall- und Befestigungsbereich bewusst ab und sichern Sie mindestens zwei Befunde.</p>
+                <div class="check-grid">
+                  <label class="check"><input type="checkbox" data-station="stationB" data-observation="mauerzug"> Mauern oder geschlossene Baukanten</label>
+                  <label class="check"><input type="checkbox" data-station="stationB" data-observation="blickachsen"> kontrollierbare Sichtachsen</label>
+                  <label class="check"><input type="checkbox" data-station="stationB" data-observation="zugang"> klar geführter Zugang oder Torwirkung</label>
+                  <label class="check"><input type="checkbox" data-station="stationB" data-observation="wallnaehe"> Bezug zu Wall, Graben oder früherer Befestigung</label>
+                </div>
+                <label for="note-stationB"><strong>Kurznotiz zum Gelände</strong></label>
+                <textarea class="observation-note" id="note-stationB" data-note="stationB" placeholder="Welche Spuren sprechen eher für Schutz, Verwaltung oder Repräsentation?"></textarea>
+              </div>
+              <div class="choice-grid" data-question="stationB">
+                <button class="choice" type="button" data-value="reiner Luxusbau">reiner Luxusbau</button>
+                <button class="choice" type="button" data-value="reine Festungsanlage">reine Festungsanlage</button>
+                <button class="choice" type="button" data-value="Kombination aus Repräsentation und Verteidigung">Kombination aus Repräsentation und Verteidigung</button>
+              </div>
+              <div class="feedback" id="feedback-stationB">Prüfen Sie, ob ein einzelner Zweck der Anlage gerecht wird.</div>
+              <div class="evidence-reveal" id="evidence-b"><strong>Beweisstück B:</strong> Das Schloss war nicht nur Luxus, sondern hatte auch strategische und administrative Funktionen. <span class="tag relief">Entlastend</span></div>
+            </article>
+
+            <article class="station" id="station-c">
+              <span class="place">Altstadt / Weg vom Schloss in Richtung historisches Zentrum</span>
+              <h2>Station 3: Wer bezahlte den Bau?</h2>
+              <div class="source">Aus einer Beschwerde: Die Lasten werden von Jahr zu Jahr größer.</div>
+              <p>Große Bauprojekte verursachen Kosten. Aber Kosten allein beweisen noch keinen Ruin. Entscheidend ist, wer sie trug und ob daraus langfristiger Nutzen entstand.</p>
+              <div class="context-card"><strong>Kontext zu Abgaben und Diensten:</strong> Fürstliche Baupolitik konnte Steuern, Naturalabgaben, Fuhrdienste und Arbeitsleistungen auslösen. Zeitgenössische Beschwerden sind deshalb keine Nebengeräusche, sondern Quellen für soziale Belastung.</div>
+              <div class="observation-box">
+                <h3>Wegprotokoll</h3>
+                <p><strong>Ortsbeobachtung erforderlich:</strong> Verbinden Sie den Schlossbau mit Wegen, Stadt und Versorgung. Markieren Sie mindestens zwei plausible Belastungsspuren.</p>
+                <div class="check-grid">
+                  <label class="check"><input type="checkbox" data-station="stationC" data-observation="transportwege"> Wege, auf denen Material transportiert worden sein könnte</label>
+                  <label class="check"><input type="checkbox" data-station="stationC" data-observation="stadtentfernung"> Entfernung zwischen Schloss und historischem Zentrum</label>
+                  <label class="check"><input type="checkbox" data-station="stationC" data-observation="materialmenge"> sichtbare Materialmengen, die hohen Aufwand erkennen lassen</label>
+                  <label class="check"><input type="checkbox" data-station="stationC" data-observation="arbeitsaufwand"> Hinweise auf langfristigen Arbeits- und Unterhaltungsaufwand</label>
+                </div>
+                <label for="note-stationC"><strong>Kurznotiz zur Kostenfrage</strong></label>
+                <textarea class="observation-note" id="note-stationC" data-note="stationC" placeholder="Welche Beobachtung macht die Kostenfrage vor Ort greifbar?"></textarea>
+              </div>
+              <div class="slider-wrap">
+                <label for="costSlider"><strong>Wie stark spricht die Kostenfrage gegen den Herzog?</strong></label>
+                <input id="costSlider" type="range" min="1" max="5" step="1" value="3">
+                <div class="slider-scale"><span>1 = kaum belastend</span><span id="costValue">3</span><span>5 = sehr belastend</span></div>
+                <button id="saveCost" class="secondary" type="button">Kostenbewertung sichern</button>
+              </div>
+              <div class="feedback" id="feedback-stationC">Legen Sie fest, wie stark dieses Indiz in Ihrer Akte zählt.</div>
+              <div class="evidence-reveal" id="evidence-c"><strong>Beweisstück C:</strong> Die Finanzierung des Bauprojekts war ein ernstes Belastungsindiz. <span class="tag load">Belastend</span></div>
+            </article>
+
+            <article class="station" id="station-d">
+              <span class="place">Marktplatz / historischer Stadtraum</span>
+              <h2>Station 4: Wem nützte der Bau?</h2>
+              <div class="source">Ein Handwerker berichtet: Noch nie hatten wir so viel Arbeit.</div>
+              <p>Überlegen Sie, welche Gruppen von einem großen Schlossbau profitieren konnten. Wählen Sie alle Gruppen, die plausibel beteiligt waren.</p>
+              <div class="context-card"><strong>Kontext zur Stadtwirtschaft:</strong> Renaissancebauten waren auch Arbeitsmärkte. Stein, Holz, Kalk, Eisen, Fuhrleistungen, Unterkunft, Verpflegung und Verwaltung verbanden Schloss und Stadt wirtschaftlich miteinander.</div>
+              <div class="observation-box">
+                <h3>Stadtraumprotokoll</h3>
+                <p><strong>Ortsbeobachtung erforderlich:</strong> Suchen Sie im historischen Stadtraum mindestens zwei Hinweise darauf, dass ein Großbau lokale Arbeit und Versorgung brauchte.</p>
+                <div class="check-grid">
+                  <label class="check"><input type="checkbox" data-station="stationD" data-observation="marktnaehe"> Nähe zu Markt, Handel oder Versorgungswegen</label>
+                  <label class="check"><input type="checkbox" data-station="stationD" data-observation="handwerk"> Spuren oder Plausibilität spezialisierter Handwerke</label>
+                  <label class="check"><input type="checkbox" data-station="stationD" data-observation="unterkunft"> Bedarf an Unterkunft, Nahrung oder Dienstleistungen</label>
+                  <label class="check"><input type="checkbox" data-station="stationD" data-observation="verwaltung"> Nähe zu Verwaltung, Abrechnung oder Amtstätigkeit</label>
+                </div>
+                <label for="note-stationD"><strong>Kurznotiz zum Nutzen für Neustadt</strong></label>
+                <textarea class="observation-note" id="note-stationD" data-note="stationD" placeholder="Welche Beobachtung stützt die These vom Wirtschaftsmotor?"></textarea>
+              </div>
+              <div class="check-grid" id="benefitChecks">
+                <label class="check"><input type="checkbox" value="Steinmetze"> Steinmetze</label>
+                <label class="check"><input type="checkbox" value="Zimmerleute"> Zimmerleute</label>
+                <label class="check"><input type="checkbox" value="Fuhrleute"> Fuhrleute</label>
+                <label class="check"><input type="checkbox" value="Schmiede"> Schmiede</label>
+                <label class="check"><input type="checkbox" value="Händler"> Händler</label>
+                <label class="check"><input type="checkbox" value="Wirte"> Wirte</label>
+                <label class="check"><input type="checkbox" value="Tagelöhner"> Tagelöhner</label>
+                <label class="check"><input type="checkbox" value="Verwaltungsbeamte"> Verwaltungsbeamte</label>
+              </div>
+              <div class="feedback" id="feedback-stationD">Markieren Sie mindestens eine Spur wirtschaftlicher Wirkung.</div>
+              <div class="evidence-reveal" id="evidence-d"><strong>Beweisstück D:</strong> Der Bau konnte wirtschaftliche Impulse für Neustadt erzeugen. <span class="tag relief">Entlastend</span></div>
+            </article>
+
+            <article class="paper-card" id="interim">
+              <p class="kicker">Zwischenfazit</p>
+              <h2>Belastung und Entlastung</h2>
+              <div class="comparison">
+                <div class="column">
+                  <h3>Belastend</h3>
+                  <ul>
+                    <li>außergewöhnlich ambitionierter Bau</li>
+                    <li>hohe Kosten und Belastungen</li>
+                  </ul>
+                </div>
+                <div class="column">
+                  <h3>Entlastend</h3>
+                  <ul>
+                    <li>strategische und administrative Funktion</li>
+                    <li>wirtschaftliche Impulse</li>
+                  </ul>
+                </div>
+              </div>
+              <h3>Hat sich Ihre Ausgangshypothese verändert?</h3>
+              <div class="choice-grid" data-question="interim">
+                <button class="choice" type="button" data-value="Ja, ich sehe den Herzog kritischer.">Ja, ich sehe den Herzog kritischer.</button>
+                <button class="choice" type="button" data-value="Ja, ich sehe den Bau differenzierter.">Ja, ich sehe den Bau differenzierter.</button>
+                <button class="choice" type="button" data-value="Nein, meine Einschätzung bleibt bestehen.">Nein, meine Einschätzung bleibt bestehen.</button>
+              </div>
+              <div class="feedback" id="feedback-interim">Vergleichen Sie Ihre Anfangsthese mit den Beweisstücken.</div>
+            </article>
+
+            <article class="paper-card" id="verdict">
+              <p class="kicker">Schlussurteil</p>
+              <h2>War der Spottname Landesverderb gerechtfertigt?</h2>
+              <div class="verdict-grid" data-question="verdict">
+                <button class="choice" type="button" data-value="Ja">Ja</button>
+                <button class="choice" type="button" data-value="Teilweise">Teilweise</button>
+                <button class="choice" type="button" data-value="Nein">Nein</button>
+              </div>
+              <label for="verdictReason"><strong>Begründen Sie Ihr Urteil in zwei bis vier Sätzen.</strong></label>
+              <textarea id="verdictReason" placeholder="Ihre Begründung..."></textarea>
+              <div class="button-row">
+                <button id="submitVerdict" type="button">Urteil einreichen</button>
+              </div>
+              <div class="feedback" id="feedback-verdict">Wählen Sie ein Urteil und formulieren Sie Ihre Begründung.</div>
+            </article>
+
+            <article class="paper-card hidden" id="historicalContext">
+              <p class="kicker">Historische Einordnung</p>
+              <h2>Was der Fall zeigt</h2>
+              <p>Der Name Landesverderb verweist auf reale Kritik an den Kosten und Folgen des Schlossbaus. Zugleich lässt sich der Bau nicht allein als Verschwendung verstehen. Schloss Landestrost war Repräsentationsbau, Verwaltungsort, strategischer Punkt und stadtprägendes Projekt zugleich. Der Fall zeigt: Geschichte besteht selten aus eindeutigen Urteilen. Entscheidend ist, welche Quellen man wie gewichtet.</p>
+            </article>
+
+            <article class="result-card hidden" id="closing">
+              <p class="kicker">Abschlussbildschirm</p>
+              <h2>Fallakte geschlossen</h2>
+              <p>Der Ermittlungsbogen ist vollständig. Ihre Akte enthält die gewählten Hypothesen, Beobachtungen, Beweisstücke und das Schlussurteil.</p>
+              <div class="context-card" id="missionAssessment"><strong>Missionsauswertung:</strong> Die Ermittlungsqualität wird nach Beobachtungsdichte, Gebäudebezug und historischer Abwägung berechnet.</div>
+              <div class="button-row">
+                <button id="playAgain" type="button">Fall erneut spielen</button>
+                <button class="secondary" id="showNotes" type="button">Ermittlungsnotizen anzeigen</button>
+                <button class="secondary" id="copyNotes" type="button">Notizen kopieren</button>
+              </div>
+              <div class="copy-status" id="copyStatus"></div>
+              <pre class="notes" id="notesOutput"></pre>
+            </article>
+          </div>
+        </div>
+      </section>
+    </section>
+  </main>
+
+  <script>
+    (function () {
+      "use strict";
+
+      var STORAGE_KEY = "fallakteLandesverderbState";
+      var evidence = [
+        { id: "A", label: "Beweisstück A", kind: "Belastend", key: "stationA" },
+        { id: "B", label: "Beweisstück B", kind: "Entlastend", key: "stationB" },
+        { id: "C", label: "Beweisstück C", kind: "Belastend", key: "stationC" },
+        { id: "D", label: "Beweisstück D", kind: "Entlastend", key: "stationD" },
+        { id: "V", label: "Schlussurteil", kind: "Abschluss", key: "verdictSubmitted" }
+      ];
+
+      var feedback = {
+        hypothesis: {
+          "Der Herzog handelte verantwortungslos.": "Sie starten aus der Anklageperspektive. Sammeln Sie nun Indizien, die diese These stützen oder erschüttern.",
+          "Der Bau war notwendig.": "Sie starten mit einer Verteidigungsthese. Achten Sie besonders darauf, ob Kosten und Wirkung diese Sicht tragen.",
+          "Ich ermittle zunächst neutral.": "Sie beginnen offen. Das ist methodisch stark, solange Sie jedes Beweisstück klar gewichten."
+        },
+        stationA: {
+          "gewöhnlicher Adelssitz": "Ihre Einschätzung ist vorsichtig. Prüfen Sie, ob Größe, Lage und Wirkung wirklich zu einem gewöhnlichen Adelssitz passen.",
+          "ehrgeiziges Bauprojekt": "Plausibel. Die Anlage wirkt nicht zufällig: Größe und Lage deuten auf politischen Anspruch.",
+          "überdimensioniertes Prestigeprojekt": "Das ist die Anklageperspektive. Notieren Sie: Die Dimension des Projekts kann als belastendes Indiz gelten."
+        },
+        stationB: {
+          "reiner Luxusbau": "Diese Deutung greift möglicherweise zu kurz. Achten Sie darauf, dass Renaissancebauten häufig mehrere Funktionen verbanden.",
+          "reine Festungsanlage": "Auch das ist nur ein Teil der Wahrheit. Die repräsentative Wirkung war ebenso wichtig.",
+          "Kombination aus Repräsentation und Verteidigung": "Sehr überzeugend. Der Ort spricht für eine doppelte Funktion: Macht zeigen und Sicherheit organisieren."
+        },
+        interim: {
+          "Ja, ich sehe den Herzog kritischer.": "Ihre Gewichtung der Belastungsindizien ist stärker geworden. Halten Sie fest, welche Beweise dafür ausschlaggebend waren.",
+          "Ja, ich sehe den Bau differenzierter.": "Sie trennen Kostenkritik und mögliche Funktionen des Baus. Diese Differenzierung trägt eine starke historische Bewertung.",
+          "Nein, meine Einschätzung bleibt bestehen.": "Ihre Ausgangsthese bleibt stabil. Prüfen Sie dennoch, ob Sie Gegenargumente angemessen berücksichtigt haben."
+        },
+        verdict: {
+          "Ja": "Sie folgen der Anklage. Ihre Begründung stützt sich vor allem auf Kosten, Belastung und Machtanspruch.",
+          "Teilweise": "Sie wählen die differenzierte Bewertung. Das entspricht dem stärksten historischen Ergebnis dieses Falls.",
+          "Nein": "Sie betonen langfristigen Nutzen und Modernisierung. Diese Verteidigung ist plausibel, blendet aber die zeitgenössische Kritik nicht vollständig aus."
+        }
+      };
+
+      var state = loadState();
+
+      function defaultState() {
+        return {
+          started: false,
+          answers: {},
+          found: {},
+          observations: {},
+          siteNotes: {},
+          benefits: [],
+          costValue: 3,
+          verdictReason: "",
+          verdictSubmitted: false
+        };
+      }
+
+      function loadState() {
+        try {
+          var saved = localStorage.getItem(STORAGE_KEY);
+          return saved ? Object.assign(defaultState(), JSON.parse(saved)) : defaultState();
+        } catch (error) {
+          return defaultState();
+        }
+      }
+
+      function saveState() {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+      }
+
+      function byId(id) {
+        return document.getElementById(id);
+      }
+
+      function setScreen() {
+        byId("screen-start").classList.toggle("active", !state.started);
+        byId("screen-case").classList.toggle("active", state.started);
+      }
+
+      function selectChoice(question, value) {
+        if (question.indexOf("station") === 0 && !canAssessStation(question)) {
+          var blocked = byId("feedback-" + question);
+          if (blocked) {
+            blocked.textContent = "Ortsbeobachtung erforderlich: Sichern Sie zuerst mindestens zwei konkrete Befunde am Gebäude, Gelände oder Stadtraum.";
+          }
+          return;
+        }
+        state.answers[question] = value;
+        if (question === "stationA") {
+          state.found.stationA = true;
+        }
+        if (question === "stationB") {
+          state.found.stationB = true;
+        }
+        saveState();
+        render();
+      }
+
+      function canAssessStation(station) {
+        return (state.observations[station] || []).length >= 2;
+      }
+
+      function renderChoices() {
+        document.querySelectorAll("[data-question]").forEach(function (group) {
+          var question = group.getAttribute("data-question");
+          group.querySelectorAll("button").forEach(function (button) {
+            button.classList.toggle("selected", state.answers[question] === button.dataset.value);
+          });
+        });
+      }
+
+      function renderFeedback() {
+        Object.keys(feedback).forEach(function (question) {
+          var element = byId("feedback-" + question);
+          var value = state.answers[question];
+          if (element && value && feedback[question][value]) {
+            element.textContent = feedback[question][value];
+          }
+        });
+
+        if (state.found.stationC) {
+          var cost = Number(state.costValue);
+          if (cost <= 2) {
+            byId("feedback-stationC").textContent = "Sie gewichten die Belastung gering. Beachten Sie: Zeitgenössische Kritik entsteht selten ohne realen Anlass.";
+          } else if (cost === 3) {
+            byId("feedback-stationC").textContent = "Ausgewogen. Die Kostenfrage bleibt ein ernstes, aber noch nicht abschließendes Indiz.";
+          } else {
+            byId("feedback-stationC").textContent = "Stark belastend. Wenn Bevölkerung und Untertanen übermäßig belastet wurden, stützt das den Begriff Landesverderb.";
+          }
+        }
+
+        if (state.found.stationD) {
+          if (state.benefits.length >= 4) {
+            byId("feedback-stationD").textContent = "Ihre Auswahl zeigt: Ein Schlossbau war nicht nur Ausgabe, sondern auch lokaler Wirtschaftsmotor.";
+          } else {
+            byId("feedback-stationD").textContent = "Denken Sie breiter: Ein Bauprojekt dieser Größe zog zahlreiche Gewerke, Zulieferer und Dienstleistungen nach sich.";
+          }
+        }
+
+        if (state.verdictSubmitted && state.answers.verdict) {
+          byId("feedback-verdict").textContent = feedback.verdict[state.answers.verdict];
+          byId("missionAssessment").innerHTML = "<strong>Missionsauswertung:</strong> " + calculateMissionAssessment();
+        }
+      }
+
+      function renderEvidence() {
+        var list = byId("evidenceList");
+        list.innerHTML = "";
+        var foundCount = 0;
+
+        evidence.forEach(function (item) {
+          var found = item.key === "verdictSubmitted" ? state.verdictSubmitted : Boolean(state.found[item.key]);
+          if (found) {
+            foundCount += 1;
+          }
+          var row = document.createElement("div");
+          row.className = "evidence-item" + (found ? " found" : "");
+          var tagClass = item.kind === "Belastend" ? "load" : item.kind === "Entlastend" ? "relief" : "";
+          row.innerHTML = "<strong>" + item.label + "</strong><span class=\"tag " + tagClass + "\">" + (found ? item.kind : "offen") + "</span>";
+          list.appendChild(row);
+        });
+
+        byId("progressFill").style.width = Math.round((foundCount / evidence.length) * 100) + "%";
+      }
+
+      function renderReveals() {
+        byId("evidence-a").classList.toggle("visible", Boolean(state.found.stationA));
+        byId("evidence-b").classList.toggle("visible", Boolean(state.found.stationB));
+        byId("evidence-c").classList.toggle("visible", Boolean(state.found.stationC));
+        byId("evidence-d").classList.toggle("visible", Boolean(state.found.stationD));
+        byId("historicalContext").classList.toggle("hidden", !state.verdictSubmitted);
+        byId("closing").classList.toggle("hidden", !state.verdictSubmitted);
+      }
+
+      function renderInputs() {
+        byId("costSlider").value = state.costValue;
+        byId("costValue").textContent = state.costValue;
+        byId("verdictReason").value = state.verdictReason;
+        document.querySelectorAll("[data-observation]").forEach(function (input) {
+          var station = input.dataset.station;
+          input.checked = (state.observations[station] || []).indexOf(input.dataset.observation) !== -1;
+        });
+        document.querySelectorAll("[data-note]").forEach(function (area) {
+          area.value = state.siteNotes[area.dataset.note] || "";
+        });
+        document.querySelectorAll("#benefitChecks input").forEach(function (input) {
+          input.checked = state.benefits.indexOf(input.value) !== -1;
+        });
+      }
+
+      function render() {
+        setScreen();
+        renderChoices();
+        renderInputs();
+        renderFeedback();
+        renderEvidence();
+        renderReveals();
+        if (byId("notesOutput").classList.contains("visible")) {
+          byId("notesOutput").textContent = buildNotes();
+        }
+      }
+
+      function updateBenefits() {
+        if (!canAssessStation("stationD")) {
+          byId("feedback-stationD").textContent = "Ortsbeobachtung erforderlich: Sichern Sie zuerst mindestens zwei Befunde im Stadtraum.";
+          document.querySelectorAll("#benefitChecks input").forEach(function (input) {
+            input.checked = state.benefits.indexOf(input.value) !== -1;
+          });
+          return;
+        }
+        state.benefits = Array.from(document.querySelectorAll("#benefitChecks input:checked")).map(function (input) {
+          return input.value;
+        });
+        if (state.benefits.length > 0) {
+          state.found.stationD = true;
+        }
+        saveState();
+        render();
+      }
+
+      function saveCost() {
+        if (!canAssessStation("stationC")) {
+          byId("feedback-stationC").textContent = "Ortsbeobachtung erforderlich: Sichern Sie zuerst mindestens zwei Befunde zur Kosten- und Wegfrage.";
+          return;
+        }
+        state.costValue = Number(byId("costSlider").value);
+        state.found.stationC = true;
+        saveState();
+        render();
+      }
+
+      function updateObservation(input) {
+        var station = input.dataset.station;
+        var current = state.observations[station] || [];
+        if (input.checked && current.indexOf(input.dataset.observation) === -1) {
+          current.push(input.dataset.observation);
+        }
+        if (!input.checked) {
+          current = current.filter(function (value) {
+            return value !== input.dataset.observation;
+          });
+        }
+        state.observations[station] = current;
+        saveState();
+        render();
+      }
+
+      function observationSummary(station) {
+        var labels = [];
+        document.querySelectorAll("[data-station='" + station + "'][data-observation]").forEach(function (input) {
+          if ((state.observations[station] || []).indexOf(input.dataset.observation) !== -1) {
+            labels.push(input.parentElement.textContent.trim());
+          }
+        });
+        return labels.length ? labels.join(", ") : "keine gesicherten Ortsbefunde";
+      }
+
+      function calculateMissionAssessment() {
+        var observationTotal = Object.keys(state.observations).reduce(function (sum, station) {
+          return sum + state.observations[station].length;
+        }, 0);
+        var notesWithContent = Object.keys(state.siteNotes).filter(function (key) {
+          return (state.siteNotes[key] || "").trim().length >= 20;
+        }).length;
+        var hasBalancedVerdict = state.answers.verdict === "Teilweise" || state.answers.interim === "Ja, ich sehe den Bau differenzierter.";
+        var score = observationTotal + notesWithContent + (hasBalancedVerdict ? 2 : 0);
+        var grade = "Ermittlungsqualität: solide.";
+        if (score >= 16) {
+          grade = "Ermittlungsqualität: sehr stark.";
+        } else if (score >= 11) {
+          grade = "Ermittlungsqualität: tragfähig.";
+        }
+        var interpretation = hasBalancedVerdict
+          ? "Ihre Mission verbindet Gebäudebefunde, Gelände und historische Abwägung."
+          : "Ihre Mission ist abgeschlossen; prüfen Sie bei einer Wiederholung besonders die Gegenargumente zu Ihrem Urteil.";
+        return grade + " Beobachtungsdichte: " + observationTotal + " gesicherte Befunde. " + interpretation;
+      }
+
+      function submitVerdict() {
+        var verdict = state.answers.verdict;
+        var reason = byId("verdictReason").value.trim();
+        if (!verdict) {
+          byId("feedback-verdict").textContent = "Wählen Sie zuerst, ob Landesverderb gerechtfertigt war.";
+          return;
+        }
+        if (reason.length < 40) {
+          byId("feedback-verdict").textContent = "Ihre Begründung braucht noch mehr Substanz. Formulieren Sie zwei bis vier Sätze.";
+          return;
+        }
+        state.verdictReason = reason;
+        state.verdictSubmitted = true;
+        saveState();
+        render();
+        byId("historicalContext").scrollIntoView({ behavior: "smooth", block: "start" });
+      }
+
+      function resetProgress() {
+        if (!window.confirm("Soll die Fallakte wirklich zurückgesetzt werden?")) {
+          return;
+        }
+        state = defaultState();
+        localStorage.removeItem(STORAGE_KEY);
+        byId("notesOutput").classList.remove("visible");
+        byId("copyStatus").textContent = "";
+        render();
+      }
+
+      function buildNotes() {
+        return [
+          "Fallakte 01: Landesverderb - Ermittlungsnotizen",
+          "",
+          "Ausgangshypothese: " + (state.answers.hypothesis || "nicht gewählt"),
+          "Station 1, Größe des Projekts: " + (state.answers.stationA || "nicht bewertet"),
+          "Gebäudeprotokoll Station 1: " + observationSummary("stationA"),
+          "Kurznotiz Station 1: " + (state.siteNotes.stationA || "keine Notiz"),
+          "Beweisstück A: " + (state.found.stationA ? "Der Bau war außergewöhnlich ambitioniert. Belastend." : "nicht freigeschaltet"),
+          "Station 2, Repräsentation oder Verteidigung: " + (state.answers.stationB || "nicht bewertet"),
+          "Geländeprotokoll Station 2: " + observationSummary("stationB"),
+          "Kurznotiz Station 2: " + (state.siteNotes.stationB || "keine Notiz"),
+          "Beweisstück B: " + (state.found.stationB ? "Strategische und administrative Funktionen. Entlastend." : "nicht freigeschaltet"),
+          "Station 3, Kostenfrage: " + (state.found.stationC ? state.costValue + " von 5" : "nicht bewertet"),
+          "Wegprotokoll Station 3: " + observationSummary("stationC"),
+          "Kurznotiz Station 3: " + (state.siteNotes.stationC || "keine Notiz"),
+          "Beweisstück C: " + (state.found.stationC ? "Finanzierung als ernstes Belastungsindiz. Belastend." : "nicht freigeschaltet"),
+          "Station 4, mögliche Nutznießer: " + (state.benefits.length ? state.benefits.join(", ") : "keine Auswahl"),
+          "Stadtraumprotokoll Station 4: " + observationSummary("stationD"),
+          "Kurznotiz Station 4: " + (state.siteNotes.stationD || "keine Notiz"),
+          "Beweisstück D: " + (state.found.stationD ? "Wirtschaftliche Impulse für Neustadt. Entlastend." : "nicht freigeschaltet"),
+          "Zwischenfazit: " + (state.answers.interim || "nicht gewählt"),
+          "Schlussurteil: " + (state.answers.verdict || "nicht gewählt"),
+          "Begründung: " + (state.verdictReason || "nicht eingetragen"),
+          "Missionsauswertung: " + (state.verdictSubmitted ? calculateMissionAssessment() : "noch nicht abgeschlossen")
+        ].join("\n");
+      }
+
+      function copyNotes() {
+        var notes = buildNotes();
+        var status = byId("copyStatus");
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(notes).then(function () {
+            status.textContent = "Notizen wurden kopiert.";
+          }).catch(function () {
+            fallbackCopy(notes, status);
+          });
+        } else {
+          fallbackCopy(notes, status);
+        }
+      }
+
+      function fallbackCopy(text, status) {
+        var area = document.createElement("textarea");
+        area.value = text;
+        area.setAttribute("readonly", "readonly");
+        area.style.position = "fixed";
+        area.style.left = "-9999px";
+        document.body.appendChild(area);
+        area.select();
+        try {
+          document.execCommand("copy");
+          status.textContent = "Notizen wurden kopiert.";
+        } catch (error) {
+          status.textContent = "Kopieren ist hier nicht verfügbar. Die Notizen können angezeigt und markiert werden.";
+        }
+        document.body.removeChild(area);
+      }
+
+      document.querySelectorAll("[data-question] button").forEach(function (button) {
+        button.addEventListener("click", function () {
+          selectChoice(button.parentElement.getAttribute("data-question"), button.dataset.value);
+        });
+      });
+
+      byId("beginCase").addEventListener("click", function () {
+        state.started = true;
+        saveState();
+        render();
+      });
+
+      byId("costSlider").addEventListener("input", function () {
+        byId("costValue").textContent = byId("costSlider").value;
+      });
+      byId("saveCost").addEventListener("click", saveCost);
+      document.querySelectorAll("[data-observation]").forEach(function (input) {
+        input.addEventListener("change", function () {
+          updateObservation(input);
+        });
+      });
+      document.querySelectorAll("[data-note]").forEach(function (area) {
+        area.addEventListener("input", function () {
+          state.siteNotes[area.dataset.note] = area.value;
+          saveState();
+        });
+      });
+      byId("benefitChecks").addEventListener("change", updateBenefits);
+      byId("verdictReason").addEventListener("input", function () {
+        state.verdictReason = byId("verdictReason").value;
+        saveState();
+      });
+      byId("submitVerdict").addEventListener("click", submitVerdict);
+      byId("resetProgress").addEventListener("click", resetProgress);
+      byId("playAgain").addEventListener("click", resetProgress);
+      byId("showNotes").addEventListener("click", function () {
+        byId("notesOutput").textContent = buildNotes();
+        byId("notesOutput").classList.toggle("visible");
+      });
+      byId("copyNotes").addEventListener("click", copyNotes);
+
+      render();
+    }());
+  </script>
+</body>
+</html>
